@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>弱口令总结 | zJ4sun</title>
+<meta name="description" content="行胜于言">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://zj4sun.github.io//favicon.ico?v=1735599266098">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zj4sun.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://zj4sun.github.io/">zJ4sun</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>弱口令总结</h1>
+            <p class="article-meta">
+              2024-10-30
+              
+            </p>
+            
+            <div class="post-content" v-pre>
+              <h2 id="前言">前言：</h2>
+<p>这一周做了一个弱口令专项，之前没有做过，以为很简单，没怎么准备，但是后边结果不好，现在结束了，结合一下这段时间的心得和一些师傅文章的文章来总结一下，因为文章为项目完结后，所以图片都是来自别的师傅的配图，部分也是直接引用师傅的文章方便后期查阅学习。</p>
+<h2 id="正文">正文</h2>
+<p>在前期查看了一些攻略，但是还是低估了这次资产的数量和其他师傅的能力，第一天就交了7八个弱口令，而自己这边在网上找的很多自动化工具都因为各种环境问题不能使用。</p>
+<p>弱口令专项无非web类和服务类</p>
+<p>WEB类弱口令后台猜解：</p>
+<ul>
+<li>web类弱口令需要做充足的信息收集，找到后台入口进行密码猜解。</li>
+<li>在弱口令枚举时可能会碰到验证码认证，此时可以使用一些验证码机器识别工具进行验证码绕过 。</li>
+</ul>
+<p>服务类-SSH&amp;RDP远程终端猜解：</p>
+<p>如果是定向打击可以针对性的定制字典，但是如果是大范围扫描的话，只能用用一些通用的字典去试探。如：</p>
+<ul>
+<li>键盘顺序输入qwer@1234；</li>
+<li>很多厂商会以厂商名缩写+@123或者厂商名缩写+年份等；</li>
+<li>撞库，多个平台共用一个密码；</li>
+<li>姓名+@+年份；</li>
+<li>单位名称+@+年份；</li>
+<li>系统默认密码；</li>
+</ul>
+<p>那么首先我们找到后台后，我们需要面对的是各种反暴力手段，包括不限于</p>
+<ul>
+<li>编码&amp;加密&amp;验签类（使用现有编码&amp;加密、使用自写加密、对数据包进行验签）</li>
+<li>验证码类（图形验证码、滑动验证码、计算验证码等等）</li>
+<li>错误次数限制类（根据单个用户名错误次数 根据总错误次数）</li>
+<li>特殊登录方式&amp;多因素认证类（手机、邮箱验证码登录 qq、微信、钉钉扫码登陆等）</li>
+</ul>
+<p>那么首先如果是专项行动的话遇上这些显然不能直接去破解了需要针对性的采取采取措施去应对，L@2uR1te师傅在他的文章介绍的很细致针对各种常见的方式都有详细的讲解<a href="https://mp.weixin.qq.com/s/S4PEypIkM9648RqSYq1I8">文章地址</a>。本文主要是先讨论那些反暴力措施不严格的，能够直接暴力的。那么首先我们针对一个目标首先我们需要思考是账号密码同时爆破呢还是先喷洒呢？</p>
+<p>那么首先要根据系统分为两种情况，一种是有返回包明显反馈的，另外一种是没有明显反馈的，例如统一返回“用户名或密码错误”。</p>
+<h3 id="知道存活用户的喷洒-爆破流程">知道存活用户的喷洒-爆破流程</h3>
+<p>针对这种情况，肯定是先喷洒再爆破，特别是一些老系统，他会在返回包中做出部分提示，包括不限与账户密码错误，不存在该用户等来佐证那些用户存在，后续也可以通过状态码和返回包长度来判断那些用户存在。比如最常见的通过长度和返回内容进行判断，这里我们假设第一轮用123456去进行喷洒：总之，大部分情况下密码正确、密码错误但用户名正确、密码和用户名都错误，三种情况会分别对应不同的返回长度或者不同的响应内容（有时候也会对应不同的响应码），多注意即可。这里值得重点说明的一种情况就是，假设返回长度、状态码都一样或者很类似，但是响应内容不同，我们喷洒了几万个用户名，总不能一个个点开去看结果吧？这种情况我们要怎么去筛选存活用户呢？可以根据返回包具体的特征，使用burp的这种情况可以借助Grep -Extract功能，我们注意到代表用户是否存在的响应内容是放在某个标签内的，可以借助这个功能做匹配。很多时候登录接口做了处理，返回“用户名或密码错误”，且无法通过返回长度、响应码进行判断的时候，可以另寻别的接口尝试对用户的存在情况进行判断。实战环境里不只能用登录接口去判断用户的存在情况，还有一些比较常见的例如如果开放注册用户接口、修改密码接口，判断用户存在基本一找一个准。也可以使用findsomething看看有没有比较未授权的一些接口来辅助判断。</p>
+<h3 id="不知道存活用户的喷洒-爆破流程">不知道存活用户的喷洒-爆破流程</h3>
+<p>那么遇到最多的情况，应该就是无论是用户名不存在，还是用户名存在但密码错误，统一返回“用户名或密码错误”。这一类系统最为头疼，在这次专项行动中，针对这类系统采用的是采取少量手工尝试，产生了几个就跳过。这一部分看了一些师傅的思路基本上也是少量字典交叉爆破，最好准备一些量级不大的精品字典交叉爆破。这里我也准备了一下字典目前是3500*10大概3w多次尝试，同时还有可以在用户名字字典后边加上123，如果反暴力不严格的话也可以先用大量字典和少量字典尝试</p>
+<p>之所以有这一步，是我发现实战中有些站点生成用户后，喜欢把用户的密码设置成用户名拼音+123，有时候还会设置成密码就是用户名，还有很多用户在设置自己密码的时候就是很喜欢用户名拼音+123的规则，所以我在实战中多加这么一步真的出过不少洞。而且也不只是拼接123，还可以试试下面这些密码规律结合用户名字典去做喷洒：</p>
+<pre><code>用户名+@123 用户名+@年份 用户名首字母大写+@123
+</code></pre>
+<p>可以让喷洒成功率提高很多。</p>
+<h3 id="特殊情况之手机号作为用户名">特殊情况之手机号作为用户名</h3>
+<p>这种在这次专项行动中，没有发现明显提到需要用手机号登录的，但是也有尝试，这里我选择使用的是手机号生成工具非常好用，如果是一个地方系统可以生成当地的手机号,这样也挺不错的，能够很好的提高出货的效率。<a href="https://github.com/asaotomo/makephonedict">makephonedict</a></p>
+<p><strong>.特殊情况之邮箱作为用户名</strong></p>
+<p>这种情况就更有意思了。这种情况我喜欢先确定目标公司的企业邮箱是什么，一般都和他们的主域名有关。比如某知名视频网站bixxbixx.com，企业邮箱大概率是@bixxbixx.com，这些爱企查都很好查的。我们在针对使用邮箱作为用户名的情况时，实际上可以在我们用户名字典的基础上直接拼接一下目标的企业邮箱后缀，比如：</p>
+<figure data-type="image" tabindex="1"><img src="https://mmbiz.qpic.cn/mmbiz_png/2A06BE6JXgZkPHvK8XKKaIa5qS63wa6gOsCrO4HvnKUsicDyFq6OB732IWm4rwoNYj0mcPia6yIB1GcO80FcXNew/640?wx_fmt=png&amp;from=appmsg&amp;tp=wxpic&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
+<p>这样基本也能去找到很多邮箱用户名，因为大部分企业邮箱的规律也就是 员工姓名拼音+邮箱后缀。</p>
+<p>如果你并不满足于此，实际上还有一些网站可以找目标相关的邮箱，例如</p>
+<pre><code>https://phonebook.cz
+www.skymem.info
+https://hunter.io/
+</code></pre>
+<p>等等</p>
+<figure data-type="image" tabindex="2"><img src="https://mmbiz.qpic.cn/mmbiz_png/2A06BE6JXgZkPHvK8XKKaIa5qS63wa6g6zlDvgKS5UOQZc6oBKES5FIutDNxLIaILkT2MicMWliamYibjUOBnrrVQ/640?wx_fmt=png&amp;from=appmsg&amp;tp=wxpic&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
+<p>同理啊，目标的“联系我们”相关界面也是有可能有邮箱相关信息的</p>
+<figure data-type="image" tabindex="3"><img src="https://mmbiz.qpic.cn/mmbiz_png/2A06BE6JXgZkPHvK8XKKaIa5qS63wa6gsNRDnkn0Csiauwp8vWEAS1C843SwEAicst8HFJtKSvqkuPBubGJeUefA/640?wx_fmt=png&amp;from=appmsg&amp;tp=wxpic&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="图片" loading="lazy"></figure>
+<h2 id="总结">总结</h2>
+<p>本次弱口令也给我了一些启示，面对大量资产如和快速产出，如果一个一个的手工测试或者半手工，那样能有什么产出呢？我想应该有爬虫工具，目前自己没有找到一些合适的工具，所以给自己埋一个坑吧，后边自己写一个。这次行动也让我意识到本地字典的重要性，字典这个东西，需要自己不断跟新，如果临时去找可能会有诸多限制，所以借着这次机会也帮我完善了一些自己的本地字典。</p>
+<h2 id="参考文章">参考文章</h2>
+<p>感谢以下师傅的文章帮助，都是非常值得观看的文章</p>
+<p><a href="https://mp.weixin.qq.com/s/3ryYB4zDzLu9qgSnN69YxQ">一些提高密码喷洒与爆破出货率的小技巧</a></p>
+<p><a href="https://mp.weixin.qq.com/s/S4PEypIkM9648RqSYq1I8w">爆破及喷洒过程中与常见限制机制的对抗思路</a></p>
+<p><a href="https://sm0nk.com/2017/12/04/Web%E6%94%BB%E9%98%B2%E4%B9%8B%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3-%E4%BD%95%E8%B6%B3%E9%81%93%E7%89%88/">Web攻防之暴力破解(何足道版)</a></p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">
+                <h3 class="post-title">
+                  2024年第三季度总结
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://zj4sun.github.io//images/avatar.png?v=1735599266098" class="no-responsive avatar">
+    <div class="text-muted">行胜于言</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-nian-zhong-zong-jie/">2024年年度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/wei-xie-qing-bao/">威胁情报</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">2024年第四季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/ruo-kou-ling-zong-jie/">弱口令总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">2024年第三季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/python-pa-chong-xue-xi-bi-ji/">python爬虫学习笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti/">github+gridea配置个人博客无法加载main.css问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">2024年第二季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-apcahe-ri-zhi-fen-xi/">玄机靶场-apcahe日志分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">玄机靶场-Linux日志分析</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://zj4sun.github.io/tag/EjyP2cHMk/" class="badge success">
+          live生活
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/Mt6wUAkn1/" class="badge secondary">
+          quarter总结
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge success">
+          information研究
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/qXZ0OLIUJ/" class="badge ">
+          python脚册
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge secondary">
+          setting环境设置
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge ">
+          Emergency响应
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge success">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge secondary">
+          job实习项目
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge secondary">
+          vulnhub打靶
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zj4sun.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

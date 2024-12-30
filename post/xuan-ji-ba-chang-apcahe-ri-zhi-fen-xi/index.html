@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>玄机靶场-apcahe日志分析 | zJ4sun</title>
+<meta name="description" content="行胜于言">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://zj4sun.github.io//favicon.ico?v=1735599266098">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zj4sun.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://zj4sun.github.io/">zJ4sun</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>玄机靶场-apcahe日志分析</h1>
+            <p class="article-meta">
+              2024-05-22
+              
+            </p>
+            
+            <div class="post-content" v-pre>
+              <h2 id="前言">前言</h2>
+<p>今天主要记录的是玄机靶场第二章apache日志分析，主要内容是日志分析。以下是题目要求</p>
+<pre><code>账号密码 root apacherizhi
+ssh root@IP
+1、提交当天访问次数最多的IP，即黑客IP：
+2、黑客使用的浏览器指纹是什么，提交指纹的md5：
+3、查看index.php页面被访问的次数，提交次数：
+4、查看黑客IP访问了多少次，提交次数：
+5、查看2023年8月03日8时这一个小时内有多少IP访问，提交次数:
+</code></pre>
+<p>先用xshell连一下。</p>
+<h2 id="正文">正文</h2>
+<p>首先我们要查看访问最多的ip我们得打开apche日志才行</p>
+<p>apache日志位置/var/log/apache2/,我们需要先进入</p>
+<pre><code>cut -d- -f 1 access.log.1|uniq -c | sort -rn | head -20
+</code></pre>
+<p><strong><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405082043082.png" alt="image-20240508204307992" loading="lazy"></strong></p>
+<p><code>flag{192.168.200.2}</code></p>
+<pre><code>cat access.log.1 |grep &quot;192.168.200.2&quot;
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405082044293.png" alt="image-20240508204413266" loading="lazy"></figure>
+<p>发现瞟了都一样，没有变动，就拿去加密提交</p>
+<figure data-type="image" tabindex="2"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405082045822.png" alt="image-20240508204534784" loading="lazy"></figure>
+<p><code>flag{2d6330f380f44ac20f3a02eed0958f66}</code></p>
+<pre><code>grep &quot;/index.php&quot; access.log.1 |wc -l
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405082046514.png" alt="image-20240508204653493" loading="lazy"></figure>
+<p><code>flag{27}</code></p>
+<pre><code>cat access.log.1 | grep &quot;192.168.200.2 - -&quot;  | wc -l
+</code></pre>
+<p><code>wc -l</code>命令用于计算匹配到的行数，即特定IP地址出现的次数。</p>
+<pre><code>grep &quot;192.168.200.2&quot; access.log.1 | cut -d' ' -f1 | sort | uniq -c
+</code></pre>
+<p>这个命令首先使用grep过滤出包含&quot;黑客IP&quot;的行，然后使用cut命令提取出每行的第一个字段（即IP地址部分），接着使用sort对IP地址进行排序，最后使用uniq -c来统计每个不同的IP地址出现的次数。</p>
+<figure data-type="image" tabindex="4"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405082101653.png" alt="image-20240508210127637" loading="lazy"></figure>
+<p><code>flag{6555}</code></p>
+<pre><code>cat access.log.1 | grep &quot;03/Aug/2023:08:&quot; | awk '{print $1}' | sort -nr| uniq -c |wc -l
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405082057089.png" alt="image-20240508205754062" loading="lazy"></figure>
+<p>每一行的格式是&quot;访问次数 IP地址&quot;。其中<code>::1</code>：这个IP地址对应的是本地主机，通常用于IPv6环回地址，表示本机。</p>
+<p><code>flag{5}</code></p>
+<h2 id="总结">总结</h2>
+<p>我们不妨对一些可能出现的高频日志分析的语句进行整理</p>
+<ol>
+<li><strong>统计访问量最高的IP地址</strong>：</li>
+</ol>
+<pre><code>cat access.log | awk '{print $1}' | sort | uniq -c | sort -nr | head -n 10
+</code></pre>
+<ol>
+<li><strong>查找特定时间范围内的访问量</strong>：</li>
+</ol>
+<pre><code>grep &quot;03/Aug/2023:08:&quot; access.log | wc -l
+</code></pre>
+<ol>
+<li><strong>统计每个HTTP状态码的数量</strong>：</li>
+</ol>
+<pre><code>awk '{print $9}' access.log | sort | uniq -c
+</code></pre>
+<ol>
+<li><strong>查找出现频率最高的URL路径</strong>：</li>
+</ol>
+<pre><code>awk '{print $7}' access.log | sort | uniq -c | sort -nr | head -n 10
+</code></pre>
+<ol>
+<li><strong>统计每个用户的访问量</strong>（假设用户信息在第八列）：</li>
+</ol>
+<pre><code>awk '{print $8}' access.log | sort | uniq -c | sort -nr
+</code></pre>
+<ol>
+<li><strong>查找特定用户的访问记录</strong>（假设用户信息在第八列）：</li>
+</ol>
+<pre><code>grep &quot;username&quot; access.log
+</code></pre>
+<ol>
+<li><strong>统计每个时间段的访问量</strong>（假设时间信息在第四列）：</li>
+</ol>
+<pre><code>awk '{print substr($4, 14, 5)}' access.log | sort | uniq -c
+</code></pre>
+<ol>
+<li><strong>查找特定URL被访问的次数</strong>：</li>
+</ol>
+<pre><code>grep &quot;specific_url&quot; access.log | wc -l
+</code></pre>
+<p>这里用到了awk，AWK是一种用于文本处理的编程语言，通常用于逐行处理文本数据。<code>awk '{print $1}'</code>: 这部分使用<code>awk</code>命令提取每行的第一个字段（即IP地址部分）。</p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">
+                <h3 class="post-title">
+                  玄机靶场-Linux日志分析
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://zj4sun.github.io//images/avatar.png?v=1735599266098" class="no-responsive avatar">
+    <div class="text-muted">行胜于言</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-nian-zhong-zong-jie/">2024年年度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/wei-xie-qing-bao/">威胁情报</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">2024年第四季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/ruo-kou-ling-zong-jie/">弱口令总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">2024年第三季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/python-pa-chong-xue-xi-bi-ji/">python爬虫学习笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti/">github+gridea配置个人博客无法加载main.css问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">2024年第二季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-apcahe-ri-zhi-fen-xi/">玄机靶场-apcahe日志分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">玄机靶场-Linux日志分析</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://zj4sun.github.io/tag/EjyP2cHMk/" class="badge success">
+          live生活
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/Mt6wUAkn1/" class="badge secondary">
+          quarter总结
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge ">
+          information研究
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/qXZ0OLIUJ/" class="badge secondary">
+          python脚册
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge warning">
+          setting环境设置
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge warning">
+          Emergency响应
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge success">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge ">
+          job实习项目
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge secondary">
+          vulnhub打靶
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zj4sun.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

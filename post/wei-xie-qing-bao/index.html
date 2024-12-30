@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>威胁情报 | zJ4sun</title>
+<meta name="description" content="行胜于言">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://zj4sun.github.io//favicon.ico?v=1735599266098">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zj4sun.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://zj4sun.github.io/">zJ4sun</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>威胁情报</h1>
+            <p class="article-meta">
+              2024-11-14
+              
+                <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge success">
+                  information研究
+                </a>
+              
+            </p>
+            
+            <div class="post-content" v-pre>
+              <h2 id="前言">前言</h2>
+<p>对于威胁情报这一块做一个系统的性的认知学习，参考多位师傅的文章整理汇总。防止学习路径走偏</p>
+<h2 id="正文">正文</h2>
+<h3 id="安全威胁情报简述">安全威胁情报简述</h3>
+<p>在讲安全威胁情报之前先来谈谈消息和情报</p>
+<p><strong>消息</strong>：指的是未经筛选、分析或验证的信息片段。它只是原始的数据或事实，可能来源广泛，可靠性也不确定。例如：某网站可能存在漏洞、某个IP地址进行了访问等。</p>
+<p><strong>情报</strong>：是经过分析和验证的消息或信息。情报需要经过筛选、归纳、分析，提供有用的背景和细节，用于帮助决策。例如，分析某些攻击行为的模式后得出攻击者的动机和目标，便形成了有价值的情报。</p>
+<p>那么显然情报是更高维度的消息，是基于客观事实的证据的高维度消息。那么我们可以说判断出</p>
+<p>1.漏洞情报不是威胁情报。威胁企业的，漏洞只是一部分。漏洞知己，威胁知彼。</p>
+<p>2.威胁信息不等于威胁情报。 威胁情报，不仅是收集，还需要分析。情报是已经处理和分析的。</p>
+<p>3.威胁情报不等于信息收集。信息收集只是威胁情报的第一部分。情报是对企业有意义的。</p>
+<h4 id="威胁情报的5w1h">威胁情报的5W1H</h4>
+<p>威胁情报详细说明了对手如何攻陷和破坏系统，以便防御者可以更好地准备在事前、事中和事后进行预防、检测和响应攻击者的行为。威胁情报通过使用多种数据（5W1H）来生成关于对手的知识，从而实现这一目标，例如：</p>
+<ul>
+<li>对手是谁（Who），包括威胁行为体，赞助商和雇主</li>
+<li>对手使用什么（What），包括他们的能力和基础设施</li>
+<li>对手的行动时（When），确定行动的时间表和规律</li>
+<li>对手的目的（Why），包括他们的动机和意图</li>
+<li>对手的目标行业和地理区域（Where），详细说明行业，垂直行业和地理区域</li>
+<li>对手如何运作（How），专注于他们的行为和规律</li>
+</ul>
+<p>画像：根据用户社会属性、生活习惯和消费行为等信息而抽象出的一个<strong>标签化</strong>的用户模型。</p>
+<p>攻击源画像：描述攻击源的基础设施、技术风格、惯用手法等标识。</p>
+<figure data-type="image" tabindex="1"><img src="%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5.assets/20200211091125.png" alt="20200211091125" loading="lazy"></figure>
+<h3 id="安全数据分析">安全数据分析</h3>
+<pre><code>从数据中提取知识，辅助解决安全问题
+</code></pre>
+<p>对于黑灰产的分析，会用到数据分析相关的知识。从数据获取——数据预处理——数据整合——数据分析——数据可视化/形成报告。在风控这块，最后能还原攻击特征，甚至写一些自动化监测、分析的脚本，最后能将这些特征加入风控规则内。</p>
+<h4 id="总体的流程">总体的流程</h4>
+<figure data-type="image" tabindex="2"><img src="%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5.assets/20200308134324.png" alt="img" loading="lazy"></figure>
+<h4 id="数据取样">数据取样</h4>
+<ul>
+<li>关键词取样</li>
+<li>根据特定的<strong>关键词及关键词组合</strong>，从全集数据中提取与特定分析对象或特定分析场景有关的数据子集</li>
+<li>主要用于<strong>数据统计或趋势分析</strong></li>
+<li>相似度采样</li>
+<li>根据文本或样本数据的相似度，从全集数据中提取具有<strong>较高相似度的数据子集</strong></li>
+<li>主要用于<strong>数据分类统计或案例分析</strong></li>
+<li>随机采样</li>
+<li>对未知类型或内容数据进行<strong>简单随机采样</strong>，抽样比例根据具体的分析场景决定</li>
+<li>主要用于<strong>情报线索发现或关键词校验</strong></li>
+<li>分层采样</li>
+<li>对已知工具/事件数据<strong>按既定的标签规则分为若干子集</strong>，对每个子集中的数据<strong>随机抽取部分数据</strong>进行分析，抽样比例根据具体分析场景决定</li>
+<li>主要用于<strong>案例分析或关键词校验</strong></li>
+<li>人工经验判断</li>
+<li>受限于数据获取的渠道、数据本身的变化、抽样概率的限制及样本噪点的影响，需要采取人工经验判断的方式进行修正</li>
+</ul>
+<h4 id="万能溯源">万能溯源</h4>
+<ul>
+<li>对任意IP进行分析</li>
+<li>分析统计流量</li>
+<li>分析访问的来源</li>
+<li>渐进地分析流量的组成</li>
+<li>地图挖掘（根据流量的不同地区，选择不同的挖掘力度）</li>
+</ul>
+<h4 id="聚类分析">聚类分析</h4>
+<h5 id="定义">定义</h5>
+<blockquote>
+<p>聚类分析是根据在数据中发现的描述对象及其关系的信息，<strong>将数据对象分组</strong>。</p>
+<p>目的是，组内的对象相互之间是相似的（相关的），而不同组中的对象是不同的（不相关的）。组内相似性越大，组间差距越大，说明聚类效果越好。</p>
+</blockquote>
+<p>例如，在实际过程中，分析灰黑产的流程和工具，对被攻击的接口请求进行特征汇总。使用聚类分析的方法，将正常请求和恶意请求进行分组汇总。</p>
+<blockquote>
+<p>聚类效果的好坏依赖于两个因素：</p>
+<p><strong>1.衡量距离的方法（distance measurement）</strong></p>
+<p>2.<strong>聚类算法（algorithm）</strong></p>
+</blockquote>
+<h4 id="交叉分析">交叉分析</h4>
+<ul>
+<li>研究黑灰产产业链特征，对比核心业务的产业链特征，进行交叉分析（总结产业链中角色<strong>交叉</strong>衍生产业链的上游，并对上游人员监控）</li>
+<li>批量行为都是有迹可循的，可以在在设备信息、注册信息重合度、 恶意用户的行为数据等方面，进行多维度的判断</li>
+</ul>
+<h4 id="告警筛选">告警筛选</h4>
+<p>安全运营的一项工作就是要进行告警监控，随着安全行业的发展，各种安全产品层出不穷，产生的海量数据对于人力的要求越来越高。但大家都知道，攻防对抗本质上是成本的对抗，这种海量的告警虽然有助于我们掌握安全态势，但不利于我们实际研判。这也是一个博弈的关系，那最好的一个情况，就是用最低数量的告警去精准地覆盖最全的安全事件。</p>
+<h5 id="传统方法">传统方法</h5>
+<blockquote>
+<ul>
+<li>风险筛选法：关注高风险等级的告警</li>
+<li>规则筛选法：关注特定防护规则产生的告警</li>
+<li>目标筛选法：关注关键资产相关的告警</li>
+<li>失陷筛选法：关注攻击源为内网主机的告警</li>
+</ul>
+</blockquote>
+<h5 id="前沿技术">前沿技术</h5>
+<blockquote>
+<ul>
+<li>攻击链筛选法：设法将告警对应到标准攻击步骤，关注构成攻击链的告警</li>
+<li>威胁情报筛选法：利用云端共享信息，关注恶意IP相关的告警</li>
+<li>异常检测筛选法：关注罕见类型、罕见端口等在统计分布中孤立/离群的告警</li>
+</ul>
+</blockquote>
+<p>关于异常检测筛选法，本质上是一种对安全能力依赖很小的方法，只要从正常中找到异常就可以，不管是什么数据。但理想很丰满，现实很骨感。由于业务、网络本身有着很多复杂的、独特的情况，加上真正有价值的高危险告警本身很稀有，导致精准识别高风险非常困难。</p>
+<p>从成本上考虑，使用机器学习、数据分析算法去进行异常检测，我们的目的是提高检测效率，但通常来说，有监督的学习方式对于海量的数据来说，也来了大量的特征工程工作量</p>
+<h5 id="完善思路">完善思路</h5>
+<p><strong>1、需要引入数据分析方法：</strong></p>
+<p>a)信息处理过程存在高度抽象，难以直接定义处理逻辑，需要通过机器学习来找出其中的关联；</p>
+<p>b)考虑告警筛选问题的原始需求，模型输入应为原始告警，输出应为重要性分值/分类。</p>
+<p><strong>2、需要将告警载荷或原始流量内容纳入模型输入</strong>：</p>
+<p>a)但告警载荷通常是二进制流数据，没有统一结构，且目前尚不明确告警载荷中的具体哪些成分能够真正反映告警重要程度；</p>
+<p>b)需要一种广泛的特征提取方法，将二进制流数据转换为模型可用的特征输入。</p>
+<p><strong>3、需要人类专家的参与：</strong></p>
+<p>a)真实环境中的信息安全事件可遇而不可求，真阳性样本非常稀缺；</p>
+<p>b)不同漏洞在不同场景下的利用方法千变万化，靶场模拟效果很难保证；</p>
+<p>c)需要设计一种方式，让模型能够从人类专家那里得到一些标注、反馈、或者其它类型的关键知识。</p>
+<h3 id="tips">tips：</h3>
+<p>对于安全事件的分析总体来说还是三个阶段：特征——模型——分析。在这个里面特征和模型能帮助我们把人工经验转化为了机器脚本去执行。但模型偏向于的单个能力的检查。比如模型能检查钓鱼邮件行为，但却不能梳理出一个APT事件。因为对于模型，我们的定义是让其做好特征检查做不到的事情，但没有要求它能到一个完整事件的梳理。</p>
+<p>同时在这个过程中我们也不要用局限的眼光看待这个事，而是一种大局观，比如将多个事件整合起来，产生出知识。具体的展现形式有之前提到的同源分析，事件归并等等</p>
+<pre><code>同源分析
+事件归并
+攻击评估
+攻击者画像
+攻击者能力
+攻击者行为
+TTPs（技战术组合）提炼
+威胁趋势、预测
+威胁狩猎
+</code></pre>
+<h2 id="总结">总结</h2>
+<h2 id="references">References</h2>
+<ul>
+<li>https://wiki.y1ng.org/</li>
+<li>https://wiki.y1ng.org/0x4_%E5%AE%89%E5%85%A8%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/4xD_%E5%AE%89%E5%85%A8%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%9B%B8%E5%85%B3%E8%B5%84%E6%96%99%E6%95%B4%E5%90%88/****</li>
+</ul>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">
+                <h3 class="post-title">
+                  2024年第四季度总结
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://zj4sun.github.io//images/avatar.png?v=1735599266098" class="no-responsive avatar">
+    <div class="text-muted">行胜于言</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-nian-zhong-zong-jie/">2024年年度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/wei-xie-qing-bao/">威胁情报</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">2024年第四季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/ruo-kou-ling-zong-jie/">弱口令总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">2024年第三季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/python-pa-chong-xue-xi-bi-ji/">python爬虫学习笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti/">github+gridea配置个人博客无法加载main.css问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">2024年第二季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-apcahe-ri-zhi-fen-xi/">玄机靶场-apcahe日志分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">玄机靶场-Linux日志分析</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://zj4sun.github.io/tag/EjyP2cHMk/" class="badge secondary">
+          live生活
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/Mt6wUAkn1/" class="badge ">
+          quarter总结
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge secondary">
+          information研究
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/qXZ0OLIUJ/" class="badge success">
+          python脚册
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge secondary">
+          setting环境设置
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge success">
+          Emergency响应
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge secondary">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge warning">
+          job实习项目
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge success">
+          vulnhub打靶
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zj4sun.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

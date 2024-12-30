@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>github+gridea配置个人博客无法加载main.css问题 | zJ4sun</title>
+<meta name="description" content="行胜于言">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://zj4sun.github.io//favicon.ico?v=1735599266098">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zj4sun.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://zj4sun.github.io/">zJ4sun</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>github+gridea配置个人博客无法加载main.css问题</h1>
+            <p class="article-meta">
+              2024-07-22
+              
+                <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge success">
+                  setting环境设置
+                </a>
+              
+            </p>
+            
+              <img src="https://zj4sun.github.io//post-images/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti.png" alt="github+gridea配置个人博客无法加载main.css问题">
+            
+            <div class="post-content" v-pre>
+              <h2 id="前言">前言</h2>
+<p>之前使用博客使用gridea一键搭建的，之前不知道为什么有时候会格式错乱。这里我使用的是自己的绑定的个人域名，访问的时候总是会有格式问题，这里记录下自己的解决方法。</p>
+<h2 id="正文">正文</h2>
+<p>访问时发现格式错乱，按f12检查一下。发现提示mix content了</p>
+<figure data-type="image" tabindex="1"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202407221115657.png" alt="image-20240722111531472" loading="lazy"></figure>
+<p>我当时想的是格式混用，首先我先去看看了看仓库的文件是否存在http样式的，找遍了几个文件都没有，在网上搜索github page无法加载css的情况，发现都不是我遇到这个问题，这里思路错了，我有看了半天后来发现我这里输入的是https,但是之前根本没有配置证书，所以导致了这个情况，如果此时<strong>换成http是能够正常显示</strong>的但是现在你输入域名浏览器搜索默认都是https的，所以我想把我的域名改成https服务，如果你搜<code>用github搭建自定义域名如何使用https</code>网上的方案有很多，主流的就是使用cloudeflare方案（见参考资料），但是现在也能使用github自带认证。大致流程如下</p>
+<pre><code>1获取域名
+2配置dns
+3配置Github
+</code></pre>
+<h3 id="获取域名">获取域名</h3>
+<p>这里就不展开讲了，国内国外很多平台都可以买域名，结合自己的预算选择一个合适的就行。国内对于域名审核比较严格，需要实名备案，如果不想麻烦可以看看出去看看</p>
+<h3 id="配置dns">配置dns</h3>
+<p>在你的域名管理界面（如GoDaddy、Cloudflare等），为你的自定义域名添加4条A记录，IP地址分别为185.199.108.153、185.199.109.153、185.199.110.153和185.199.111.153。这里每一个厂商的界面会有细微差异，但是内容应该是一样的</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>名称</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>@</td>
+<td>185.199.108.153</td>
+</tr>
+<tr>
+<td>A</td>
+<td>@</td>
+<td>185.199.109.153</td>
+</tr>
+<tr>
+<td>A</td>
+<td>@</td>
+<td>185.199.110.153</td>
+</tr>
+<tr>
+<td>A</td>
+<td>@</td>
+<td>185.199.111.153</td>
+</tr>
+<tr>
+<td>CNAME</td>
+<td>www</td>
+<td>jasunzhang.github.io</td>
+</tr>
+</tbody>
+</table>
+<p>稍等一会等域名解析生效，接下来去 GitHub 配置。</p>
+<h3 id="配置github">配置Github</h3>
+<p>在custom name填入你注册的域名后 <code>Save</code>，等待几小时生成证书，然后在下边处勾选 <code>Enforce HTTPS</code>。网上很多教程都提示需要配哦之cname，但是我这里他自动生成了（应该是gridea生成的）</p>
+<figure data-type="image" tabindex="2"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202407221113449.png" alt="" loading="lazy"></figure>
+<p>接下来就是等待github给我们申请了。</p>
+<figure data-type="image" tabindex="3"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202407221136111.png" alt="image-20240722113619077" loading="lazy"></figure>
+<p>等它加载完成以为一切都好了，结果是输入发现还是有一个css文件未加载（这里按理说应该不会出现这种情况，可以弄好了之后把cookie清理下）</p>
+<figure data-type="image" tabindex="4"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202407221144776.png" alt="image-20240722114420563" loading="lazy"></figure>
+<p>如果清理后还是有这个情况，可以试试这个方案</p>
+<p>（在index.html的head中加入以下代码）</p>
+<pre><code>&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;upgrade-insecure-requests&quot; /&gt;
+</code></pre>
+<p>加入该标签的原理是使用META标签强制将http请求转成https(SSL协议)请求(这里不知道一开始就修改能不能行)</p>
+<figure data-type="image" tabindex="5"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202407221147816.png" alt="image-20240722114719747" loading="lazy"></figure>
+<p>ok正常了</p>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="https://tzhou2018.github.io/2018/04/%E4%B8%BAGitHub-Pages%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D%E5%B9%B6%E6%B7%BB%E5%8A%A0SSL-%E5%BC%80%E5%90%AFHTTPS%E5%BC%BA%E5%88%B6/">为GitHub Pages自定义域名并添加SSL-开启https强制</a></p>
+<p><a href="https://io-oi.me/tech/custom-domains-on-github-pages/">GitHub Pages 绑定个人域名，免 Cloudflare 支持 HTTPS</a></p>
+<p><a href="https://blog.csdn.net/qq_41287158/article/details/125186830">解决Mixed Content: The page at ‘https://xxxx‘ was loaded over HTTPS..</a></p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">
+                <h3 class="post-title">
+                  2024年第二季度总结
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://zj4sun.github.io//images/avatar.png?v=1735599266098" class="no-responsive avatar">
+    <div class="text-muted">行胜于言</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-nian-zhong-zong-jie/">2024年年度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/wei-xie-qing-bao/">威胁情报</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">2024年第四季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/ruo-kou-ling-zong-jie/">弱口令总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">2024年第三季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/python-pa-chong-xue-xi-bi-ji/">python爬虫学习笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti/">github+gridea配置个人博客无法加载main.css问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">2024年第二季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-apcahe-ri-zhi-fen-xi/">玄机靶场-apcahe日志分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">玄机靶场-Linux日志分析</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://zj4sun.github.io/tag/EjyP2cHMk/" class="badge success">
+          live生活
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/Mt6wUAkn1/" class="badge ">
+          quarter总结
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge warning">
+          information研究
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/qXZ0OLIUJ/" class="badge ">
+          python脚册
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge secondary">
+          setting环境设置
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge secondary">
+          Emergency响应
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge success">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge success">
+          job实习项目
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge secondary">
+          vulnhub打靶
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zj4sun.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

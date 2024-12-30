@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>bp靶场——sql注入专题 | zJ4sun</title>
+<meta name="description" content="行胜于言">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://zj4sun.github.io//favicon.ico?v=1735599266098">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zj4sun.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://zj4sun.github.io/">zJ4sun</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>bp靶场——sql注入专题</h1>
+            <p class="article-meta">
+              2024-02-16
+              
+                <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge ">
+                  web安全之路
+                </a>
+              
+            </p>
+            
+            <div class="post-content" v-pre>
+              <h2 id="什么是-sql-注入-sqli">什么是 SQL 注入 (SQLi)？</h2>
+<p>SQL 注入 (SQLi) 是一种 Web 安全漏洞，允许攻击者干扰应用程序对其数据库进行的查询。这可能允许攻击者查看他们通常无法检索的数据。这可能包括属于其他用户的数据或应用程序可以访问的任何其他数据。在许多情况下，攻击者可以修改或删除此数据，从而导致应用程序的内容或行为发生持久更改。</p>
+<p>在某些情况下，攻击者可以升级 SQL 注入攻击以危害底层服务器或其他后端基础设施。它还可以使他们执行拒绝服务攻击。</p>
+<h2 id="如何检测sql注入漏洞">如何检测SQL注入漏洞</h2>
+<p>您可以针对应用程序中的每个入口点使用一组系统测试来手动检测 SQL 注入。为此，您通常需要提交：</p>
+<ul>
+<li>单引号字符<code>'</code>并查找错误或其他异常。</li>
+<li>一些特定于 SQL 的语法，用于计算入口点的基本（原始）值和不同的值，并查找应用程序响应中的系统差异。</li>
+<li>布尔条件，例如<code>OR 1=1</code>和<code>OR 1=2</code>，并查找应用程序响应中的差异。</li>
+<li>有效负载旨在在 SQL 查询中执行时触发时间延迟，并查找响应时间的差异。</li>
+<li>OAST 有效负载旨在在 SQL 查询中执行时触发带外网络交互，并监视任何生成的交互。</li>
+</ul>
+<p>或者，您可以使用 Burp Scanner 快速可靠地找到大多数 SQL 注入漏洞。</p>
+<h2 id="在查询的不同部分进行-sql-注入">在查询的不同部分进行 SQL 注入</h2>
+<p>大多数 SQL 注入漏洞都发生在查询<code>WHERE</code>子句中<code>SELECT</code>。大多数有经验的测试人员都熟悉这种类型的 SQL 注入。</p>
+<p>但是，SQL 注入漏洞可能发生在查询内的任何位置以及不同的查询类型中。 SQL 注入发生的其他一些常见位置包括：</p>
+<ul>
+<li>在<code>UPDATE</code>语句中，在更新的值或<code>WHERE</code>子句中。</li>
+<li>在<code>INSERT</code>语句中，在插入的值内。</li>
+<li>在<code>SELECT</code>语句中，表名或列名内。</li>
+<li>在<code>SELECT</code>陈述中，在<code>ORDER BY</code>子句中。</li>
+</ul>
+<h2 id="sql注入union攻击">SQL注入UNION攻击</h2>
+<p>当应用程序容易受到 SQL 注入攻击，并且查询结果在应用程序的响应中返回时，您可以使用该<code>UNION</code>关键字从数据库中的其他表检索数据。这通常称为 SQL 注入 UNION 攻击。</p>
+<p>该<code>UNION</code>关键字使您能够执行一个或多个附加<code>SELECT</code>查询并将结果附加到原始查询。例如：</p>
+<pre><code>SELECT a, b FROM table1 UNION SELECT c, d FROM table2
+</code></pre>
+<p>此 SQL 查询返回包含两列的单个结果集，其中包含 columns<code>a</code>和<code>b</code>in<code>table1</code>以及 columns<code>c</code>和<code>d</code>in 中的值<code>table2</code>。</p>
+<p>要使<code>UNION</code>查询正常工作，必须满足两个关键要求：</p>
+<ul>
+<li>各个查询必须返回相同数量的列。</li>
+<li>每列中的数据类型必须在各个查询之间兼容。</li>
+</ul>
+<p>要执行 SQL 注入 UNION 攻击，请确保您的攻击满足这两个要求。这通常涉及找出：</p>
+<ul>
+<li>从原始查询返回了多少列。</li>
+<li>从原始查询返回的哪些列具有合适的数据类型来保存注入查询的结果。</li>
+</ul>
+<h2 id="确定所需的列数">确定所需的列数</h2>
+<p>当您执行 SQL 注入 UNION 攻击时，有两种有效的方法可以确定从原始查询返回多少列。</p>
+<p>一种方法涉及注入一系列<code>ORDER BY</code>子句并递增指定的列索引，直到发生错误。例如，如果注入点是<code>WHERE</code>原始查询子句中带引号的字符串，您将提交：</p>
+<pre><code>' ORDER BY 1-- ' ORDER BY 2-- ' ORDER BY 3-- etc.
+</code></pre>
+<p>这一系列有效负载修改了原始查询，以按结果集中的不同列对结果进行排序。子句中的列<code>ORDER BY</code>可以通过其索引来指定，因此您不需要知道任何列的名称。当指定的列索引超过结果集中实际列数时，数据库返回错误，如：</p>
+<pre><code>The ORDER BY position number 3 is out of range of the number of items in the select list.
+</code></pre>
+<p>应用程序实际上可能在其 HTTP 响应中返回数据库错误，但也可能发出通用错误响应。在其他情况下，它可能根本不返回任何结果。无论哪种方式，只要您可以检测到响应中的一些差异，您就可以推断查询返回了多少列。</p>
+<p>当您执行 SQL 注入 UNION 攻击时，有两种有效的方法可以确定从原始查询返回多少列。</p>
+<p>一种方法涉及注入一系列<code>ORDER BY</code>子句并递增指定的列索引，直到发生错误。例如，如果注入点是<code>WHERE</code>原始查询子句中带引号的字符串，您将提交：</p>
+<pre><code>' ORDER BY 1-- ' ORDER BY 2-- ' ORDER BY 3-- etc.
+</code></pre>
+<p>这一系列有效负载修改了原始查询，以按结果集中的不同列对结果进行排序。子句中的列<code>ORDER BY</code>可以通过其索引来指定，因此您不需要知道任何列的名称。当指定的列索引超过结果集中实际列数时，数据库返回错误，如：</p>
+<pre><code>The ORDER BY position number 3 is out of range of the number of items in the select list.
+</code></pre>
+<p>应用程序实际上可能在其 HTTP 响应中返回数据库错误，但也可能发出通用错误响应。在其他情况下，它可能根本不返回任何结果。无论哪种方式，只要您可以检测到响应中的一些差异，您就可以推断查询返回了多少列。</p>
+<p>第二种方法涉及提交一系列<code>UNION SELECT</code>指定不同数量的空值的有效负载：</p>
+<pre><code>' UNION SELECT NULL-- ' UNION SELECT NULL,NULL-- ' UNION SELECT NULL,NULL,NULL-- etc.
+</code></pre>
+<p>如果空值数量与列数不匹配，数据库将返回错误，例如：</p>
+<pre><code>All queries combined using a UNION, INTERSECT or EXCEPT operator must have an equal number of expressions in their target lists.
+</code></pre>
+<p>我们使用<code>NULL</code>从注入查询返回的值，<code>SELECT</code>因为每列中的数据类型必须在原始查询和注入查询之间兼容。<code>NULL</code>可转换为每种常见数据类型，因此当列计数正确时，它可以最大限度地提高有效负载成功的机会。</p>
+<p>与该<code>ORDER BY</code>技术一样，应用程序实际上可能在其 HTTP 响应中返回数据库错误，但也可能返回一般错误或干脆不返回任何结果。当空值的数量与列数匹配时，数据库会在结果集中返回一个附加行，每列中都包含空值。对 HTTP 响应的影响取决于应用程序的代码。如果幸运的话，您将在响应中看到一些附加内容，例如 HTML 表格上的额外行。否则，空值可能会触发不同的错误，例如<code>NullPointerException</code>.在最坏的情况下，响应可能看起来与由错误数量的空值引起的响应相同。这将使该方法无效。</p>
+<p>要求：</p>
+<figure data-type="image" tabindex="1"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403251325932.png" alt="image-20240325132506863" loading="lazy"></figure>
+<p>这道题我开始在网站看了半天，没有找到比较明显的诸如点，最后看了下解决方案，发现是对分类的标签进行注入。</p>
+<figure data-type="image" tabindex="2"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403251337446.png" alt="" loading="lazy"></figure>
+<h2 id="查找具有有用数据类型的列">查找具有有用数据类型的列</h2>
+<p>SQL 注入 UNION 攻击使您能够从注入的查询中检索结果。您想要检索的有趣数据通常是字符串形式。这意味着您需要在原始查询结果中查找数据类型为字符串数据或与字符串数据兼容的一列或多列。</p>
+<p>确定所需列数后，您可以探测每一列以测试它是否可以容纳字符串数据。您可以提交一系列<code>UNION SELECT</code>有效负载，将字符串值依次放入每列中。例如，如果查询返回四列，您将提交：</p>
+<pre><code>' UNION SELECT 'a',NULL,NULL,NULL-- ' UNION SELECT NULL,'a',NULL,NULL-- ' UNION SELECT NULL,NULL,'a',NULL-- ' UNION SELECT NULL,NULL,NULL,'a'--
+</code></pre>
+<p>如果列数据类型与字符串数据不兼容，则注入的查询会导致数据库错误，如：</p>
+<pre><code>Conversion failed when converting the varchar value 'a' to data type int.
+</code></pre>
+<p>如果没有发生错误，并且应用程序的响应包含一些附加内容（包括注入的字符串值），则相关列适合检索字符串数据。</p>
+<p>要求：<img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403251400030.png" alt="image-20240325140045988" loading="lazy"></p>
+<p>我们可以注意到他这里已经明确的提到了分类的那个地方存在sqli，而且这里提示和之前的攻击是一样的用union攻击，我们尝试一下<img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403251404412.png" alt="image-20240325140429304" loading="lazy"></p>
+<figure data-type="image" tabindex="3"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403251413898.png" alt="image-20240325141356779" loading="lazy"></figure>
+<p>一定要注意，在大概这个位置有一个随机值，要用它来猜数据类型。</p>
+<p>https://portswigger.net/web-security/learning-paths/sql-injection/sql-injection-using-a-sql-injection-union-attack-to-retrieve-interesting-data/sql-injection/union-attacks/using-a-sql-injection-union-attack-to-retrieve-interesting-data</p>
+<h1 id="sql注入"><a href="https://portswigger.net/web-security/sql-injection">SQL注入</a>备忘单</h1>
+<p>此 SQL 注入备忘单包含有用语法的示例，您可以使用这些语法来执行执行 SQL 注入攻击时经常出现的各种任务。</p>
+<h2 id="字符串连接">字符串连接</h2>
+<p>您可以将多个字符串连接在一起以形成单个字符串。</p>
+<p>| oracle     | <code>'foo'||'bar'</code>                                               |<br>
+| ---------- | ------------------------------------------------------------ |<br>
+| 微软       | <code>'foo'+'bar'</code>                                                |<br>
+| PostgreSQL | <code>'foo'||'bar'</code>                                               |<br>
+| MySQL      | <code>'foo' 'bar'</code>[注意两个字符串之间的空格] <code>CONCAT('foo','bar')</code> |</p>
+<h2 id="子串">子串</h2>
+<p>您可以从指定偏移量和指定长度中提取字符串的一部分。请注意，偏移索引是从 1 开始的。以下每个表达式都将返回字符串<code>ba</code>。</p>
+<table>
+<thead>
+<tr>
+<th>oracle</th>
+<th><code>SUBSTR('foobar', 4, 2)</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>微软</td>
+<td><code>SUBSTRING('foobar', 4, 2)</code></td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td><code>SUBSTRING('foobar', 4, 2)</code></td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td><code>SUBSTRING('foobar', 4, 2)</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="评论">评论</h2>
+<p>您可以使用注释来截断查询并删除原始查询中您输入之后的部分。</p>
+<table>
+<thead>
+<tr>
+<th>oracle</th>
+<th><code>--comment</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>微软</td>
+<td><code>--comment/*comment*/</code></td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td><code>--comment/*comment*/</code></td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td><code>#comment</code> <code>-- comment</code>[注意双破折号后的空格] <code>/*comment*/</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="数据库版本">数据库版本</h2>
+<p>您可以查询数据库以确定其类型和版本。在制定更复杂的攻击时，此信息非常有用。</p>
+<table>
+<thead>
+<tr>
+<th>oracle</th>
+<th><code>SELECT banner FROM v$versionSELECT version FROM v$instance</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>微软</td>
+<td><code>SELECT @@version</code></td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td><code>SELECT version()</code></td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td><code>SELECT @@version</code></td>
+</tr>
+</tbody>
+</table>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://zj4sun.github.io/post/2023-nian-nian-du-zong-jie/">
+                <h3 class="post-title">
+                  2023年年度总结
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://zj4sun.github.io//images/avatar.png?v=1735599266098" class="no-responsive avatar">
+    <div class="text-muted">行胜于言</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-nian-zhong-zong-jie/">2024年年度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/wei-xie-qing-bao/">威胁情报</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">2024年第四季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/ruo-kou-ling-zong-jie/">弱口令总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">2024年第三季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/python-pa-chong-xue-xi-bi-ji/">python爬虫学习笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti/">github+gridea配置个人博客无法加载main.css问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">2024年第二季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-apcahe-ri-zhi-fen-xi/">玄机靶场-apcahe日志分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">玄机靶场-Linux日志分析</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://zj4sun.github.io/tag/EjyP2cHMk/" class="badge success">
+          live生活
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/Mt6wUAkn1/" class="badge ">
+          quarter总结
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge secondary">
+          information研究
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/qXZ0OLIUJ/" class="badge secondary">
+          python脚册
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge secondary">
+          setting环境设置
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge secondary">
+          Emergency响应
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge ">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge success">
+          job实习项目
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge ">
+          vulnhub打靶
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zj4sun.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

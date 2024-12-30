@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>hw面经知识点整理 | zJ4sun</title>
+<meta name="description" content="行胜于言">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://zj4sun.github.io//favicon.ico?v=1735599266098">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zj4sun.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://zj4sun.github.io/">zJ4sun</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>hw面经知识点整理</h1>
+            <p class="article-meta">
+              2024-04-30
+              
+                <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge secondary">
+                  job实习项目
+                </a>
+              
+            </p>
+            
+            <div class="post-content" v-pre>
+              <h2 id="web安全篇">web安全篇</h2>
+<h3 id="端口常见服务">端口，常见服务</h3>
+<p>端口号的范围是从1～65535</p>
+<p>1） 公认端口（Well Known Ports）：从0到1023，它们紧密绑定于一些服务。通常这些端口的通讯明确表明了某种服务的协议。例如：80端口实际上总是HTTP通讯。</p>
+<p>2） 注册端口（Registered Ports）：从1024到49151，它们松散地绑定于一些服务。但是这些端口同样用于许多其它目的。例如：许多系统处理动态端口从1024左右开始。</p>
+<p>3） 动态和/或私有端口（Dynamic and/or Private Ports）：从49152到65535。</p>
+<table>
+<thead>
+<tr>
+<th>服务</th>
+<th>端口号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FTP</td>
+<td>20</td>
+<td>FTP服务器真正传输所用的端口，用于上传、下载</td>
+</tr>
+<tr>
+<td>FTP</td>
+<td>21</td>
+<td>用于FTP的登陆认证</td>
+</tr>
+<tr>
+<td>SSH、SFTP 、</td>
+<td>22</td>
+<td>加密的远程登录，文件传输</td>
+</tr>
+<tr>
+<td>Telnet</td>
+<td>23</td>
+<td>远程登录（在本地主机上使用此端口与远程服务器的22/3389端口连接）</td>
+</tr>
+<tr>
+<td>SMTP</td>
+<td>25</td>
+<td>用于发送邮件</td>
+</tr>
+<tr>
+<td>HTTP</td>
+<td>80</td>
+<td>用于网页浏览</td>
+</tr>
+<tr>
+<td>POP3</td>
+<td>110</td>
+<td>SUN公司的RPC服务所有端口</td>
+</tr>
+<tr>
+<td>Network News Transfer Protocol</td>
+<td>119</td>
+<td>NEWS新闻组传输协议，承载USENET通信</td>
+</tr>
+<tr>
+<td>SMTP</td>
+<td>161</td>
+<td>Simple Network Management Protocol，简单网络管理协议</td>
+</tr>
+<tr>
+<td>SNMP Trap</td>
+<td>162</td>
+<td>SNMP陷阱</td>
+</tr>
+<tr>
+<td>HTTPS</td>
+<td>443</td>
+<td>加密的网页浏览端口</td>
+</tr>
+<tr>
+<td>CIFS</td>
+<td>445</td>
+<td>公共Internet文件系统</td>
+</tr>
+<tr>
+<td>sql server</td>
+<td>1433</td>
+<td>Microsoft的SQL服务开放的端口 数据库</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>1521</td>
+<td>数据库</td>
+</tr>
+<tr>
+<td>NFS</td>
+<td>2049</td>
+<td>通过网络，让不同的机器、不同的操作系统实现文件共享</td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>3306</td>
+<td>数据库</td>
+</tr>
+<tr>
+<td>WIN2003远程登录</td>
+<td>3389</td>
+<td>Windows 2000(2003) Server远程桌面的服务端口，本地服务器开放此端口，去连接到远程的服务器</td>
+</tr>
+<tr>
+<td>QQ·</td>
+<td>4000</td>
+<td>腾讯QQ客户端开放此端口</td>
+</tr>
+<tr>
+<td>WebLogic</td>
+<td>7001</td>
+<td>一个基于JAVAEE架构的中间件，WebLogic是用于开发、集成、部署和管理大型分布式Web应用、网络应用和数据库应用的Java应用服务器</td>
+</tr>
+<tr>
+<td>Wingate</td>
+<td>8010</td>
+<td>Wingate代理开放此端口</td>
+</tr>
+</tbody>
+</table>
+<h3 id="http协议内容">http协议内容</h3>
+<p>1.其中一般来用作扫描的方法是?</p>
+<p>哪个方法扫描要快一些</p>
+<p>get和head.Head方法快一些<br>
+2、用什么方法探测服务器开启了什么方法?<br>
+options<br>
+http状态码<br>
+<strong>服务器已经接收到第一段请求,正在等待接受后续请求100</strong>:<br>
+1xx:请求已被接收(100-102)<br>
+请求已被成功接收理解并接受(200-207)2xx:<br>
+200:服务器成功返回网页<br>
+<strong>3xx:重定向，表示需客户端进一步操作(300-307)</strong><br>
+301:表示本网页已经永久性地移动到一个新地址;<br>
+302:临时重定向，表示网页暂时性地移动到一个新地址;</p>
+<p>303:表示必须临时重定向，且必须使用GET方法请求<br>
+<strong>4xx:请求错误(400-449)</strong><br>
+400:客户端请求有语法错误，不能被理解;<br>
+401:请求未经授权;<br>
+403:服务器收到请求，但是拒绝提供服务(会给出原因)<br>
+404:请求的网页不存在<br>
+<strong>服务器错误(500-510)5xx:</strong><br>
+500:服务器发生不可预期的错误<br>
+503:服务暂时不可用(表示服务器繁忙)<br>
+600:源站没有返回响应头部，只返回实体内容</p>
+<pre><code>Host请求的web服务器域名地址(对方的ip)
+User-Agent 当前HTTP请求的客户端浏览器类别(包括浏览器类型、操作系统及版本、CPU类型、浏览器渲染引擎、浏览器插件等信息
+Accept告诉服务器能够发送哪些媒体类型告诉服务器能够发送哪些字符集
+Accept-CharsetAccept-Encoding告诉服务器能够发送哪些编码方式
+Accept-Language 告诉服务器能够发送哪些语言
+TE11告诉服务器可以使用哪些扩展传输编码
+Content-Encoding 对主体执行的任意编码方式
+Content-Length 主体的长度或尺
+这个主体的对象类型(第二后缀名)Content-Type
+Authorization包含了客户端提供给服务器，以便对其自身进行认证的数据客户端用它向服务器传送一个令牌，它并不是真正的安全首部，但确实隐含了安全功能用来说明请求端支持的cookie 版本，
+Cookie 告诉服务器该网页是从哪个页面链接过来的
+RefererDNT 值为0表示用户更喜欢在目标站点上进行跟踪，1表示用户不希望在目标站点上跟踪X
+X-Forwarded-For 用来表示HTTP请求端真实IP
+connection 表示是否需要持久连接
+Keep-Alive 使客户端到服务器端的连接持续有效，后继请求时避免了建立或者重新建立连接
+X-Recuested-with:XMLHttpRecuest
+Date 响应时间
+Server 服务器中间件和源码信息
+</code></pre>
+<h3 id="tcp三次握手与四次挥手">Tcp三次握手与四次挥手</h3>
+<h4 id="三次握手">三次握手</h4>
+<p>·第一次:客户端发送初始序号x和syn=1请求标志<br>
+·第二次:服务器发送请求标志syn，发送确认标志ACK，发送自己的序号seq=y，发送客户端的确认序号ack=x+1<br>
+·第三次:客户端发送ACK确认号，发送自己的序号seq=x+1，发送对方的确认号ack=y+1四次挥手</p>
+<h4 id="四次挥手">四次挥手</h4>
+<p>第一次挥手:客户端发出释放FIN=1，自己序列号seg=u，进入FIN-WAIT-1状态<br>
+第二次挥手:服务器收到客户端的后，发出ACK=1确认标志和客户端的确认号ack=u+1，自己的序列号seq=v，进入CLOSE-WAIT状态<br>
+第三次挥手:客户端收到服务器确认结果后，进入FIN-WAIT-2状态。此时服务器发送释放FIN=1信号，确认标志ACK=1，确认序号ack=u+1，自己序号seq=W，服务器进入LAST。ACK(最后确认态)<br>
+日<br>
+第四次挥手:客户端收到回复后，发送确认ACK=1，ack=w+1，自己的seg=u+1，客户端进入TIME-WAIT(时间等待)，客户端经过2个最长报文段寿命后，客户端CLOSE;服务器收到确认后，立刻进入CLOSE状态。</p>
+<h3 id="osi模型open-systems-interconnection-model开放系统互联模型">OSI模型（Open Systems Interconnection Model，开放系统互联模型）</h3>
+<p>物理层      数据链路层  网络层 传输层  会话层 表示层 应用层</p>
+<ol>
+<li><strong>物理层（Physical Layer）</strong>：
+<ul>
+<li>负责传输比特流，以及定义连接物理介质的规范，例如电缆、光纤等。</li>
+<li>主要关注数据的传输方式、传输介质的传输速率、电压等物理特性。</li>
+</ul>
+</li>
+<li><strong>数据链路层（Data Link Layer）</strong>：
+<ul>
+<li>负责通过物理链路传输数据帧。</li>
+<li>主要解决数据的传输错误、流量控制、数据帧的定界和组装等问题。</li>
+<li>以太网、WiFi等协议工作在这一层。</li>
+</ul>
+</li>
+<li><strong>网络层（Network Layer）</strong>：
+<ul>
+<li>负责在网络上选择合适的路径并进行数据包的传输。</li>
+<li>主要解决数据的路由、寻址、分组和拆装问题。</li>
+<li>IP协议工作在这一层。</li>
+</ul>
+</li>
+<li><strong>传输层（Transport Layer）</strong>：
+<ul>
+<li>负责在通信的两个节点之间提供可靠的数据传输服务。</li>
+<li>主要解决数据的分段、传输控制、错误恢复和流量控制问题。</li>
+<li>TCP和UDP协议工作在这一层。</li>
+</ul>
+</li>
+<li><strong>会话层（Session Layer）</strong>：
+<ul>
+<li>负责建立、管理和终止应用程序之间的通信会话。</li>
+<li>主要解决会话的建立、同步、管理和恢复问题。</li>
+</ul>
+</li>
+<li><strong>表示层（Presentation Layer）</strong>：
+<ul>
+<li>负责数据的格式化、编码和加密，以确保数据在网络中的正确传输和解释。</li>
+<li>主要解决数据的表示、转换和编码问题。</li>
+</ul>
+</li>
+<li><strong>应用层（Application Layer）</strong>：
+<ul>
+<li>提供用户与网络服务之间的接口，使用户能够访问网络上的各种服务。</li>
+<li>主要解决网络应用程序之间的通信问题，例如电子邮件、文件传输、远程登录等。</li>
+<li>HTTP、FTP、SMTP等协议工作在这一层。</li>
+</ul>
+</li>
+</ol>
+<h3 id="cdn内容分发网络">cdn(内容分发网络)</h3>
+<p>原理:cdn全称是内容分发网络（Content Delivery Network）。其目的是让用户能够更快速的得到请求的数据。简单来讲，<strong>cdn就是用来加速的，他能让用户就近访问数据，这样就能更快的获取到需要的数据</strong>。下面是个栗子，可不说(举个例子，现在服务器在北京，深圳的用户想要获取服务器上的数据就需要跨越一个很远的距离，这是然就比北京的用户访向北京的服务器速度要慢，但是现在我们在深圳建立一个cdn服务器，上面缓存住一些数据，深圳用户访问时先访问这个cdn服务器，如果服务器上有用户请求的数据就可以直接返回，这样速度就大大的提升了。</p>
+<h4 id="检测网站是否开启cdn">检测网站是否开启cdn</h4>
+<p>使用一些网站多地ping 服务，查看对应IP 地址是否唯一，如果不唯一则极有可能是使用了CDN</p>
+<h4 id="cdn查询真实ip"><strong>cdn查询真实ip</strong></h4>
+<ul>
+<li>网络空间引擎搜索法</li>
+</ul>
+<p>zoomeye、fofa、shodan</p>
+<p>通过这些公开的安全搜索引擎爬取得历史快照，主要得一些特征总结如下：</p>
+<p>特有的http头部（如server类型、版本、cookie等信息)、</p>
+<p>特定keyword（如title、css、js、url等）、</p>
+<p>特定的IP段搜索（如fofa支持C段搜索），</p>
+<p>有些时候爬取的时候不一定含有上面那些特征，但是我们仍然需要仔细排查。</p>
+<ul>
+<li>
+<p><strong>历史DNS记录(域名转换为ip)</strong></p>
+<p>查询ip与域名绑定历史记录，可能会发现使用CDN之前的目标ip。查询网站有：</p>
+<pre><code class="language-text">https://dnsdb.io/zh-cn/
+https://x.threatbook.cn/
+http://toolbar.netcraft.com/site_report?url=
+http://viewdns.info/
+http://www.17ce.com/
+https://community.riskiq.com/
+http://www.crimeflare.com/cfssl.html
+</code></pre>
+</li>
+<li>
+<blockquote>
+<p>国外请求</p>
+</blockquote>
+<p>通过国外得一些冷门得DNS或IP去请求目标，很多时候国内得CDN对国外得覆盖面并不是很广，故此可以利用此特点进行探测。 通过国外代理访问就能查看真实IP了，或者通过国外的DNS解析，可能就能得到真实的IP查询网站：</p>
+<pre><code class="language-text">https://asm.ca.com/en/ping.php
+</code></pre>
+</li>
+<li>
+<p><strong>网络流量分析</strong>：进行网络流量分析，尤其是在与网站通信时捕获的数据包中查看 HTTP 标头信息。有时候，你可能会在 HTTP 标头中找到源服务器的 IP 地址，尤其是在某些特定的 CDN 配置下。</p>
+</li>
+</ul>
+<h3 id="什么是dnslog外带">什么是DNSlog外带？</h3>
+<p>DNS在解析的时候会留下日志，我们将信息放在高级域名中，通过读取多级域名的解析日志，传递到自己这里，然后通过读日志获取信息。【比如 SQL注入盲注、Log4j漏洞验证、SSRF 网页无回显漏洞验证】</p>
+<p>或者</p>
+<p>通过主机进行的DNS解析请求，解析请求会通过DNSLog进行记录解析记录。<br>
+即我们可以通过域名解析把想要获取的数据带到DNSLog的解析记录上</p>
+<h3 id="dns盲注">dns盲注</h3>
+<p>dnslog回显只能用于windows系统，DNSlog盲注需要用的load_file()函数，所以一般得dba权限。</p>
+<h3 id="sql注入"><strong>sql注入</strong></h3>
+<p>原理：没有过滤用户输入的恶意数据，把用户输入的数据当作SQL语句执行，因此导致sql注入漏洞产生</p>
+<p><a href="https://zhuanlan.zhihu.com/p/350063338">sqli详细面经</a></p>
+<p><strong>Sql注入分类</strong>QL注入有哪几种注入类型？</p>
+<blockquote>
+<p>从注入参数类型分：数字型注入、字符型注入、搜索型注入<br>
+从注入方法分：基于报错、基于布尔盲注、基于时间盲注、联合查询、堆叠注入、内联查询注入、宽字节注入<br>
+从提交方式分：GET注入、POST注入、COOKIE注入、HTTP头注入</p>
+</blockquote>
+<p><strong>报错型注入</strong></p>
+<p>原理：种利用数据库返回的错误信息来获取敏感信息的SQL注入技术</p>
+<p>extractvalue(xml_doc, xpath)            从指定xml文档中查询指定的字符串**</p>
+<p>updatexml(xml_doc,xpath,new_value)    利用xpath把xml文档中****<em><strong>*的指定字符串替换成新值*</strong></em></p>
+<ol>
+<li><strong>VERSION()</strong>: VERSION函数用于返回数据库服务器的版本信息。攻击者可以使用VERSION函数来获取有关数据库的版本信息，从而更好地了解目标系统。</li>
+<li><strong>DATABASE()</strong>: DATABASE函数用于返回当前数据库的名称。攻击者可以使用DATABASE函数来获取当前数据库的名称。</li>
+<li><strong>COUNT()</strong>: COUNT函数用于计算查询结果集中行的数量。攻击者可以利用COUNT函数来获取有关数据库表的信息，例如表中的行数。</li>
+<li><strong>LENGTH()</strong>: LENGTH函数用于返回字符串的长度。攻击者可以使用LENGTH函数来确定数据库字段的长度，从而进一步获取信息。</li>
+</ol>
+<p><strong>mysql默认的存在的那个数据库中</strong></p>
+<p>information_schema</p>
+<p><strong>时间盲注的特点？常用函数？易受到什么影响？</strong></p>
+<p>场景：应用于无数据回显，无报错，布尔型盲注失效后</p>
+<p>特点：时间盲注页面没有明显的回显。只能根据页面刷新的时间的长短来判断构造的语法是否正确</p>
+<p>常用的函数：sleep函数，if条件语句等</p>
+<p>比较难判断，容易收到网络波动影响</p>
+<h4 id="布尔盲注特点常用的函数"><strong>布尔盲注特点？常用的函数</strong></h4>
+<p>特点：bool正误嘛，根据页面正确和错误的两种状态嘛，来判断语句是否正确</p>
+<p>常用的函数：length（）猜测字符串长度的，sunstr（）截取的，mid（）去除字符串的一部分的值</p>
+<p>sql<strong>手注</strong></p>
+<p>1.收集信息（数据库类型和 版本信息），判断注入类型</p>
+<p>2.判断注入点注入嘛，输入’——等来看看反应</p>
+<p>3.然后就用oder by 查数据库字段</p>
+<p>4.用联合查询的查用户名等等一些敏感信息</p>
+<p>user（） 当前用户</p>
+<p>database（） 数据库</p>
+<p>version（） 数据库版本</p>
+<h4 id="宽字节注入"><strong>宽字节注入</strong></h4>
+<p>原理：针对一些针对的是使用宽字符编码的网站。编码转换的问题</p>
+<p>条件：</p>
+<ol>
+<li>数据库为GBK编码</li>
+<li>使用了转义函数，将、POGETST、cookie传递的参数进行过滤，将单引号、双引号、null等敏感字符用转义符\进行转义</li>
+</ol>
+<p><code>%df' or 1=1 #</code></p>
+<p>GBK编码中，反斜杠的编码是%5c,在输入%df后，使得添加反斜杠后形成%df%5c，而%df%5c是繁体字&quot;連&quot;,单引号成功逃逸，爆出mysql数据库的错误。</p>
+<p>处理方式：</p>
+<p>gbk编码造成的宽字符注入问题，解决方法是设置character_set_client=binary。<br>
+矫正人们对于mysql_real_escape_string的误解，单独调用set names gbk和mysql_real_escape_string是无法避免宽字符注入问题的。还得调用mysql_set_charset来设置一下字符集。</p>
+<h4 id="sql注入的绕过方式">sql<strong>注入的绕过方式</strong></h4>
+<ul>
+<li>大小写绕过</li>
+<li>多重关键字绕过</li>
+<li>编码绕过，比如十六进制，url编码</li>
+<li>注释绕过</li>
+<li>内联注释绕过</li>
+<li>填充大量脏数据绕过</li>
+<li>垃圾参数填充绕过</li>
+<li>改变提交方式绕过，如GET方式变为POST方式提交</li>
+<li>随机agent头绕过 fuzz过滤函数，函数替换绕过</li>
+</ul>
+<p>什么样的网站存在sql注入？</p>
+<p>只要存在数据和数据库惊醒的交互的这种网站都有可能有sqli</p>
+<h4 id="sql注入挂马"><strong>sql注入挂马</strong></h4>
+<ul>
+<li>
+<p>用到了--os-shell 内置了一个方法 select *into dumpfile,写入一个文件。（sqlmap参数）</p>
+</li>
+<li>
+<p>outfile函数嘛。</p>
+<p>sql<strong>挂马的前提条件</strong></p>
+<p>web目录你能写，有写的权限，单引号没有被过滤</p>
+<p>知道网站的绝对路径</p>
+<p>secure_file_priv没有具体的值。(secure file priv是用来限制load dumpfile、into outfile、<br>
+load file()函数在哪个目录下拥有上传和读取文件的权限。在mysql5.6.34版本以后 secure file priv的值默认为NULL。要修改secure file priv 的值<br>
+为‘ ’才可以利用)</p>
+</li>
+</ul>
+<h4 id="一般你会怎样利用sql注入"><strong>一般你会怎样利用sql注入</strong></h4>
+<ol>
+<li>利用sql注入读数据，看能不能不读到一些管理员数据子类的，找后台</li>
+<li>利用sql挂马拿下服务器权限</li>
+</ol>
+<h3 id="sqlsever有了解过吗sqlsever执行系统命令函数">sqlsever有了解过吗？sqlsever执行系统命令函数</h3>
+<p>xp_cmdshell</p>
+<h4 id="sql注入如何修复">sql<strong>注入如何修复</strong></h4>
+<p>加白名单嘛。扩大自己的恶意库来过滤一部分</p>
+<p>sql预编译嘛</p>
+<p><strong>sql预编译</strong></p>
+<p>其实原理就是，预编译的语句mdms不会被当作的普通sql语句先编译</p>
+<h3 id="什么是水坑攻击">什么是水坑攻击?</h3>
+<p>水坑攻击:分析攻击目标的上网活动规律，寻找攻击目标经常访问的网站的弱点，将网站攻破并植入恶意程序，等待目标访问触发</p>
+<h3 id="文件上传漏洞">文件上传漏洞</h3>
+<p>原理：在上传点没有进行严格的过滤，导致用户上传了恶意脚本到服务器</p>
+<p><strong>文件上传的绕waf的方式</strong></p>
+<p>大小写绕过，%00截断（可配合中间件漏洞），绕过前端验证（burp抓包，修改content-type）<br>
+<strong>文件上传的方式</strong><br>
+网站时iis的服务器的——————采用asp、aspx<br>
+当发现这个不可以的时候，可以试试比如asa，cdx或者cer尝试上传</p>
+<ul>
+<li>
+<p>发现时apache服务器的时候———php</p>
+</li>
+<li>
+<p>中间件是tomcat————jsp</p>
+</li>
+<li>
+<p>中间件weblogic————jsp</p>
+</li>
+<li>
+<p>中间件naginx———php<br>
+**文件上传的漏洞防护<br>
+首先加白名单，黑名单嘛嘛，限制上传类型嘛，然后重命名文件，限制上传大小扽等更</p>
+<p><strong>文件上传绕过姿势</strong></p>
+</li>
+<li>
+<p>文件类型大小写绕过，Php</p>
+</li>
+<li>
+<p>名单列表没有的啊，想asa.cer等等</p>
+</li>
+<li>
+<p>特殊文件名，加个下划线，加个空格</p>
+</li>
+<li>
+<p>hatccess文件</p>
+</li>
+<li>
+<p>图片马等等</p>
+</li>
+</ul>
+<h3 id="文件包含">文件包含</h3>
+<p>原理：就是外部应用一部分代码函数的时候，被人恶意利用，调用了脚本文件被拿shell了<br>
+<strong>远程文件包含和本地文件包含的区别</strong><br>
+本地文件包含只能包含本地的文件。<br>
+远程文件包含要包含其他服务器的文件。若PHP配置选项allow url include为ON的话，则include函数是可以加载远程文件的。<br>
+<strong>防护方法</strong><br>
+限制文件类型，对文件敏感内容查找</p>
+<h3 id="xss跨站脚本攻击">xss跨站脚本攻击</h3>
+<p>原理：在页面中嵌入了js的脚本，用户访问后，对方浏览器加载了并执行了恶意代码，<br>
+<strong>防护方法</strong></p>
+<ul>
+<li>过滤危险字符</li>
+<li>输入长度限制</li>
+<li>使用黑名单</li>
+</ul>
+<p>html实体编码<br>
+对于反射型和存储型，可以在数据返回客户端浏览器时，将敏感字符进行转义;<br>
+对于DOM型，可以使用上下文敏感数据编码。</p>
+<h4 id="有哪几种类型谁的危害最大">有哪几种类型？谁的危害最大？</h4>
+<p>存储型最大，直接将恶意代码直接存在了服务器了，导致所有用户都能看到</p>
+<h4 id="类型区别">类型区别</h4>
+<p>反射型:经过后端，不经过数据库;<br>
+存储型:经过后端，经过数据库;<br>
+DOM型:不经过后端。<br>
+反射型是一次性的，用户访问带xss代码的请求时，服务器接受请求并处理，之后将带有xss代码的数据返回给浏览器，浏览器解析执行;<br>
+存储型中提交的恶意内容会被永久存储在数据库，攻击行为伴随攻击数据一直存在;<br>
+DOM型的触发基于浏览器对DOM数据的解析来完成，完全是客户端的事，<br>
+<strong>危害？</strong><br>
+盗取cookie，钓鱼<br>
+<strong>如何盗cookie</strong><br>
+主要是利用document.get[cookie]。就写一段js脚本嘛，然后放过去，点了就传过来了</p>
+<h3 id="csrf跨站请求伪造">csrf跨站请求伪造</h3>
+<p>原理：就利用受害者没有失效的身份信息认证，向服务器发送请求。<br>
+<strong>修复</strong></p>
+<ul>
+<li>验证http的refer，仅响应自己本域的请求</li>
+<li>加token验证</li>
+<li>用localstorage和sessionstorage保存会话。<br>
+<strong>类型</strong><br>
+get请求型csrf:只需要构造url，然后诱导受害者访问;<br>
+Post请求型csrf:构造自动提交的表单，诱导受害者访问或者点击，<br>
+<strong>危害</strong><br>
+身份伪造钓鱼，盗号等</li>
+</ul>
+<h3 id="ssrf服务器伪造请求">ssrf服务器伪造请求</h3>
+<p>原理：通过在服务端发起请求，使得服务端的应用程序无意识地将攻击者构造的恶意请求发送到其他内部或外部网络资源上。<br>
+<strong>利用方式</strong></p>
+<ul>
+<li>可以对服务器所在的内网、本地进行端口扫描，获取一些服务的banner信息</li>
+<li>攻击运行在内网或本地的应用程序(比如溢出)</li>
+<li>对内网web应用进行指纹识别，通过访问应用存在的默认文件实现:</li>
+<li>攻击内外网的web应用，主要是使用get参数就可以实现的攻击(比如struts2漏洞利用等)</li>
+<li>利用file协议读取本地文件</li>
+<li>利用Redis未授权访问，HTTP CRLF注入达到getshell7、DOS攻击(请求大文件，始终保持连接keep alive always)等等<br>
+<strong>绕过姿势</strong></li>
+<li>(绕黑名单)进制转换ip</li>
+<li>(绕白)使用@在主机名之前的url中嵌入凭据:</li>
+<li>302跳转;</li>
+<li>DNS重绑定<br>
+<strong>修复</strong><br>
+url白名单(限制不能访问内网的ip)<br>
+过滤返回信息<br>
+统一错误信息<br>
+限制请求端口只能为web端口，只允许访问http和https的请求;</li>
+</ul>
+<h3 id="xxe外部实体注入">xxe外部实体注入</h3>
+<p><strong>原理</strong><br>
+在使用用户上传xml的文件时没有禁止XML引用外部实体，导致的漏洞<br>
+<strong>什么是XML</strong><br>
+-XML是一种类似于HTML（超文本标记语言）的可扩展标记语言。</p>
+<ul>
+<li>比如说我们经常看到一些.XML的配置文件就是用XML的这种格式来写的。</li>
+<li>还可以用来传输数据，我们可以直接以XML的格式放到请求当中发给服务器（就像用post请求去发送一个数据一样）。</li>
+<li>他可以向json 一样去传一组数据发送到我们服务端，服务端收到之后可以对数据进行解析读取，然后后处理等等。<br>
+<strong>危害</strong></li>
+<li>检索文件，其中定义了包含文件内容的外部实体，并在应用程序的响应中返回。</li>
+<li>执行SSRF攻击，其中外部实体是基于后端系统的URL定义的。</li>
+<li>无回显读取本地敏感文件(Blind OOB XXE)，敏感数据从应用服务器传输到攻击者的服务器上。</li>
+<li>通过Blind XXE错误消息检索数据是否存在，攻击者可以触发包含敏感数据的解析错误消息。<br>
+<strong>如何利用</strong></li>
+<li>构造一个XML文档</li>
+<li>.然后在这个文档里面，通过外部实体，去通过这些协议，去指定读取一些文件<br>
+（后台在收到这个数据之后就会对这个外部实体里面的内容去进行执行，然后导致一些意外的数据泄露）<br>
+<strong>如何修复</strong></li>
+<li>通过黑名单过滤用户提交的XML数据</li>
+<li>配置XML处理器使用禁用DTD、禁止外部实体解析</li>
+</ul>
+<h3 id="命令执行漏洞">命令执行漏洞</h3>
+<p><strong>原理</strong><br>
+程序应用有时需要调用一些执行系统命令的函数，如php中的system、exec、shell-exec、passthru、popen、proc open、asert、putenv等<br>
+漏洞条件:用户能够控制的函数输入;存在可以执行代码或系统命令的危险函数。基本定义:指攻击者可以随意执行系统命令。<br>
+<strong>利用(危害)</strong><br>
+继承web服务程序的权限去执行系统命令(任意代码)或读写文件;<br>
+反弹shel;控制整个网站甚至服务器;<br>
+进一步内网渗透<br>
+<strong>修复</strong><br>
+尽量不执行外部指令;使用自定义函数或函数库来替代外部命令的功能:使用escapeshellerq函数来处理命令参数</p>
+<h3 id="逻辑漏洞">逻辑漏洞</h3>
+<p>常见的逻辑漏洞有哪些?<br>
+支付逻辑，短信逻辑，越权漏洞等<br>
+<strong>短信逻辑漏洞(短信轰炸漏洞)</strong><br>
+顾名思义就是可以无限制地发送短信，原理由于短信业务逻辑设计缺陷，设对短信发送次数做出制，导致可以大量重复发送短信验证码。该漏洞会对其他用户造成骚批或使厂商的运营商短信费用的塔加，造成损失。<br>
+<strong>普通的安全加固手段?</strong><br>
+关闭不常用的端口和服务;开启防火墙，不允许外部USB设备的插入;数据库不允许匿名登陆等，漏洞扫描修复，修改一些中间件或系统的配置文件<br>
+<strong>安全加固手段</strong></p>
+<ul>
+<li>关闭不常用端口与服务;</li>
+<li>开启防火墙，不允许外部usb设备插入;</li>
+<li>数据库不允许匿名登录;<br>
+-对可控参数进行严格的检查与过滤。</li>
+</ul>
+<h3 id="反序列化漏洞">反序列化漏洞</h3>
+<p>反序列化漏洞<br>
+原理:首先了解一下序列化和反序列化的含义:<br>
+序列化是指Java对象转化为二进制内容，转换的原因就是为了便于网络传输和本地存储。<br>
+反序列化的含义是将相应的二进制转换为Java对象。<br>
+<strong>漏洞成因</strong><br>
+当输入的反序列化的数据可以被用户控制，那么攻击者就可通过构造恶意输入，让反序列产生非预期对象，同时执行构造的恶意代码<br>
+<strong>常用函数:</strong><br>
+(php反序列化)围绕:serialize()和unserialize()这两个函数展开<br>
+<strong>常用的魔术函数:</strong><br>
+魔术函数（magic methods）来执行恶意操作。魔术函数是一种在特定情况下会自动调用的特殊方法，</p>
+<ul>
+<li>construct() #当一个对象创建时被调用</li>
+<li>destruct() #利用这个方法执行一些清理操作，同时也可以执行一些恶意操作，比如删除文件、发送数据等。</li>
+<li>tostring()#输出的时候自动调用</li>
+<li>sleep()#在对象在被序列化之前运行</li>
+<li>wakeup #将在序列化之后立即被调用，用来执行恶意代码，例如，执行命令、修改对象属性等。</li>
+</ul>
+<h3 id="php危险函数有哪些">php危险函数有哪些？</h3>
+<p>eval，asset，exec，shell_exec,system</p>
+<h3 id="java反序列化">java反序列化</h3>
+<p>就是指把字节序列恢复为java 对象的过程，一般都是利用专门的反序列化测试工具 如果存在 struts2 这个框架漏洞,那么可以直接在测试,工具的输入框执行命令</p>
+<h3 id="rmi原理">rmi原理</h3>
+<p>RMI（Remote Method Invocation，远程方法调用）是 Java 平台的一种机制，允许在不同 Java 虚拟机（JVM）之间进行通信和远程方法调用。它允许一个 Java 程序调用另一</p>
+<h2 id="中间件漏洞">中间件漏洞</h2>
+<h3 id="iis">iis</h3>
+<ul>
+<li>
+<p>put漏洞（本质上就是一个任意文件上传）<br>
+原理：iis开启了webdav配置了可以写入的权限，造成了任意文件上传<br>
+修复：关闭webadv；关闭写入去权限</p>
+</li>
+<li>
+<p>解析漏洞<br>
+6.0版本默认将muma.asp;.jpg此类格式的文件名，当作asp解析，服务器默认；后面的内容不解析，相当截断。上传一个asp木马，通过或者来绕过，除了asp还有cer，cdx，asa等拓展名解析成asp<br>
+防御手法：<br>
+禁止上传和创建此类的文件<br>
+图片存放的目录禁止脚本执行</p>
+</li>
+<li>
+<p>短文件名猜测<br>
+原理：iis的短文件名机制，可以暴力破解访问存在的段文件会返回404，访问某个不存在的短文件，会返回400.使用payload验证一下就知道<br>
+修复：升级。net framework<br>
+修改注册表键值</p>
+</li>
+</ul>
+<h3 id="apache">apache</h3>
+<ul>
+<li>
+<p>解析漏洞（未知拓展名解析）<br>
+原理：apache默认以一个文件可以有多个以点切割的后缀，当最右的后缀无法识别时，就继续向左识别，知道识别带合法后缀才开始解析。<br>
+修复：</p>
+</li>
+<li>
+<p>目录遍历<br>
+原理：程序在实现上没有充分的过滤用户输入的../之类目录跳转符，导致恶意用户可以通过提交的目录跳转来遍历服务器的文件。这个还可以通过../的ascll或者unicode编码绕过<br>
+目录遍历的标志：index of /</p>
+</li>
+</ul>
+<p>修复：修改httpd.conf文件里面的参数</p>
+<h3 id="tomact">tomact</h3>
+<ul>
+<li>
+<p>弱口令+war后门文件部署</p>
+<p>原理：tomcat因为配置不当导致未授权就可以直接登录后台，或者由于弱口令存在登上后上传含木马的war包，后面你访问改war就可以执行。</p>
+<p>在msf中可以完成，也可以在jdk目录下</p>
+<pre><code>jav cvf shell.war 1.jsp
+</code></pre>
+</li>
+<li>
+<p>put 任意文件上传</p>
+<p>tomcat允许put方法上传任意的文件类型，但不允许jsp后缀文件上传，配合windows解析漏洞，适用注入1.jsp%20或者1.jsp::$DATA</p>
+</li>
+</ul>
+<h3 id="nginx">nginx</h3>
+<ul>
+<li>文件解析漏洞</li>
+</ul>
+<p>​	原理：用户配置不当嘛，原理:用户配置不当造成的解析漏洞。由于nginx.conf的配置不当首导致nginx把以’.php‘结尾的文件给fastcg处理。对于任意文件名，<br>
+在后面添加/xxx.pnp，即可将文件作为php解析<br>
+​	例如:在1.jpg中写入一句话木马，上传1jpg/xxx.PHP<br>
+​	修复:</p>
+<p>1、将php.ini文件中的cgi.fix pathinfo的值设置为0<br>
+2、 php-fpm.conf中的security.limit extensions后面的值设置为.php</p>
+<ul>
+<li>
+<p>目录遍历</p>
+<p>原理：和apache一样，属于配置上的错误。程序在实现上没有充分过滤用户输入的。/之类的目录跳转符，导致恶意用户可以通过提交目录跳转<br>
+修复:将nginx.conf中的autoindex on 中的“on”改为“off”</p>
+</li>
+<li>
+<p>CRLF注入漏洞</p>
+<p>CRLF是”回车+换行”(mn)的简称,其十六进制编码分别为0x0d和Ox0a，在HTP协议中,HTTP header与HTTP Body是用两个CRLF分隔的,测览器就是根据这两个CRLF来取出HTTP内容并显示出来。所以,一旦我们能够控制HTTP消息头中的字符,<strong>注入一些恶意的换行</strong>,这样我们就能注入一些会话CooKie或者HTML代码，CRLF漏洞常出现在Location与Set-cookie消息头中。<br>
+修复:修改一些配置文件</p>
+</li>
+</ul>
+<h3 id="jboss">jboss</h3>
+<p>流量特征：</p>
+<p>1.在访问JBOSS漏洞页面/invoker/readonly后，返回值为500.<br>
+2.请求体有llections.map.LazyMap、keyvalue.TiedMapEntry攻击链特征并且有明显的命令执行行为，比如whoami。</p>
+<p>3.在返回500 堆栈报错页面内容中包含了系统返回内容 比如系统用户:root</p>
+<p>**1.反序列化漏洞(HttpInvoker 组件(CVE-2017-12149) **<br>
+原理:存在于 Jboss 的 Htplnvoker组件中的 ReadOnyAccesfiter过滤器中。该过滤器在没有进行任何安全检查的情况下尝试将来自客户端的数据流进行反序列化，从而导致了攻击者可以在服务器上执行任意代码。<br>
+漏洞验证<br>
+访问/invoker/readonly，返回500，说明此页面存在反序列化漏洞<br>
+过程:开两个终端，一个进行监听(nc-lvnp12345)，另一个发payload<br>
+curl http://192.168.50.169:8080/invoker/readonly --data-binary @ReverseshellCommonsCollectionsHashMap.se</p>
+<p>(@不能省略)<br>
+最后，成功反弹shell</p>
+<h3 id="weblogic">weblogic</h3>
+<p><strong>1.弱口令+war后门文件部署</strong><br>
+原理:通过弱口<strong>令(weblogic/0racle@123</strong>)登录管理台后，点击部署，安装，上传war包<br>
+<strong>反序列化</strong><br>
+原理: Weblogic的<strong>WLSSecurity组件</strong>对外提供webservice服务，其中使用了XMLDecoder来解析用户传入的XML数据，在解析的过程中出<strong>现反序列化漏洞，导致可执行任意命令</strong><br>
+<strong>SSRF漏洞</strong><br>
+原理:Oracle WebLogic Web Server既可以<strong>被外部主机访问</strong>，同时也允许访问内部主机.<br>
+过程:比如有一个isp页面SearchPublicRegistries.sp，我们可以利用它进行攻击，未经授权通过weblogicserver连接任意主机的任意TCP端口，可以能兄长的响应来推斯在此端口上是否有服务在监听此端口，进而攻击内网中redis、fastcgi等脆弱组件。</p>
+<h3 id="简述你知道的一句话木马">简述你知道的一句话木马</h3>
+<p>php: php@eval($ POST['shell&quot;]);?&gt;</p>
+<p>asp: &lt;%execute(request(&quot;value&quot;))%&gt;</p>
+<p>&lt;%eval(Request.ltem[&quot;value&quot;])%&gt;</p>
+<p>aspX:&lt;%@ Page Language=&quot;Jscript&quot;%&gt;</p>
+<h2 id="框架及其漏洞">框架及其漏洞</h2>
+<h3 id="apache-shiro">Apache shiro</h3>
+<p><strong>指纹信息</strong>：</p>
+<p>请求包中，在cookie中信息给remenberme变量赋任意值，首当返回包的set-cookie值存在remenberme=delete说明使用了shiro框架</p>
+<p><strong>漏洞原理</strong></p>
+<p><strong>Shiro-550</strong><br>
+Apache shiro框架提供了RememberMe的功能，用户登录成功后会生成经过加密并编码的cookie，<br>
+攻击者只要找到AES加密的密钥，就可以构造恶意对象，对其进行列化-&gt;AES加密-&gt;Base64编码，最终造成恶意对象执行，导致反席列化漏洞。<br>
+在服务端接收cookie后，Base64解码-&gt;AES解密-&gt;反序列化<br>
+然后将其作为cookie的rememberMe字段发送，对方服务器将rememberMe进行解密并且反序列化</p>
+<p><strong>复现：</strong><br>
+1、首先拿到一个登录框，输入信息，勾选Remember Me后提交。<br>
+2、抓包，查看返回的数据包中set-Cookie字段存在remenberme=deleteme(判断存在漏洞)<br>
+3、使用ysoserial中的监听模块，监听6666端口(为第5步拿到密钥做准备)（github反序列化工具）<br>
+4、在自己的电脑上，用nc监听7777端口(为第6步拿到shell做准备)<br>
+5、使用py脚本获取shiro的AES密钥。有了密钥之后，再用py脚本生成payload<br>
+6、最后，重新登录抓包，把包中的cookie值替换为步骤5中的payload，反弹sehll成功</p>
+<p>Shiro-721(问的概率小，选看)jndi，ldap，rmi</p>
+<p>而正确的 cookie 之后的恶意反序列化字段则会被 Oracle Padding 解密，导致反序列化代码执行</p>
+<p>在Apache shiro框架的cookie中，带有加密的rememberMe字段存在问题，会受到pading Oracle攻击。攻击者无需知道RememberMe的加密秘钥，直接使用RememberMe的cookie作为pading<br>
+Oracle Attack的前缀，然后把精心制作的恶意语句写入RememberMe字段，从而执行反序列化攻击。</p>
+<p><strong>550和721的区别:550需要AES加密的密钥，721不需要;721是通过Padding Oracle生成加密的攻击代码，而550是通过AES加密生成的攻击代码</strong></p>
+<p>复现：</p>
+<p>1、首先登录网站，并从cookie中获取rememberMe字段(该漏洞必须在登录Shiro的前提下才可能利用成功)<br>
+2、拿到rememberMe cookie后，用它作为Padding Oracle攻击的前缀;<br>
+3、打开ysoserial工具，加密一条Java序列化Payload，构造恶意rememberMe;<br>
+4、最后使用构造好的恶意rememberMe重新请求网站，进行反序列化攻击，最终导致远程代码执行,</p>
+<p><strong>快速理解:</strong><br>
+Shiro漏洞的本质是处理cookie的流程有问题<br>
+漏洞的关键点就在于找到AES的加密秘钥，AES的密钥是硬编码在代码里。Shiro流量特征**:数据包含有多个$$$符号，C参数含有base64编码**。</p>
+<h3 id="shrio反序列化漏洞">shrio反序列化漏洞</h3>
+<p>1.浏览器或服务器重启后用户不丢失登录状态，<strong>Shiro 支持将持久化信息序列化并加密后保存在 Cookie的rememberMe 字段中</strong>，下次读取时进行解密再反序列化。但是在 Shiro 1.2.4版本之前<strong>内置了一个默认且固定的加密 Key</strong>，**导致攻击者可以伪造任意的 remembereCookie，进而触发反序列化漏洞Apache shiro框架提供了记住密码的功能(RememberMe)，**用户登录成功后会生成经过加密并编码的cookie。在服务端对rememberMe的cookie值2 先base64解码然后AES解密再反序列化，就导致了反序列化RCE漏洞。那么，Payload产生的过程:命令=&gt;序列化=&gt;AES加密=&gt;base64编码=&gt;Remembere Cookie值在整个漏洞利用过程中，比较重要的是AES加密的密钥，如果没有修改默认的密钥那么就很容易就知道密钥了。</p>
+<h4 id="流量层面">流量层面</h4>
+<p>1**.在HTTP请求头Cookie里出现rememberMe字段以及可能出现自定义类型，**例如c: aWQ=，响应体中出现大量编码字符串，若需要判断是否攻击成功，需对请求数据和响应体内容进行解密判断<br>
+2.<strong>检查请求头中的&quot;rememberMe&quot; cookie。攻击者可能会在此处插入恶意序列化数据。</strong><br>
+3.观察服务器响应。<strong>如果服务器返回了异常错误信息，如Java反序列化异常，可能表明攻击成功。</strong><br>
+分析应用程序日志。<strong>如果日志中出现了异常堆栈跟踪，可能表明攻击成功</strong>。<br>
+例如，<strong>攻击者发送了一个包含恶意序列化数据的请求，服务器响应了一个包含Java反序列化异常的错误信息。这可能表明攻击成功。</strong></p>
+<h3 id="shrio不出网利用">shrio不出网利用</h3>
+<p>通过冰蝎反弹 反弹metepreter shell</p>
+<p><a href="https://www.cnblogs.com/tysec/p/shiro-bu-chu-wang-de-da-fa.html">相关文章</a></p>
+<p><a href="https://forum.butian.net/share/401">相关文章</a></p>
+<h3 id="thinkphp">Thinkphp</h3>
+<p><strong>指纹信息</strong>：</p>
+<p>url上输入http://192.168.xx.xx/ThinkPHP/logo.png。该图片也存在于title中。<br>
+除此之外，“十年磨一剑”也是Thinkphp的重要特征。</p>
+<p><strong>漏洞原理:</strong><br>
+程序未对控制器进行过滤，导致攻击者可以通过引入\符号来调用任意类方法。从而使框架存在代码执行漏洞，攻击者可以利用构造的恶意URL执行任意代码,比如<code>index.php?s=indexAnamespace\class/method</code>，在解析url时，会实例化\namespace\class类并执行任意method方法举个例子:<br>
+<code>http://192.168.xx.xx/public/index.php?s=index\think\app/invokefunction&amp;function=call_user_func_arry&amp;</code>其中\think\app是类名，后面是恶意方法</p>
+<p>实践方法：</p>
+<p>1、植入一句话木马(写在url中)<br>
+<code>htp:/192.168.xo.x0/pubic index,php?s=/index/thinklappinvokefunction&amp;function=calluser func arrav&amp;wars!0l=system&amp;wars!1l=echo ^&lt;?php @eval($ GET[&quot;hack&quot;]?^&gt;&gt;shell.php</code></p>
+<p>2、显示phpinfo信息(写在url中)<br>
+<code>http://192.1 68.xx.xx/public/index,php?s=indexAthinkapp/invokefunction&amp;function=phpinfo&amp;varv[0]=100</code><br>
+3、POST利用方法一(写在请求正文中)<br>
+<code>-method= construct&amp;filter=system&amp;method=get&amp;server[REQUEST METHOD]=whoami</code><br>
+4、POST利用方法二(写在请求正文中)<br>
+<code>a=system&amp;b=whoami8, method=filter.</code></p>
+<h3 id="struts2">struts2</h3>
+<p><strong>指纹信息:</strong><br>
+1、一般st2框架开发的网站，url上会有.action或.do后缀的文件名，比如:http://192.168.xx.xx/integration/editGangster.action<br>
+方法1可能不准确，因为spring框架或jboss系统有时候也存在.do结尾的文件名。<br>
+2、在相关接口追加actionErrors参数，通过网站页面的回显错误消息来判断。<br>
+3、默认情况下，<strong>st2框架中存在http://192.168.xx.xx/struts/webconsole.html这个默认文件。</strong><br>
+4、抓包，看包中Content-Type字段的开头是否形如%{#x=['xxx']<br>
+方法4仅限于st2-045框架漏洞</p>
+<p>漏洞原理：</p>
+<p><strong>st2-045</strong><br>
+Struts2默认使用org.apache.struts2.dispatcher.mnultipart.aartaMultipartReuest<strong>类对上传数据进行解析</strong>，其在处理Content-Type时如果获得<strong>非预期的值</strong>的话，将会地出一个异常。在处理异常的过程中会对错误信息进行<strong>OGNL表达式解析。如果错误信息中包含恶意语句，语句将被执行</strong>。</p>
+<p>【重要】S2-062远程命令执行(cve-2021-31805)<br>
+该漏洞由于对CVE-2020-17530的修复不完整造成的，CVE-2020-17530漏洞是由于truts2 会对<strong>某些标签属性</strong>(比如id)的属性值进行二次表达式解析，因此当这些标签属性中使用了 %{x}且 其中x 的值用户可控时，用户再传入一个 <strong>%(pavoad)<strong>即可造成</strong>OGNL表达式执行</strong>。在CVE-2021-31805漏洞中，仍然存在部分标签属性会造成攻击者恶意构造的OGNL表达式执行，导致远程代码执行</p>
+<p>原理:开发人员使用%(…)}语法进行强制 OGNL 解析，有一些特殊的TAG属性可以执行二次解析。对不受信任的用户输入使用强制 OGNL 解析可能会导致远程代码执行。(一般不会问payload，太长了，就是<strong>请求体里的%}里的恶意语句</strong>)<br>
+修复:<br>
+1、这些 UiBean元素最终对 name 属性执行第二次 OGNL评估，因为“ale”属性不存在并且它试图填充该属性。因此，通过给所有属性一个空白值=“”，这将有助于缓解这个向题。(例如:&lt;s:label name=&quot;%{skillName}&quot; value=&quot;&quot;/&gt;<br>
+1.将 org.apache.commons.collection.BeanMap 添加到 Struts2 沙箱的 excludeClasses 列表将排除直接使用它</p>
+<p><strong>快速理解:</strong><br>
+st2-045的漏洞，所有问题都出现在Content-Type字段上<br>
+修复建议:<br>
+升级struts2框架至最新版，</p>
+<h4 id="在发生命令执行攻击时如何判断是struts2漏洞执行命令">在发生命令执行攻击时，如何判断是struts2漏洞执行命令?</h4>
+<p>1.在<strong>请求头中存在OGNL表达式</strong>，一般在url中会出现的攻击特征主要是<code>…action?method ?redirect$</code>、在conten-type中出现的攻击特征主要有:%(#context在报文体中出现的攻击特征主要有:# memberAccess 等<br>
+1.判断<strong>请求中是否包含特定的 Struts2 关键字</strong>，如“<strong>method:&quot;、&quot;redirect:</strong>&quot;等，这些关键字可能是用于执行命令的操作;2.检查请求中是否包含&quot;Content-Type&quot;头字段，并且值为&quot;<strong>application/x-www-form-urencoded</strong>&quot;，这是 Struts2 框架默认的 Content-Type 值，用于处理POST 请求:<br>
+3.检查<strong>请求参数中是否包含OGNL表达式，如&quot;$}&quot;、&quot;{}&quot;等字符:</strong><br>
+4.检查请求<strong>是否包含一个名为&quot;class&quot;的参数，值为&quot;java.lang.Runtime&quot;，这个参数可以用于执行系统命令</strong></p>
+<h3 id="fastjson">Fastjson</h3>
+<p><strong>指纹信息:</strong><br>
+1、抓包，看请求包中传入的参数值是否形如json格式，如(“张三”:100,&quot;李四”:200)。随后将<strong>json数据随意修改</strong>，<strong>看响应包中是否出现f</strong>astjson.JSONException字样。</p>
+<p>2、正常请求是get请求没有请求体。可以通过构造错误的POST请求，看<strong>返回包中是否有fastjson这个字符串</strong>。</p>
+<h4 id="如何研判fastjson攻击成功">如何研判fastjson攻击成功</h4>
+<p>1.请求头:method: POST content type: application/json<br>
+2.请求体:data:com.sun.rowset.JdbcRowSetlmpl,dataSourceName,@type<br>
+3.请求体: 包含攻击者C2服务器地址<br>
+4.状态码为:400 也可能是500<br>
+5.通过天眼分析平台进行回溯分析，在分析中心输入语法:(sip:(失陷服务器P)OR sip:(攻击者C2IP)AND(dip:(失陷服务器IP) OR dip:(攻击者C2IP)</p>
+<p><strong>漏洞原理:</strong></p>
+<p>原理也是jdni注入 利用就是构造一个json字符，用@type指定一个类库，流量特征就是json autotype。<strong>Fastjson在对javaBean 进行序列化的时候会调用它的所有get或者is方法，反序列化的时候会调用所有的 set方法，如果这个set方法中含有些危险的调用链，我们则可以利用这个反序列化过程来执行我们自己的命令。</strong></p>
+<p>简单版：fastjson 在反序列化时会调用 setter 方法， fastjson 支持使用 @type 指定反序列化的目标类。</p>
+<p>fastison告警，怎么判断是不是攻击事件(恶意，状态码)<br>
+<strong>实践与利用:</strong><br>
+1、新建一个java文件，写入恶意代码。然后编译成class文件。<br>
+2、然后将class文件内容进行base64之后赋值给 bytecodes[]<br>
+3、fastison一旦收到这个json对象，恶意代码将被执行。<br>
+<strong>快速理解:</strong><br>
+有这样一个json对象:<br>
+{&quot;@type&quot;:Templateslmpl,&quot; bytecodes&quot;:[恶意语句],&quot; name&quot;:'xxx',&quot; tfactory&quot;:{xxx}};</p>
+<p>Fastjson在处理json对象时有问题，只要json对象包含@type:Templateslmpl，那它就会执行 bytecodes字段里的语句,</p>
+<p><strong>修复建议:</strong><br>
+对@type字段进行过滤</p>
+<h3 id="fastjson不出网">fastjson不出网</h3>
+<ul>
+<li>
+<p>（1）利用C3P0构造二次反序列化，C3P0是JDBC的一个连接池组件（hex base以及jndi两个Gadget利用链）</p>
+</li>
+<li>
+<p>（2）通过将注册恶意类的字节码文件和注册controller的类的字节码文件经过BCEL编码后请求到服务器，但BCEL ClassLoader（类加载器）在Java 8u251以后就没有了，BCEL可以创建、修改Java Class文件的API</p>
+</li>
+<li>
+<p>（3）TemplatesImpl来加载字节码执行命令,需要开启SupportNonPublicField功能（很苛刻）</p>
+</li>
+<li>
+<p>（4）common-io写文件</p>
+</li>
+</ul>
+<h3 id="apache-log4j远程代码执行漏洞">Apache Log4j远程代码执行漏洞</h3>
+<p>影响范围:<br>
+Apache Log4j 2.x&lt;<em>Apache Shiro</em>=2.14.1</p>
+<p>受影响的应用及组件:</p>
+<p>Spring-Boot-Strater-log4j2、Apache Solr、Apache Flink、Apache Druid</p>
+<p><strong>原理：</strong></p>
+<p>Log4j2提供的lookup功能造成的，该功能允许开发者通过一些协议去读取相应环境中的配置。但在实现的过程中，并未对输入进行严格的判断，从而造成漏洞的发生。lookup可以通过{$xx}的方式来执行一些命令和操作。Log4j就是java的日志插件，处理日志存在”KaTeX parse error: Expected '}', got 'EOF' at end of input: …入，流量特点就是数据包里面有”{“字段。</p>
+<h4 id="流量层面分析apache-log4j2-远程代码执行漏洞是否攻击成功">流量层面分析Apache Log4j2 远程代码执行漏洞是否攻击成功?</h4>
+<p>1、<strong>dnslog类:查看是否存在源ip与dnslog的外联日志记录</strong></p>
+<p>2、<strong>本质是命令执行攻击看看回显</strong><br>
+2.1 有回显:响应体中存在命令执行结果<br>
+2.2无回显:存在源ip与ldap服务ip的外联日志记录</p>
+<p>修复：</p>
+<ul>
+<li>升级到受影响版本之外的 Log4j 版本</li>
+<li><strong>禁用 JNDI 查找功能</strong>：</li>
+</ul>
+<h3 id="spring-framework">SPring framework</h3>
+<p><strong>Spring Framework远程代码执行漏洞(CVE-2022-22965)</strong><br>
+(真问到就说没做过相关复现呢)<br>
+影响范围:<br>
+1、JDK &gt;= 9月5.3.X&lt;Spring Framework&lt;5.3.18或5.2.X&lt;Spring Framework &lt; 5.2.20<br>
+2、使用受影响的Spring框架或衍生框架。<br>
+3、Spring-webmvc或Spring-webflux依赖项。<br>
+漏洞的简单描述:(描述时:大概知道一些原理的动机)<br>
+Spring framework是一个开源应用框架，旨在降低应用程序开发的复杂度，它是轻量级、松散耦合的。它具有分层体系结构，允许用户选择组件，同时还为J2EE 应用程序开发提供了一个有深聚力的框契。<br>
+但是在JDK9及以上版本环境中，一些新的版本特性，可以使攻击者绕过一些安全特性，借助某些中间件构造数据包修改敏感文件，达到远程代码执行目的。<br>
+(说这个!)<strong>Spring框架存在处理流程缺陷，攻击者可远程实现对目标主机的后门文件写入和配置修改，继而通过后门文件访问获得目标主机权限</strong><br>
+实践与利用:<br>
+1、在本地用Vulfocus 靶场搭建环境，docker-compose up -d即可,<br>
+2、在有漏洞的Sprint框架界面抓包，替换get请求内容如下:<br>
+3、将包中内容做如下替换:左边是替换前，右边是替换后。<br>
+4、最后访问http://192.168.xx,xx:8080//tomcatwar.jsp?pwd=j&amp;cmd=whoami，可以看到界面上返回了指令结果</p>
+<p>修复建议:<br>
+1、UWAF防护<br>
+2、代码中搜索@InitBinder注解，看方法体内是否调用dataBinder.setDisallowedfields方法。如果有，则在原来的黑名单中添加{“&quot; class.module.*”)<br>
+3、请管理员及时更新至最新版本,</p>
+<h3 id="weblogic-2">Weblogic</h3>
+<p>漏洞原理:<br>
+主要源于在coherence,jar存在着用于<strong>gadget构造的类(反序列化构造类)</strong>，并且利用weblogic默认开启的<strong>T3协议</strong>进行传输和解析，进而导致weblogirc服务器将恶意代码反序列化，最后执行攻击语句。<strong>T3 是用于在 WebLogic 服务器和其他类型的Java程序之间传输信息的协议</strong>。服务端可以持续追踪监控客户端是否存活(心跳机制)，通常心跳的间隔为60秒，服务端在超过240秒未收到心跳即判定与客户端的连接丢失。<br>
+实践与利用:<br>
+这个框架的实践在面试的时候不必说明，因为大部分关于Weblogic的漏洞都和T3协议有关。</p>
+<p>快速理解:<br>
+<strong>Weblogic在通信过程中传输数据对象，涉及到反序列化操作，如果找到某个类在反序列化过程中能执行的代码，就有可能通过控制这些代码达到远程命令执行的效果。</strong></p>
+<p><strong>xml的反序列化漏洞，通过xmldecoder还是什么导致的xml解析代码执行。弱口令。</strong></p>
+<p>流量特征:不加密，常见的出网协议也可以用。有很多T3协议的特征，文件操作和冰蝎一样有fileoutstream字段。</p>
+<p>在TCP 流量中（ T3 协议基于 TCP 协议），反序列化数据通常以 ac ed 00 05 开头，在 T3 中开头<br>
+特征都一样，结尾为： fe010000<br>
+所以，拿到T3 的流量包用 wireshark 打开跟踪 TCP 流：用hex解码</p>
+<p>修复建议:<br>
+升级框架版本<br>
+【挺重要】F5漏洞CVE-2020-5902(暂时没找到最新的)<br>
+成因分析<br>
+Apache在处理 /tmui/loginjsp/.;/tmui/localb/workspace/fleRead.jsp，会认为处理的是 /tmui/loginjsp 文件，但是**.jsp 会进行最大限度的匹配**，所以就会将完整的/tmui/login.isp/.:/tmui/localb/workspace/fileRead.jsp 转给 Tomcat 处理，关于Apache 对访间权限校验的处理，得去看/etc/htpd/modules/mod auth pam.so, Tomcat在处理/tmui/login.jsp/..;/tmui/locallb/workspace/fileRead.jsp 的时候，会先去除;/之间的字符。<br>
+<strong>漏洞利用</strong></p>
+<ul>
+<li>利用该漏洞可以root权限在F5环境中执行命令<br>
+通过调用crul命令可以对文件进行读写操作<br>
+bash命令必须要用alias创建别名，否则会命令执行失败<br>
+将运行脚本写入F5中的文件，并运行该脚本，理论上可以执行任意shell命令<br>
+使用反弹shell来获取F5的shell</li>
+</ul>
+<h3 id="redis未授权访问">redis未授权访问</h3>
+<p>原理：利用 Redis 自身的提供的config 命令，可以进行写文件操作，攻击者可以成功将自己的ssh公钥写入目标服务器的 /root/.ssh 文件夹的authotrized_keys 文件中，进而可以使用对应私钥直接使用ssh服务登录目标服务器。</p>
+<p>前提条件：</p>
+<pre><code>（1）redis绑定在 0.0.0.0:6379，且没有进行添加防火墙规则避免其他非信任来源ip访问等相关安全策略，直接暴露在公网；
+（2）没有设置密码认证（一般为空），可以免密码远程登录redis服务。 
+</code></pre>
+<pre><code>（1）攻击者无需认证访问到内部数据，可能导致敏感信息泄露，黑客也可以恶意执行flushall来清空所有数据；
+（2）攻击者可通过EVAL执行lua代码，或通过数据备份功能往磁盘写入后门文件；
+（3）最严重的情况，如果Redis以root身份运行，黑客可以给root账户写入SSH公钥文件，直接通过SSH登录受害服务器
+</code></pre>
+<p>kali写webshell，写计划任务，写ssh公钥<br>
+windows写webshell，开机启动项</p>
+<h3 id="redis常见的getshell方式">redis常见的getshell方式：</h3>
+<p>1、通过向Web目录中写webshell的方式进行getshell</p>
+<p>2、通过写SSH key的方式进行getshell</p>
+<p>3、通过写corntab的方式进行getshell（写入计划任务反弹shell）</p>
+<p>4.**利用主从复制rce，**执行脚本即可获取shell</p>
+<p><a href="https://zhuanlan.zhihu.com/p/36529010">redis拿shell</a></p>
+<p><a href="https://www.freebuf.com/vuls/224235.html">拿shell</a></p>
+<h3 id="永恒之蓝漏洞">永恒之蓝漏洞</h3>
+<p>原理:<br>
+<strong>利用Windows系统的SMB协议漏洞来获取系统的最高权限</strong>，以此来控制被入得的计算机、永恒之蓝是在Windows的SMB服务外理SMB V1清求时发生的漏洞，这个漏洞导致攻击者在目标系统上可以执行任意代码，通过永恒之蓝漏洞会扫描开放445文件共享端口的Windows机器，无要用户任何操作，只要开机上网，不法分子就能在电脑和服务器中植入勤索软件，远程控制木马、虚拟货币挖矿机等恶意程序。<br>
+SMB协议(补充):SMB(全称是server Mesage BlocK)是一个协议服务器信息块，它是一种客户机/服务器、请求/响应协议，通过SMB协议可以在计算机间共享文件、打印机、命名管道等资源电脑上的网上邻居就是靠SMB实现的;SMB协议工作在应用层和会话层，可以用在TCP/IP协议之上，SMB使用<strong>TCP139端口和TCP445端口</strong></p>
+<p>攻击载荷一般会发送NT Trans Request载荷，里<br>
+面有大量的NOP指令在发送NT Trans Request载荷后，会发送Trans2Secondary Request载荷，相关的Trans2<br>
+Secondary Request载荷会分几个数据包发送加密的攻击载荷。 在攻击载荷发送完后，如果发现数据包中存在Multiplex ID: 82数据包，说明漏洞攻击成功</p>
+<h3 id="netlogon-域内提权漏洞">Netlogon 域内提权漏洞</h3>
+<p>windows域控中严重的远程权限提升漏洞，攻击者通过NetLogon，建立与域控间易受攻击的安全通道时，可利用此漏洞获取域管访问权限</p>
+<p>Netlogon使用的AES认证算法中的vi向量默认为0。这将导致攻击者可以绕过认证，并向域发起Netlogon计算机账户认证请求。攻击者可以使用8字节全0 client challenge 不断尝试，从而得到一个正确的8字节全0 client credential以通过认证，再通过相关调用完成对域控密码的修改。</p>
+<p>攻击者只需要定位域控主机名及IP，同时确认可以访问域控，就可以在无需任何凭据的情况下 (<strong>可在域外</strong>) 取得域管理员的权限。</p>
+<h2 id="攻防相关工具及其流量分析">攻防相关工具及其流量分析</h2>
+<h3 id="wireshark">Wireshark</h3>
+<p>是一个网络封包分析软件，用来截取并分析指定网卡上的流量包。*Filter编辑框中，过虑规则如果语法无误，框会显绿色，否则是红色★过滤协议:<br>
+直接输入协议名tcp、udp、arp、icmp、http、ftp、dns等等★过滤IP:<br>
+ip.src eq 192.8.1.107 显示来源ip<br>
+ip.dst eq 192.168.1.107 显示目标ip<br>
+ip.addr eq 192.168.1.107 显示来源或目标ip<br>
+★过滤端口:<br>
+tcp.port==80 只要端口的80均显示<br>
+tcp.dstport <mark>80 只显tcp协议的目标端口80<br>
+tcp.srcport</mark>80 只显tcp协议的来源端口80<br>
+tcp.port &gt;=1 and tcp.port&lt;= 80 指定范围过滤<br>
+udp.port eq 15000 过滤udp端口<br>
+*过滤MAC地址:<br>
+eth.dst == A0:00:00:04:C5:84 过滤目标mac<br>
+eth.src == A0:00:00:04:C5:84 过滤来源mac<br>
+eth.addr == A0:00:00:04:C5:84 显示来源或目标mac<br>
+★过滤http模式<br>
+http.request.method ==&quot;GET&quot;<br>
+http.request.uri ==&quot;/img/logo-edu.gif'<br>
+http contains &quot;GET&quot;<br>
+http.request.method ==&quot;GET&quot; &amp;&amp; http contains &quot;User-Agent:'http contains &quot;HTTP/1.1 200 ОK&quot; &amp;&amp; http contains &quot;Content-Type:'★包长度过滤<br>
+udp.length ==26 除了UDP头固定长度8，加上udp下面那块数据包之和tcp.len &gt;=7指的是ip数据包(tcp下面那块数据)，不包括tcp本身ip.len == 94 除了以太网头固定长度14，其它都算是ip.len，即从ip本身到最后</p>
+<h3 id="nmap">nmap</h3>
+<p>是一个网络扫描软件，用来扫描电脑的网络连接情况、运行的服务等等，也能够推断计算机操作系统或服务的详细信息<br>
+nmap-p1-65535 192.168.1.1 扫描全端口<br>
+nmap -sT 192.168.1.1 使用TCP Connect扫描，也是默认扫描方式nmap -Pn 192.168.1.1非ping扫描，不执行主机发现，可以跳过防火墙nmap -sV 192.168.1.1 返回端口以及所对应的服务和版本号<br>
+nmap -sS 192.168.1.1 半开扫描，返回端口，原理是采用TCP协议中的第一次握手，通过返回服务器第二次握手确定端[nmap -sN 192.168.1.1使用TCP NuI扫描，以ARP或ICMP协议发送ping命令，检测存活主机(只进行主机发现，不进行端口扫描)nmap-p 1-65535 192.168.1.1 指定扫描所有端口，(默认只扫描1000端口，等价于nmap -p-)nmap -A 192.168.1.1-A表示全面综合扫描(包含了1-10000端口ping扫描、操作系统扫描、脚本扫描、路由跟踪、服务探测)<br>
+nmap -0 192.168.1.1 操作系统检测<br>
+nmap -T4 192.168.1.1 -T[0-6]设置定时模板(越高越快)<br>
+nmap-v192.168.1.1 -v或-vv表示显示扫描过程<br>
+nmap --script 使用脚本</p>
+<h3 id="sqlmap的流量特征">sqlmap的流量特征</h3>
+<p>1）sqlmap的关键字特征：user-agent、 xss测试语句、随机数的位数<br>
+2）sqlmap的攻击流程具有一定的顺序和规律<br>
+3）sqlmap的一些payload测试语句具有模板特征</p>
+<h3 id="frp流量分析">frp流量分析</h3>
+<p>frp是一款用于<strong>内网穿透的工具</strong>，可通过创建服务端和客户端，**将内网的服务或应用暴露到外网，**这样可以方便地访问内网中的服务或应用，实现内网穿透。fr的服务端和客户端都支持多种操作系统，包括Linux、Windows以及mac0s等，支持TCP和UDP协议，可以通过域名或IP地址访问，同时也支持多种认证方式和加密传输。使用frp可以方便地在内网部署网站、搭建游戏服务、远程访问设备等，也可以用于企业内网的访问和控制。客户端frps.exe 服务端frpc.exe</p>
+<h4 id="流量特征">流量特征</h4>
+<p>1.首先，Frp 会使用自定义协议进行通信，其默认端口为 7000，该端口在流量中是可以被识别出来的。<br>
+2.Frp 在启动时，会在流量中进行特定的标识，例如会发送&quot;frps&quot;或&quot;frpc”字符串，用于标识是服务端还是客户端。<br>
+3.Frp 会使用心跳包来维持与服务器之间的连接，心跳包的特征是由两个字节的包头和固定长度的包体组成。<br>
+4.在正常使用过程中，Frp 会产生大量的TCP连接，每个连接都对应着一个隧道，通过观察连接的建立和断开可以推断出 Frp 是否正在被使用。</p>
+<h3 id="中国菜刀得流量特征">中国菜刀得流量特征</h3>
+<p>特征：特征主要在 body中，主要是php类eval函数用于执行传递的攻击 payload，流量参数z0、z1、z2</p>
+<p>base64-encode默认参数为 z0，对其进行 base64 解密之后会发现脚本用于传递 payload 的函数，比如 php的 eval 和 assert,asp 中的 execute，后面的版本 body 中部分字符被 unicode 编码替换混淆，常见%u00</p>
+<h3 id="蚁剑流量特征">蚁剑流量特征</h3>
+<p>Base64 AES加密</p>
+<p>php 类常见，**最明显的@ini _set(&quot;display_errors&quot;,&quot;0&quot;)，*<strong>asp 类常见 execut</strong>e，但是会 断拼接，混淆加密后常见 ——0x.....这种形势</p>
+<h3 id="冰蝎流量特征">冰蝎流量特征</h3>
+<p>AES加密 + base64编码</p>
+<p>行请求时内置了十几个User-Agent头，每次请求时会随机选择其中的一个。因此当发现一个ip的请求头中的user-agent在频繁变换</p>
+<p>请求数据包中的content-type字段常见为application/octet-stream。</p>
+<p>webshell连接密码的MD5的前16位，默认连接密码是&quot;rebeyond&quot;(即密钥是md5('rebeyond')[0:16]=e45e329feb5d925b)。</p>
+<h3 id="哥斯拉流量特征">哥斯拉流量特征</h3>
+<p>AES 加密PHP 连接特征请求都含有&quot;pass**=&quot;第一个包第二个包，jsp连接特征与php请求一样都含有&quot;pass=&quot;而且发起连接时服务器返回的 Content-Length 是 0</p>
+<p><strong>不修改User-Agent,User-Agent会类似于Java/1.8.0 121(具体什么版本取决于JDK环境版本)，在请求包的Cookie中有一个非常致命的特征，最后的分号。标准的HTTP请求中最后一个Cookie的值是不应该出现;的</strong></p>
+<h3 id="内存马">内存马</h3>
+<p>内存马是<strong>无文件攻击的一种常用手段</strong>。根据内存马注入方式大致分成以下两种，<br>
+PHP内存马，Python内存马，java内存马的检测与查杀，java内存马又主要分为下面这三大类</p>
+<ul>
+<li>
+<p>servlet-api类</p>
+<ul>
+<li>filter型</li>
+<li>servlet型</li>
+<li>listener型</li>
+</ul>
+</li>
+<li>
+<p>spring类</p>
+<ul>
+<li>拦截器</li>
+<li>controller型</li>
+</ul>
+</li>
+<li>
+<p>Java Instrumentation类</p>
+<ul>
+<li>agent型</li>
+</ul>
+<p>根据内存马注入的方式，大致可以将内存马划分为如下两类</p>
+<blockquote>
+<p>1.servlet-api型<br>
+通过命令执行等方式动态注册一个新的listener、filter或者servlet，从而实现命令执行等功能。特定框架、容器的内存马原理与此类似，如spring的controller内存马，tomcat的valve内存马</p>
+<p>2.字节码增强型<br>
+通过java的instrumentation动态修改已有代码，进而实现命令执行等功能。</p>
+</blockquote>
+<p>内存马排查思路如下：<br>
+1、先查看<strong>检查服务器web日志，查看是否有可疑的web访问日志</strong>，比如说filter或者listener类型的内存马，会有大量url请求路径相同参数不同的，或者页面不存在但是返回200的请求。<br>
+2、如在web日志中并未发现异常，可以排查是否为中间件漏洞导致代码执行注入内存马，排查中间件的error.log日志查看是否有可疑的报错，根据注入时间和方法根据业务使用的组件排查是否可能存在java代码执行漏洞以及是否存在过webshell，排查框架漏洞，反序列化漏洞。<br>
+3、查看是否有类似哥斯拉、冰蝎特征的url请求，哥斯拉和冰蝎的内存马注入流量特征与普通webshell的流量特征基本吻合。<br>
+4、通过查找返回200的url路径对比web目录下是否真实存在文件，如不存在大概率为内存马。</p>
+<p>内存马特征：<br>
+1、内存马的Filter是动态注册的，所以在web.xml中肯定没有配置，这也是个可以的特征。但servlet 3.0引入了@WebFilter标签方便开发这动态注册Filter。这种情况也存在没有在web.xml中显式声明，这个特征可以作为较强的特征。<br>
+2、内存马就是代码驻留内存中，本地无对应的class文件。所以我们只要检测Filter对应的ClassLoader目录下是否存在class文件。</p>
+</li>
+</ul>
+<h3 id="如何判断cobalt-strike攻击流量">如何判断Cobalt Strike攻击流量?</h3>
+<p>1、http-beacon通信中，默认使用<strong>get方法向/dpixel、/ utm.gif、/pixel.gif等地址发起请求，同时请求头存在cookie字段并且值为base64编码</strong></p>
+<p>2、dns-beacon通信中，默认使用cdn、www6、api.、www、post.为开头发起dns清求，并且查询结果伴随0.0.0.0、0.0.0.80、0.0.0.241等非常规IP、<strong>心跳包间隔一定时间，均有通信，且流级上的上下行数据长度固定</strong><br>
+1.常见User-Agent: Cobalt strike通常使用自定义的User-Agent字符串，例如Mozila/5.0 (Windows NT 10.0: Win64: x64) Cobalt strike2.命令和控制流量:</p>
+<p><strong>Cobalt Strike的HTTP请求中可能包含与C2（Command and Control）服务器通信的命令和控制信息，这些信息在正常的Web请求中不会出现。</strong></p>
+<pre><code>POST /index.php HTTP/1.1
+Host: example.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.9999.99 Safari/537.36
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 57
+Connection: close
+
+id=abcdefg&amp;sleep=300&amp;server=attacker.com&amp;port=443///其中id参数可能用于标识受感染的系统，sleep参数指定了Beacon的心跳间隔，server和port参数指定了C2服务器的地址和端口。
+
+</code></pre>
+<h2 id="metasploit流量分析">Metasploit流量分析</h2>
+<p>起初先用<code>payload windows/x64/shell/bind_tcp</code>进行交互，这是一个<code>cmd shell</code></p>
+<p>Metasploit Framework利用漏洞时会使用特定的exploit模块。这些模块通常会在攻击开始时发送特定的探测和利用报文，这些报文可能具有可识别的特征，如特定的命令或参数。</p>
+<p>例如大量的异常数据包、异常的数据流量模式或频繁的连接尝试。</p>
+<h3 id="sql查询异常流量分析的思路">SQL查询异常流量分析的思路？</h3>
+<p>数据库短时间内查询增多有可能遭遇到了【扫描】或者【sql注入测试】，可以结合流量分析工具进行研判。<br>
+【select】 和【union】为数据库查询语句特征，当这两者数量出现次数较多而且差异较小可能存在SOL注入漏洞或正在被扫描器扫描，可监控这两个关键字，但还需要进一步查看具体请求参数。如：1)使用wireshark打开抓取后的流量包，2)对于抓取到的数据包筛选出HTTP协议包，在统计处筛选出短时间内流量较大的IP。<br>
+尝试定位一些基本的注入特征（select、union、（）、/*、sleep等）。</p>
+<h2 id="日志分析">日志分析</h2>
+<h3 id="windows日志分析">windows日志分析</h3>
+<p>Windows主要有以下三类日志记录系统事件：应用程序日志、系统日志和安全日志。</p>
+<pre><code>记录操作系统组件产生的事件，主要包括驱动程序、系统组件和应用软件的崩溃以及数据丢失错误等。系统日志中记录的时间类型由Windows NT/2000操作系统预先定义。
+
+默认位置： %SystemRoot%\System32\Winevt\Logs\System.evtx
+包含由应用程序或系统程序记录的事件，主要记录程序运行方面的事件，例如数据库程序可以在应用程序日志中记录文件错误，程序开发人员可以自行决定监视哪些事件。如果某个应用程序出现崩溃情况，那么我们可以从程序事件日志中找到相应的记录，也许会有助于你解决问题。 
+
+默认位置：%SystemRoot%\System32\Winevt\Logs\Application.evtx
+记录系统的安全审计事件，包含各种类型的登录日志、对象访问日志、进程追踪日志、特权使用、帐号管理、策略变更、系统事件。安全日志也是调查取证中最常用到的日志。默认设置下，安全性日志是关闭的，管理员可以使用组策略来启动安全性日志，或者在注册表中设置审核策略，以便当安全性日志满后使系统停止响应。
+
+默认位置：%SystemRoot%\System32\Winevt\Logs\Security.evtx
+</code></pre>
+<p>Log Parser（是微软公司出品的日志分析工具，它功能强大，使用简单，可以分析基于文本的日志文件、XML 文件、CSV（逗号分隔符）文件，以及操作系统的事件日志、注册表、文件系统、Active Directory。它可以像使用 SQL 语句一样查询分析这些数据，甚至可以把分析结果以各种图表的形式展现出来。</p>
+<p>eventvwr.msc</p>
+<h3 id="linux日志分析">linux日志分析</h3>
+<p>日志默认存放位置：/var/log/</p>
+<p>查看日志配置情况：more /etc/rsyslog.conf</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">日志文件</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">/var/log/cron</td>
+<td style="text-align:center">记录了系统定时任务相关的日志</td>
+</tr>
+<tr>
+<td style="text-align:center">/var/log/cups</td>
+<td style="text-align:center">记录打印信息的日志</td>
+</tr>
+<tr>
+<td style="text-align:center">/var/log/dmesg</td>
+<td style="text-align:center">记录了系统在开机时内核自检的信息，也可以使用dmesg命令直接查看内核自检信息</td>
+</tr>
+<tr>
+<td style="text-align:center">/var/log/mailog</td>
+<td style="text-align:center">记录邮件信息</td>
+</tr>
+<tr>
+<td style="text-align:center">/var/log/message</td>
+<td style="text-align:center">记录系统重要信息的日志。这个日志文件中会记录Linux系统的绝大多数重要信息，如果系统出现问题时，首先要检查的就应该是这个日志文件</td>
+</tr>
+<tr>
+<td style="text-align:center">/var/log/btmp</td>
+<td style="text-align:center">记录错误登录日志，这个文件是二进制文件，不能直接vi查看，而要使用lastb命令查看</td>
+</tr>
+<tr>
+<td style="text-align:center">/var/log/lastlog</td>
+<td style="text-align:center">记录系统中所有用户最后一次登录时间的日志，这个文件是二进制文件，不能直接vi，而要使用lastlog命令查看</td>
+</tr>
+<tr>
+<td style="text-align:center">/var/log/wtmp</td>
+<td style="text-align:center">永久记录所有用户的登录、注销信息，同时记录系统的启动、重启、关机事件。同样这个文件也是一个二进制文件，不能直接vi，而需要使用last命令来查看</td>
+</tr>
+<tr>
+<td style="text-align:center">/var/log/utmp</td>
+<td style="text-align:center">记录当前已经登录的用户信息，这个文件会随着用户的登录和注销不断变化，只记录当前登录用户的信息。同样这个文件不能直接vi，而要使用w,who,users等命令来查询</td>
+</tr>
+<tr>
+<td style="text-align:center">/var/log/secure</td>
+<td style="text-align:center">记录验证和授权方面的信息，只要涉及账号和密码的程序都会记录，比如SSH登录，su切换用户，sudo授权，甚至添加用户和修改用户密码都会记录在这个日志文件中</td>
+</tr>
+</tbody>
+</table>
+<p>比较重要的几个日志： 登录失败记录：/var/log/btmp //lastb 最后一次登录：/var/log/lastlog //lastlog 登录成功记录: /var/log/wtmp //last 登录日志记录：/var/log/secure</p>
+<p>目前登录用户信息：/var/run/utmp //w、who、users</p>
+<p>历史命令记录：history 仅清理当前用户： history -c</p>
+<h3 id="日志分析的操作技巧">日志分析的操作技巧</h3>
+<pre><code>1、定位有多少IP在爆破主机的root帐号：    
+grep &quot;Failed password for root&quot; /var/log/secure | awk '{print $11}' | sort | uniq -c | sort -nr | more
+
+定位有哪些IP在爆破：
+grep &quot;Failed password&quot; /var/log/secure|grep -E -o &quot;(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)&quot;|uniq -c
+
+爆破用户名字典是什么？
+ grep &quot;Failed password&quot; /var/log/secure|perl -e 'while($_=&lt;&gt;){ /for(.*?) from/; print &quot;$1\n&quot;;}'|uniq -c|sort -nr
+
+2、登录成功的IP有哪些：     
+grep &quot;Accepted &quot; /var/log/secure | awk '{print $11}' | sort | uniq -c | sort -nr | more
+
+登录成功的日期、用户名、IP：
+grep &quot;Accepted &quot; /var/log/secure | awk '{print $1,$2,$3,$9,$11}' 
+
+3、增加一个用户kali日志：
+Jul 10 00:12:15 localhost useradd[2382]: new group: name=kali, GID=1001
+Jul 10 00:12:15 localhost useradd[2382]: new user: name=kali, UID=1001, GID=1001, home=/home/kali
+, shell=/bin/bash
+Jul 10 00:12:58 localhost passwd: pam_unix(passwd:chauthtok): password changed for kali
+#grep &quot;useradd&quot; /var/log/secure 
+
+4、删除用户kali日志：
+Jul 10 00:14:17 localhost userdel[2393]: delete user 'kali'
+Jul 10 00:14:17 localhost userdel[2393]: removed group 'kali' owned by 'kali'
+Jul 10 00:14:17 localhost userdel[2393]: removed shadow group 'kali' owned by 'kali'
+# grep &quot;userdel&quot; /var/log/secure
+
+5、su切换用户：
+Jul 10 00:38:13 localhost su: pam_unix(su-l:session): session opened for user good by root(uid=0)
+
+sudo授权执行:
+sudo -l
+Jul 10 00:43:09 localhost sudo:    good : TTY=pts/4 ; PWD=/home/good ; USER=root ; COMMAND=/sbin/shutdown -r now
+</code></pre>
+<h3 id="dns-log告警分析">dns log告警分析</h3>
+<p>DNS（Domain Name System）是互联网中负责将域名转换为 IP 地址的系统嘛，查看攻击payload，确定执行了扫描命令，可以在虚拟机中直接重放攻击流量，将改dns地址改成自己的地址，然后查看是否攻击成功等等。、</p>
+<h3 id="红队删除了历史记录怎么搞">红队删除了历史记录怎么搞</h3>
+<ul>
+<li>痕迹清理这个动作本身也会产生痕迹，所以不存在完美的痕迹清理</li>
+<li>如果目标已经配置，第三方的日志记录平台，本机的痕迹清理作用微乎其微，除非我们可以拿下日记系统的控制权限。</li>
+</ul>
+<h2 id="安全设备">安全设备</h2>
+<h3 id="什么是ips">什么是ips?</h3>
+<p>**Intrusion Prevention System)**预防  对该设备的网络流量进行分析监控，发现攻击后就会进行拦载。IPS是防火墙的重要补充，如果是防火墙是第一道防线，IPS就是第二道防线。</p>
+<h3 id="什么是ids">什么是ids</h3>
+<p>**(Intrusion Detection System)**监视，记录网络中的各种攻击企图。特点就是记录检测，不会对攻击行为进行拦截，只能事中检测和时候追查。</p>
+<h3 id="idr是什么用过没有">IDR是什么/用过没有</h3>
+<p>入侵检测和响应系统。IDR系统是一种网络安全设备，用于检测网络中的恶意活动和安全事件，并对这些事件做出响应</p>
+<h3 id="什么是蜜罐">什么是蜜罐</h3>
+<p>部署一些作为诱饵的主机，诱使攻击方对蜜罐进行过攻击，对攻击方的攻击行为进行捕捉和分析，了解攻击方使用的工具和方法，从而增强增强真实系统的安全防护能力。</p>
+<h3 id="什么是waf">什么是waf</h3>
+<p>web应用防火墙，专门针对于HTTP和htps请求，对客户端的请求内容进行检测，确保其合法性和安全性，还会对非法的请求进行及时的阻断</p>
+<h3 id="什么是防火墙">什么是防火墙</h3>
+<ul>
+<li>防火墙是一种用于保护网络安全的设备，通常用于控制网络流量并实施访问控制策略。</li>
+<li>它可以工作在不同的 OSI 模型层次，包括网络层（如传统的网络防火墙）和应用层（如代理型防火墙）</li>
+</ul>
+<h3 id="waf与ips的区别">waf与ips的区别</h3>
+<p>与IPS最大的区别在于:WAF是针对于web系统的防护，对于sqlxss文件上传csrf的防护更具有针对性，而IPS的防护面很广)</p>
+<h3 id="你遇到的厂商硬件设备有哪些">你遇到的厂商硬件设备有哪些?</h3>
+<p>奇安信的天眼 ngsoc，微步在线的tdp，锐信服的流量分析等等</p>
+<h3 id="你了解哪些网络安全设备">你了解哪些网络安全设备?</h3>
+<p>IDS,IPS,防火墙,蜜罐,威胁态势感知平台，<br>
+1.低交互蜜罐，中交互蜜罐，高交互蜜罐的区别?<br>
+低交互蜜罐最大的特点就是模拟，它的服务都是模拟的行为，数据不够真实。<br>
+中交互蜜罐是对真正的操作系统的各种行为的模拟，它提供了更多的交互信息，同时也可以从攻击者的行为中获取更多的信息<br>
+高交互蜜罐具有一个真实的操作系统，更加仿真。<br>
+模拟的场景越来越真实，数据越来越真实。</p>
+<h3 id="ips和ids哪个是监听哪个是控制处理">ips和ids哪个是监听哪个是控制处理</h3>
+<p>ids监听 ips控制</p>
+<h3 id="了解奇安信的天擎吗">了解奇安信的天擎吗?</h3>
+<p>了解点，功能和界面类似于360安全卫士</p>
+<h3 id="用过奇安信的天眼吗可以用天眼来于什么">用过奇安信的天眼吗?可以用天眼来于什么?</h3>
+<p>用过。主要用天眼来进行流量分析和流量监控，并且可以用他的日志检索模块进行溯源。</p>
+<p>天眼聚焦攻防（hw作用蛮大得，最爱），NGSOC主要是企业内网的安全运营。</p>
+<h3 id="ips和ids分别在网络中如何部署">ips和ids分别在网络中如何部署?</h3>
+<p>ips有阻断操作，一般都是串接的设备，ids旁挂就可以</p>
+<h3 id="奇安信天眼">奇安信天眼</h3>
+<p>天眼日志检索常用语法<br>
+dip 被攻击的 ip<br>
+dport 被攻击的端口<br>
+sip源ip<br>
+sport:源端口<br>
+请求的 url 地址 .uri<br>
+data请求包的正文内容<br>
+status 响应包的状态码<br>
+host  域名<br>
+client os  系统</p>
+<p>运算符 AND(AND或&amp;&amp;或+)       OR(OR或l|) NOT(NOT 或!或-)ix .</p>
+<h4 id="天眼搭建配置的相关问题">天眼搭建，配置的相关问题</h4>
+<p>天眼分成两个部分，一部分是流量传感器，一部分是天眼分析平台，正常情况下只要确保传感器和天眼在同一网段互相直接可以通信即可进行联动。同时需要在交换机上做流量镜像口，复制设备流量，这样传感器可以感知到流量并将相关威胁流量传到天眼上进行分析。</p>
+<h3 id="内外网攻击处置">内外网攻击处置</h3>
+<p>内网①研判攻击动作，误报情况可向天眼产品反馈(一些特殊业务触发告警)②核查发起攻击的资产是否失陷<br>
+外网①研判攻击动作，误报情况可向天眼产品反馈(一些特殊业务触发告警)②排除网关、CND 和出口类IP 等特殊 IP地址后可以在边界设备处实施封禁策略</p>
+<h3 id="如何判断告警是否是误报告警误报">如何判断告警是否是误报?(告警误报)</h3>
+<p>首先看下此告警，发起攻击的<strong>源ip(就是攻击ip)是内网ip还是外网ip</strong><br>
+1、如果是内网ip，并且<strong>告警流量请求包内有明显的恶意请求</strong>，比如请求包内有ipconfig,whoami等，那么此内网服务器即有可能失陷会把此ip立即上报给研判组人员，让研判组人员对这个ip进行详细的分析;</p>
+<p>还有就是这个可能是被访问的这个内网系统，<strong>本身业务系统存在业务逻辑问题</strong>，因为内网所布置的很多业务系统往往不会考虑一些安全性问题，比如在正常的业务逻辑请求中直接带了sql语句，就会触发设备规则产生告警，这一类是属于误报，然后会将此告警上报给研判人员，需要研判组专家和甲方客户确认下是否是该系统存在此业务逻辐问题，并且需要确认<strong>告警的源ip在此告警的时间段附近有没有进行操作过</strong>。2、如果是外网ip,那么就主要根据请求包和响应包的数据内容进行对比，比如请求包内有一些恶意语句,比如sql执行语句(select version 等)，那么我会判定此攻击为恶意攻击。</p>
+<h3 id="如果看到内网挖矿告警怎么处理">如果看到内网挖矿告警怎么处理?</h3>
+<p>大部分内网挖矿告警，<strong>木马病毒都是基于情报的告警，误报率很大，很有可能是因为内部员工使用大量盗版软件以及盗版系统导致</strong>，因此无法准确判断但是护网期间此类告警需要谨慎处理，不放过任意一条告警，所以我会将此类告警上报到研判人员处，由研判人员再进行进一步的验证。</p>
+<p>判断: ①<strong>查看 CPU 占用率</strong>②査看天眼的流量分析，是否去别的有危险的网站下载东 西，然后在本地执行了挖矿的一些命令 是否有外连，向远程请求</p>
+<p>分析：①登陆网站服务器，查看进程是否有异常</p>
+<p>②查看异常进程是什么，选择可疑的 务项，停止服务，启动类型改为静止</p>
+<p>③查看计划任务有没有可疑的临时解决方案</p>
+<p><strong>临时解决方案</strong>：    停止可疑的服务项目，有时候服务项的名称会变，但描述不会变，根据描述找到服务项并删除(②根据实际木马的路径，删除木马 ③重启计算机④ 使用杀毒软件进行全盘查杀</p>
+<h3 id="如何确认被挖矿">如何确认被挖矿?</h3>
+<p>当服务器或PC处于什么样的状态时，我们可以判定为被挖矿。通常来说，当我们的<strong>服务器或PC资源(CPU)使用率接近或超过100%</strong>，<strong>并持续高居不下导致服务器或PC操作延缓，<strong>我们就可以判定被挖矿。<br>
+常见挖矿其它特征如下:1、服务器或PC访问过不受信任的地址，这些地址包括:主机、iP、域名。这是由于大部分挖矿都需要从一个不受信任的地址下载初始化程序，而不受信任的来源主要是:第三方情报结构，企业内部历史数据沉淀。<br>
+2、服务器或PC</strong>新增异常或恶意文件、进程或服务</strong>，并且大部分异常文件保存在服务器或PC的**TMP目录(暂存文件目录)**中<br>
+3.<strong>服务器或PC的定时任务发生变更</strong></p>
+<h3 id="从流量层次来判断挖矿的真实性">从流量层次来判断挖矿的真实性</h3>
+<p>1.看数据包的详细信息，<strong>看终端或者服务器是否有与矿池交互的信息，判断是否存在登录到矿池(methodlogin从矿池接收任务(”methodjob“)字段，在载荷内容中是否存在ok、success等字段</strong><br>
+1.通信端口:挖矿木马可能会使用特定的端口进行通信。例如，Monero挖矿木马通常会使用TCP端口3333或5555进行通信<br>
+2.通信流量:<strong>挖矿木马的通信流量可能会具有特定的特征</strong>，例如大量的高速数据传输和周期性的通信。在数据包中可以看到大量的计算资源使用信息和挖矿结果信息。<br>
+3.进程和文件系统:挖矿木马可能会创建特定的讲程和文件来执行挖矿操作。例如，Monero挖矿木马通常会在操作系统上创建名为&quot;xmrig&quot;的进程，并在文件系统上创建名为&quot;config.json&quot;的配置文件。<br>
+4.系统资源:挖矿木马可能会占用系统资源，例如CPU和内存，并可能导致系统崩溃或变得缓慢</p>
+<p>5.判断流量的数据:挖矿木马通常会在通信中发送一些特定的数据，例如挖矿难度、钱包地址、挖矿程序版本等，如果流量中存在这些数据，就可能存在挖矿木马</p>
+<h3 id="如果看到一条sql注入告警如何判断注入成功">如果看到一条sql注入告警，如何判断注入成功？</h3>
+<p>根据请求包和响应包对比进行判断。比如看下请求包内是否有sq语句，如果有sql语句(例select version),并且响应包内容有执行成功的回显(就是响应包里面有数据库版本),那么判定sq注入攻击成功。<br>
+<strong>处置</strong><br>
+①验证此条 SQL 注入告警是否真的存在 SQL 注入漏洞<br>
+②触发告警的行为是客户自身还是攻击行为(通过请求包数据判断)<br>
+1.若是自身业务问题，则将漏洞点相关整合成报告反馈项目经理<br>
+2.若为攻击者行为，则需要进一步分析，查看分析平台攻击IP 除了 SQL注入以外是否存在其他攻击行为，攻击结果如何<br>
+3.将发现时间及攻击行为反馈给上报</p>
+<h3 id="如果看到一条xss告警怎么判断是否攻击成功">如果看到一条xss告警，怎么判断是否攻击成功?</h3>
+<p>根据请求包和响应包进行对比判断，看下请求包插入的脚本，在响应包内是否有，当然这样还不能准确判断是否攻击成功，再将响应包的正文复制出来，放到html后缀的文档内，用浏览器打开，看下是否有弹窗之类的。</p>
+<h3 id="如果看到ssrf告警没有明显的回显怎么判断是否攻击成功">如果看到ssrf告警，没有明显的回显，怎么判断是否攻击成功?</h3>
+<p>如果能做漏洞验证的话，我会进行复现验证下。如果不能做漏洞验证的话，就查下日志看看他探测目标有没有流量交互如果有流量交互的话应当是攻击成功。</p>
+<h3 id="如果看到分析文件上传告警怎么是否攻击成功">如果看到分析文件上传告警，怎么是否攻击成功?</h3>
+<p>1、<strong>查看响应体响应结果判断服务器是否接受了该上传请求，上传成功通常状态码为200，查看响应体中是否响应了上传路径，访问该上传路径查看文件是否被解析是否存在</strong><br>
+2、通过查看<strong>椒图日志判断文件是否落地</strong><br>
+3、<strong>登陆受害者主机全局搜索上传文件</strong></p>
+<h3 id="在发生xml实体注入-内网存活主机探测告警后如何判断是否攻击成功">在发生XML实体注入-内网存活主机探测告警后，如何判断是否攻击成功?</h3>
+<p>1.可以根据请求体的payload的信息判断、在存在漏洞的主机主动访问内网的其他服务或者终端</p>
+<p>2根据payload的内容找到内网探活的主机IP，查看IP是否有被访问的流量信息。</p>
+<p>2.在客户授权的情况下，进行验证，看是否存在漏洞</p>
+<h3 id="如果天眼设备上短时间内有大量告警你会怎么进行分析">如果天眼设备上短时间内有大量告警，你会怎么进行分析?</h3>
+<p>根据轻重缓急进行筛选查看，从高危到低危，从命令执行到目录遍历这种等</p>
+<h3 id="你觉得天眼的误报率怎么样">你觉得天眼的误报率怎么样?</h3>
+<p>相对于其它厂商的设备来说的话，天眼的误报率不高，大部分规则比较准确，但是很难检测到0day攻击</p>
+<h3 id="天眼或者流量传感器上出现webshell木马使用告警怎么应对验证此条告警是否真的成功">天眼或者流量传感器上出现webshell木马使用告警，怎么应对?验证此条告警是否真的成功?</h3>
+<p>进入分析平台进一步分析，查看分析平台攻击IP除了文件上传以外是否存在其他攻击行为，攻击结果如何?</p>
+<p>成功的话，直接就可以出报告了，查看webshell工具的流量特征，看有无使用痕迹</p>
+<p>失败的话，判断攻击者是手工还是扫描工具批量行为?(批量的话会有大量请求)</p>
+<p>溯源:<br>
+攻击者是怎么把木马写进来的</p>
+<h3 id="流量分析经验总结">流量分析经验总结?</h3>
+<p>1.内网攻击不要忽视<br>
+2.告警信息需要需排查<br>
+3.爆破行为也要看<br>
+4.成功失陷追仔细</p>
+<h3 id="如果是检测到代理流量怎么判断是否是攻击">如果是检测到代理流量，怎么判断是否是攻击</h3>
+<p>分析** 常**，比如短时间内大量访问同一 URL或 IP，访问频率异常高等</p>
+<p><strong>通过网络协议、源 IP，端口等信息，确定请求是否来自可信的、有授权的源端，<strong>比较简单有效的方法是检査 IP 地址的信任度和黑名单。<br>
+检查流量载荷是否经过加密或压缩等操作，<strong>具有可疑的编码、解码以及混淆特征</strong>。鉴别代理流量是否被用于违规信息的转发。<br>
+攻击者可能会通过分段传输数据来规避检测，在此情况下</strong>，可以根据数据包大小，协议负载长度，流量分层等方面进行分析判断</strong>。<br>
+代理流量通常使用 HTTP 或者 socKs 协议，了解该协议的特点和常见攻击手法，比如 HTTP 奔溃和溢出攻击等等。</p>
+<h3 id="常见代理">常见代理</h3>
+<p>正向代理:代理服务器扮演客户端，向目标服务器发起请求，并将响应返回给客户端。<br>
+反向代理:代理服务器扮演目标服务器，接收客户端请求，并将请求转发至真实的目标服务器进行处理，最终将响应返回客户端。<br>
+S0CKS代理:通常用于TCP和UDP协议的网络代理，客户端可以通过S0CK5代理服务器访问目标服务器。<br>
+HTTP代理:客户端通过HTTP协议访问代理服务器，代理服务器转发请求至目标服务器并返回响应给客户端。<br>
+VPN代理:通过建立虚拟专用网络(VPN)来实现网络代理，将用户本地网络流量通过VPN隧道传输到代理服务器进行代理处理。</p>
+<h2 id="内网篇">内网篇</h2>
+<h3 id="什么是域控">什么是域控?</h3>
+<p>可以对域内的机器进行控制，拥有较高的权限。<br>
+域控是域控制器的简称，域控制器是指在“域&quot;模式下，至少有一台服务器负责每一台联入网络的电脑和用户的验证工作</p>
+<h3 id="如何查找域控">如何查找域控?</h3>
+<p>来去寻找dns域名服务器 一般域控就是dns域名服务器<br>
+命令:ipc config -all，还有 net time</p>
+<h3 id="如何进行内网横向渗透">如何进行内网横向渗透?</h3>
+<p>首先收集当前主机的网络连接、进程列表、命令执行历史记录、 数据库信息、当前用户信息、管理员登录信息；同时对内网的其他机器的IP、主机名、开放端口服务等情况进行情报刺探。再利用内网机器不及时修复漏洞、不做安全防护、弱口令等弱点来进行横向渗透。一般就是用psexec wmic evil-winrm这些服务工具 具体的话需要看机器开了哪些服务 端口 像winrm就需要开5985才可以用evil-winrm横向 最关键的还是要抓到hash 或者用一些历史漏洞</p>
+<h3 id="烂土豆提权原理"><strong>烂土豆提权原理</strong></h3>
+<p>欺骗 “NT AUTHORITY\SYSTEM”账户通过NTLM认证到我们控制的TCP终端。<br>
+对这个认证过程使用中间人攻击（NTLM重放），为“NT AUTHORITY\SYSTEM”账户本地协商一个安全令牌。这个过程是通过一系列的Windows API调用实现的。<br>
+模仿这个令牌。只有具有“模仿安全令牌权限”的账户才能去模仿别人的令牌。一般大多数的服务型账户（IIS、MSSQL等）有这个权限，大多数用户级的账户没有这个权限。<strong>模拟令牌</strong><br>
+上面这个感觉满抽象的</p>
+<p>让我用通俗的语言解释一下：</p>
+<p>想象一下你有一把钥匙，可以打开计算机系统中一个非常重要的账户，叫做“NT AUTHORITY\SYSTEM”。这个账户有很高的权限，就像是系统的“超级管理员”。攻击者想要欺骗系统，让它相信他们是这个“超级管理员”。</p>
+<p>他们通过一种叫做 NTLM 认证的方式来实现。这就像是系统要求他们出示一份特殊的通行证才能进入，而他们制造了一个假的通行证。</p>
+<p>他们利用中间人攻击的方法，类似于偷听到了你和银行之间的通话，他们截取了NTLM认证的请求，并保存了一份副本。然后他们使用一些技巧，重新播放这个请求，就好像是他们自己发送的一样。</p>
+<p>接着，他们通过一系列的操作，就像在做一场复杂的戏剧表演一样，告诉系统他们就是“NT AUTHORITY\SYSTEM”账户。他们使用一些Windows系统内部的方法，欺骗系统，说他们就是这个账户，而系统却无法察觉到这是一个假冒者。</p>
+<p>最后，他们成功地获取了系统中“NT AUTHORITY\SYSTEM”账户所拥有的权限，就好像他们是真正的“超级管理员”一样。但这一切都是通过欺骗和技术手段实现的，并不是真实的合法权限。</p>
+<p>需要注意的是，要想实施这样的攻击，攻击者需要具备一定的技术知识和特殊权限。一般来说，普通用户是无法进行这样的攻击的，而像一些服务型账户（比如网站服务器、数据库等）可能会有这样的权限。</p>
+<h3 id="脏数据提权了解么"><strong>脏数据提权了解么</strong></h3>
+<h3 id="windows权限提升">windows权限提升</h3>
+<ul>
+<li>
+<p>基于系统内核的漏洞（ms17-010）</p>
+</li>
+<li>
+<p>利用Cobalt Strike提权</p>
+</li>
+<li>
+<p>C#版的烂土豆工具</p>
+</li>
+<li>
+<p>dll劫持</p>
+</li>
+<li>
+<p>注册表提权</p>
+</li>
+<li>
+<p>数据库提权</p>
+</li>
+</ul>
+<h3 id="linux权限提升">Linux权限提升</h3>
+<ul>
+<li>
+<p>sudo滥用</p>
+<p><code>/etc/sudoers</code>文件定义可以执行 sudo 的账户、定义某个应用程序用 root 访问、是否需要密码验证</p>
+</li>
+<li>
+<p>SUID提权</p>
+<p>SUID 是一种特殊的文件属性，它允许用户执行的文件以该文件的拥有者的身份运行</p>
+</li>
+<li>
+<p>内核溢出漏洞提权</p>
+</li>
+<li>
+<p>UDF提权 [UDF(user-defined function)是MySQL的一个拓展接口，也可称之为<strong>用户自定义函数</strong></p>
+<p>用户可以通过自己增加函数对mysql功能进行扩充，文件后缀为.dll</p>
+</li>
+</ul>
+<h3 id="内网渗透思路"><strong>内网渗透思路</strong></h3>
+<pre><code class="language-javascript">代理穿透
+权限维持
+内网信息收集
+口令爆破
+凭据窃取
+社工
+横行和纵向渗透
+拿下域控
+</code></pre>
+<h3 id="内网端口转发失败的原因">内网端口转发失败的原因</h3>
+<p>(1)防火墙的策略 此端口不允许出网<br>
+(2)端口转发工具特征比较明显<br>
+(3)端口无法提供服务<br>
+(4)端口转发的ip 肉鸡(攻击者已拿下的机子)无法访问</p>
+<h3 id="你了解的端口转发工具">你了解的端口转发工具?</h3>
+<p>Frp   nc (netcat)   lcx</p>
+<h3 id="cs有了解吗">cs有了解吗</h3>
+<p>有了解，CobaltStike 是一个<strong>集成化的图形工具</strong>，支持 windows和 linux 系统 使用，集成了提权，端口转发，offce攻击，文件捆绑，钓鱼等功能。还<strong>支持多人协同</strong><br>
+cs如何启动:先打开cmd，然后进入cs月录，加载teamserverbat，然后用管理员身份运行cmd，加载cobaltstrike.iar.java -XX:ParallelGCThreads=4 -XX:+AggressiveHeap -XX:+UseParallelGC -Xms512M -Xmx1024M -jar cobaltstrike.jar或者windows直接点击start.bat即可启动</p>
+<h3 id="域渗透思路">域渗透思路</h3>
+<p>通过域成员主机，定位出域控制器IP以及域管理员账号，利用域成员主机作为跳板，扩大渗透范围。利用域管理员可以登陆域中任何成员主机的特性，定位出域管理员登陆过的主机ip，设法从该域成员主机内存中dump出域管理员密码，进而拿下域控制器。</p>
+<h3 id="找到域控如何找到域控">找到域控(如何找到域控)</h3>
+<p>去寻找dns域名服务器 一般域控就是dns域名服务器，一般域控主机会开启dns服务和ltap服务，可能开放389端口和53端口</p>
+<p>命令:ipconfig -all，还有 net time</p>
+<h3 id="黄金票据和白银票据区别">黄金票据和白银票据区别?</h3>
+<p>是在Windows系统中利用 Kerberos 协议进行身份认证时的一种攻击技术。</p>
+<p>黄金票据和白银票据虽然都是利用 Kerberos 协议的漏洞进行攻击的手段，但它们的目标和攻击方式不同，适用于不同的攻击场景。</p>
+<p><strong>黄金票据（Golden Ticket）</strong>：</p>
+<ul>
+<li>黄金票据是指攻击者通过获取域控制器上的域管理员（Domain Administrator）或其他高权限账户的 NTLM（NT LAN Manager）哈希值，并利用这个哈希值生成伪造的 Kerberos TGT（Ticket Granting Ticket）。</li>
+</ul>
+<p><strong>白银票据（Silver Ticket）</strong>：</p>
+<ul>
+<li>白银票据是指攻击者通过获取某个服务账户（Service Account）的 NTLM 哈希值，并利用这个哈希值生成伪造的 Kerberos TGS（Ticket Granting Service）。</li>
+</ul>
+<h3 id="拿了webshell如何提权">拿了webshell如何提权？</h3>
+<p>因为大多数的应用用户是没有登录权限的，我们可以使用Suid 提权，查找一个带有S权限的文件一般为二进制文件，然后根据找到的文件，使用 nmap,find 等命令打开一个 shel在这个shel里面就可以执行一些 root 命令 了。 或者可以査看/etc/passwd 的文件看看此主机有什么可以登录的用户，然后针 对密码进行一个爆破</p>
+<h3 id="免杀有了解吗">免杀有了解吗</h3>
+<p>有过简单的了解，可以用 msf或者 cs结合其它的框架生成免杀马，主要就是 静态免杀和动态免杀方式:可以通过替换 api，重写 api，合理替换调用顺序，绕过调用 源来免杀<br>
+静态免杀方式:替换特征码，替换资源，修改入口点(peid工具加壳)</p>
+<h3 id="什么是免杀">什么是免杀</h3>
+<p>将shellcode进行加密，动态解密恢复，申请可写可执行内存并写入解密后的shellcode，将函数指针指向这块内存的起始位置并开始执行。</p>
+<h3 id="免杀有几种途径">免杀有几种途径？</h3>
+<p>答：修改特征码、流量混淆、花指令、加壳</p>
+<h3 id="udf提权">udf提权</h3>
+<p>UDF (user defined function)，即用户自定义函数。是通过添加新函数，对MySQL的功能进行扩充其实就像使用本地MySQL函数如 user0 或 concat()等。msf里面好像有个相关的exp。sqlmap好像也有相关脚本</p>
+<h3 id="简单说一下mssql提权">简单说一下mssql提权</h3>
+<p>答：我只记得xp_cmdshell和自启动<br>
+补充：trigger提权、沙盒提权、计划任务提权、sethc.exe 替换粘滞键提权<br>
+（替换c:\windows\system32\下的sethc.exe替换c:\windows\system32\dllcache\sethc.exe）</p>
+<h2 id="经验问题篇">经验问题篇</h2>
+<h3 id="项目进场的工作流程">项目进场的工作流程</h3>
+<p>(1)了解项目情况，包括人员组成等<br>
+(2)了解项目上的设备:如拓扑图，以及安全布防设备等</p>
+<p>(3)确认工作内容，核查各项设备是否能够正常使用</p>
+<p>(4)确认紧急联系人以及紧急事件上报流程</p>
+<p>备战阶段主要任务是进行</p>
+<p>两方面的操作，</p>
+<p>一是减少攻击面 资产梳理，减少暴露面;</p>
+<p>二是排査风险点，即通过漏洞扫描，渗透测试，弱口令等进行自查</p>
+<p>临战阶段：</p>
+<p>一是进行内部演练，发现疏忽处并进行相应整改;</p>
+<p>二是可以适当增加安全设备，比如WAF，IPS，IDS，SOC，堡垒机等<br>
+决战阶段：主要就是坚守岗位，有应急日志就看自己能不能解决，不能就上报，服从上级安排，优化防护，持续整改</p>
+<h3 id="如何进行前期的资产梳理">如何进行前期的资产梳理</h3>
+<h3 id="获取客户资产ip范围">获取客户资产ip范围</h3>
+<p>拿到客户的一张部分资产表，大致涉及到六个c段的ip。。。再拿到一台接入内网的主机。基于组织架构、资产类型、资产重要性进行梳理，包括：IP、MAC、域名、厂商、名称、资产类型、系统版本、开放端口、开放服务、中间件、责任人、部署位置等。</p>
+<h3 id="中级研判有哪些工作内容">中级研判有哪些工作内容</h3>
+<p><strong>流量分析</strong>+漏洞复测+基线加固+指定资产的渗透测试(偶尔有)+出具外置建议报告(<strong>每日流量分析报告+应急响应+溯源分析</strong>(一般就是复原攻击链，描绘攻击者画像不归你管)</p>
+<h3 id="初级流量监控监测工作内容一般有哪些">初级流量监控监测工作内容一般有哪些?</h3>
+<p>每天的流量告警检测以及初步的流量，可能有时候项目经理让升级设备，还有当日的日报</p>
+<h3 id="说下hw项目一般有哪些组以及这个hw流程">说下hw项目一般有哪些组?以及这个hw流程?</h3>
+<p>一般有监控组:主要监控设备的流量<br>
+研判组:主要对监控组上报的流量进行分析，进行漏洞验证<br>
+处置组:主要对攻击ip进行封禁<br>
+应急响应组:主要对被攻击成功的服务器进行应急响应<br>
+溯源反制组:主要对攻击者进行溯源以及反制<br>
+专家组:指挥全场般就是监控组将监控到的恶意攻击流量上报到研判组，研判组对上报上来的流量进行分析以后确定此流量是攻击流量以后，再转给处置组，处置组将此恶意ip进行封禁;如果是有攻击成功的事件，研判组需要同步到溯源反制组和应急响应组，溯源反制组和研判组的人员对该事件进行溯源，应急响应组的对该机器进行应急响应。</p>
+<h3 id="对漏洞进行修复的时候有什么注意事项吗">对漏洞进行修复的时候，有什么注意事项吗?</h3>
+<p>(1)在不影响业务连续性运行的前提下，进行漏洞修复(2)避开业务使用时间段，进行漏洞修复,</p>
+<h3 id="遭遇0day怎么办">遭遇0day怎么办</h3>
+<p>确定存在真实攻击行为，在客户允许的情况下，可以采取断网隔离措施，不行就采取白名单连接防火墙策略</p>
+<p>看告警、确定资产，poc复现、确认是否攻击成功</p>
+<h3 id="溯源的常见手法">溯源的常见手法?</h3>
+<p>答:溯源事件调查分析可以根据目标和深度的不同分为三个级别，即<strong>攻击路径调查、攻击团伙调查、攻击人员调查</strong></p>
+<p>攻击路径调查是最基本的也是最重要的调查取证工作。<br>
+1）攻击源捕获（设备告警、日志流量分析、蜜罐系统），获得攻击者真实IP，定位目标，利用精准IP定位目标的位置，IP数据<br>
+2）利用常规的渗透测试思路找出攻击者攻击的手法，比如说当前系统使用的是鱼跃cms，然后我们可以通过查询鱼跃cms历史漏洞看有没有可以利用的点，然后逆向判断出攻击者的攻击手段<br>
+3、有时候我们可以判断出发动攻击的团伙是哪个，然后更全面的了解该攻击同伙惯用的攻击手法，这也有利于溯源的进行或者进而部署更全面的安全防护方案，这就是攻击团伙调查<br>
+4、接下来就是要获取攻击人员信息，ID追踪术，利用搜索引擎、社交平台、技术论坛、社工库匹配<br>
+具体技巧：<br>
+1）域名、ip 反查目标个人信息<br>
+2）支付宝转账,确定目标姓氏<br>
+3）淘宝<br>
+4）企业微信手机号查公司名称<br>
+5）REG007 查注册应用、网站<br>
+6）程序 PDB 信息泄露，如果能拿到攻击木马样本，因为攻击者在编译攻击样本的时候会有那个调试信息，这也是一种信息泄漏</p>
+<p>7）还有就是各大src排行榜，各种社交微博，vx都可以进行这个id的追踪</p>
+<h3 id="溯源技巧">溯源技巧</h3>
+<p>1）通常情况下我们接到溯源任务的时候，可以获取到很多信息，如攻击者ip、攻击类型、恶意文件、攻击详情可以作为我们溯源的入手点。<br>
+2）通过攻击类型分析攻击详情的请求包，看有没有攻击者特征，通过获取到的 IP 地址进行威胁情报查询来判断所用的 IP 具体是代理 IP 还是真实 IP 地址。<br>
+3）如果遇到端口扫描，大概率为个人vps或者空间搜索引擎，在接到大量溯源任务时可以优先溯源<br>
+4）如果遇到命令执行，大概率为未经任何隐匿的网络、移动网络、接到脚本扫描任务的肉鸡，在接到大量溯源任务时可以优先溯源<br>
+5）如果遇到爬虫大概率为空间搜索引擎，可放到最后溯源</p>
+<h3 id="如何分析排查邮件的影响和目的">如何分析排查邮件的影响和目的</h3>
+<p>1.确认<strong>邮箱批量发送时间点</strong><br>
+2.排查邮箱登录日志，发现【恶意IP】在【什么时间】通过web登录成功;<br>
+3.<strong>查看邮件内容，确认钓鱼邮件的影响和目的;</strong><br>
+4.排查浏览器或上网行为，判断是否访问过钓鱼页面<br>
+5.对访问过的设备进行全盘查杀。<br>
+分析邮件头部:查看邮件的原始头部信息。检查发件人的真实地址、邮件服务器的来源、邮件传输路径等。注意查看&quot;Received&quot;字段，查看是否存在异常的邮件转发或代理。<br>
+<strong>分析链接与附件，添加至黑名单</strong>，<br>
+<strong>查看有多少内网ip访问过这个链接或者ip，双向排查。</strong></p>
+<h3 id="钓鱼邮件如何绕过安全设备的检测">钓鱼邮件如何绕过安全设备的检测</h3>
+<p>先说防护嘛，一般就有spf（查邮件接收方会检查域名的SPF记录，来判断发件人的IP地址是否在SPF记录里面）dkim（一种数据签名）网关检测，规则库，邮件头，防病毒。</p>
+<p>那么可以采用的手段有做免杀嘛，绕过SPF和DKIM（骗163是阿里云的邮件）邮件网关会对SPF记录中的IP开启白名单，对SPF记录中的IP进行漏洞探测，如果能获取这些IP的控制权，也可以嘛</p>
+<h3 id="邮件溯源">邮件溯源</h3>
+<p>1）看指纹信息（什么发送工具平台）<br>
+2）看发送IP地址（服务器IP或攻击IP）<br>
+3）根据域名寻找邮件服务器地址(利用红队手段渗透获取信息)<br>
+4）可能存在个人的ID昵称用户名（利用社工的技术手段进行画像）</p>
+<h2 id="应急响应篇">应急响应篇</h2>
+<h3 id="linux服务器被上传webshell如何进行应急">linux服务器被上传webshell，如何进行应急</h3>
+<ul>
+<li>在网站的根目录下用下河马或者d盾扫下看看，看看能不能扫出 webshesll</li>
+<li>查看网站的 web 日志，使用 weblshell 会在网站的 web日志中留下 Webshell 页面的访问数据和数据提交记录，主要特征是**少量ip对其发起访问，总的访问次数少，**该页面属于孤立页面</li>
+<li>看下相关设备的告警流量，看下 webshell 的名字和路径，然后在服务器上使用 find 命令进行查找。并删除</li>
+</ul>
+<h3 id="windows和linux排查外联">Windows和Linux排查外联</h3>
+<p>netstat、tcpdump（Linux）、Wireshark等工具来检查外联情况，</p>
+<h3 id="如果攻击的回显有延迟或者说攻击生效需要一定的时间你不能很快看见那该怎么通过流量分析判断出攻击是否生效了">如果攻击的回显有延迟或者说攻击生效需要一定的时间，你不能很快看见，那该怎么通过流量分析判断出攻击是否生效了</h3>
+<p>检查异常流量模式、目的端口、协议使用、数据包大小、数据流量模式和数据内容等方面，寻找异常迹象，并及时采取应对措施。重放流量包，将 payload 改成自己的来进行判断。</p>
+<h3 id="如何根据pid定位到具体的程序吗除了grep专门查进程的">如何根据pid定位到具体的程序吗（除了grep，专门查进程的）</h3>
+<p>可以使用pstree、ps等命令来查找进程及其关联信息，以定位具体的程序。</p>
+<h3 id="应急响应的基本思路是什么">应急响应的基本思路是什么？</h3>
+<pre><code>实时性应急响应：大多为DDOS攻击，首要进行流量分析，若流量打满，能做的就是反查攻击IP，逆向渗透；若网络设备会话数被打满或者主机系统的CPU、内存、会话数被打满，可通过交换机做端口镜像，使用wireshark、tcpdump进行抓包，分析流量特征，确认攻击类型，在网络设备或安全设备上做相应阻断策略；
+攻击后应急响应：通过分析恶意文件和日志，查找入侵来源IP和入侵者所利用的漏洞，提出漏洞修补方案，并逆向追踪入侵者；
+</code></pre>
+<h3 id="应急响应流程">应急响应流程</h3>
+<pre><code>1）初步判断事件的类型，是被入侵、ddos还是其它的原因,在判断服务器资产、影响范围以及严重程度，首先抑制范围，隔离使受害面不继续扩大，一般先封堵攻击源IP，事件处置组人员根据攻击事件通报信息或报告**确认有没有必要将服务器下线隔离，然后根据服务器的失陷时间和态势感知的告警，判断是由什么漏洞进来的
+2）其次就是取证排查阶段，如果是web漏洞，就是查看web日志，根据失陷时间节点往上排查是否上传webshell；
+再查看后门是否有恶意的命令执行、文件上传。如果有恶意的文件比如说.exe，可以放到一些微步社区平台分析；
+如果是webshell的话，可以用d盾、河马进行查杀
+3）接下来可以通过其他主机查看是否有相同的攻击迹象，然后排查是否有可疑的进程、端口、自启动项，可以用火绒剑查看有没有异常外联
+4）然后就是进行攻击路径的还原，可以通过对日志、流量进行分析、确定他的攻击路径，然后判断出他的漏洞点并切断他的攻击路径
+5）处置安全事件，处置方式包括:**安全设备策略调整**、**系统下线**、服务器排査**、**应用排査**、**加固整改**、**系统上线，把业务恢复至正常水平
+6）后面可以根据样本分析到的ip地址进行信息收集，进行常规的溯源，查看是否有个人id泄漏、社交平台搜索其个人信息、利用蜜罐系统反制等手段绘制攻击者画像
+8）若无则尝试是否能够打进其服务器，比如说常见的cs反制，可以爆破攻击者cs服务器密码，或者利用cs漏洞拿到攻击者服务器权限，进一步获取攻击者信息
+9）上报安全事件，**根据攻击行为报告和处置报告，对攻击事件、威胁处置上报演习系统**
+</code></pre>
+<h3 id="溯源流程">溯源流程</h3>
+<p>溯源方式:</p>
+<p>首先通过日志和蜜罐等方式获取到攻击方的 ip，可以对 ip 进行反向渗透获取信息，定位攻击者信息。</p>
+<p>这个ip可以通过whios反差哪些工具，再通过微步的ip反查可以看看有无域名绑定的行为。扫描端口看看又有有无开了特殊的端口的</p>
+<p>也可以通过搜索引擎或者安全情报，获取 ip 对应攻击者的网名id，再通过社交平台获取攻击者的信息<br>
+通过攻击 IP 历史解析记录/域名，对域名注册信息进行溯源分析<br>
+如果攻击者有种植木马等，可以提取样本特征如用户名、ID、邮箱、C2 服务器等信息—同源分析<br>
+搭载 jsonp 钓鱼的蜜罐，通过 JSONP 跨域，获取攻击者的主机信息、浏览器信息、真实 IP 及社交信息等</p>
+<h3 id="除了杀进程还有什么方法可以快速找到webshell吗因为有时候占用率高的不一定是木马也可能是业务相关进程">除了杀进程还有什么方法可以快速找到webshell吗?因为有时候占用率高的不一定是木马，也可能是业务相关进程?</h3>
+<p>看下相关设备的告警流量，看下webshell的名字和路径，然后在服务器上使用find命令进行查找。<br>
+或者在网站的根目录下用下河马或者d盾扫下看看，看看能不能扫出webshell。</p>
+<h3 id="应急响应常用的工具">应急响应常用的工具?</h3>
+<p>微步云沙箱，火绒剑、d盾、河马(linux和windows通用)、安全厂商的一些态势感知平台，流量分析平台等等</p>
+<p>火绒剑可以一键查看进程和注册表</p>
+<h3 id="windows应急响应"><strong>windows应急响应</strong></h3>
+<pre><code>1.1系统账户：弱口令、22/3389 等端口是否对外
+查看账号的方法：
+net user（无法列出$用户）
+lusrmgr.exe（无法找到注册表方式建立的用户）
+查看注册表（最准）可以按Win+R输入regedit来打开HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account\Users\
+D盾有查看账户的功能
+
+1.2进程、端口相关
+查看开放的端口：netstat -ano
+重点看状态是 ESTABLISHED 的端口：netstat -ano | findstr 'estab'
+查看路由：netstat -rn
+查看系统信息：msinfo32，依次点击 软件环境→正在运行任务，可以看到当前的
+进程
+查找 PID 对应的进程：tasklist | findstr PID
+
+杀死进程：
+taskkill /f /pid 123 /t
+taskkill /f /im explorer.exe /t
+
+查看进程对应的文件：依次输入 wmic-- process
+显示 进程--PID--服务：tasklist /svc
+
+查看 Windows 服务所对应的端口：
+%system%/system32/drivers/etc/services
+（一般 %system% 就是 C:\Windows ）
+
+防火墙配置：netsh firewall show all
+
+1.3 计划任务、可疑进程
+服务相关
+查看服务：services.msc
+系统信息
+查看系统信息及补丁：systeminfo
+可疑文件和目录
+最近打开的文件：%UserProfile%\Recent
+排查的几个点：
+回收站、浏览器下载记录、浏览器历史记录
+时间排序，查看最新的文件
+修改时间在创建时间之前的文件
+查看日志：eventvwr.msc
+
+1.4  日志分析
+系统日志（System.evtx）：驱动程序、系统组件和应用软件的崩溃以及数据丢失
+错误等 
+应用程序日志（Application.evtx）：记录程序运行方面的事件 
+安全日志（Security.evtx）：登录日志、对象访问日志、进程追踪日志、特权使
+用、帐号管理、策略变更、系统事件。安全日志也是调查取证中最常用到的日志。
+默认设置下，安全性日志是关闭的，管理员可以使用组策略来启动安全性日志，
+或者在注册表中设置审核策略，以便当安全性日志满后使系统停止响应
+修改配置策略，默认的话只会记录一些简单的，可以按照下面这个改配置
+修改方法：开始 → 管理工具 → 本地安全策略 → 本地策略 → 审核策略
+
+1.5  快捷常用命令
+查看域中当前的主机列表：net view /domain 
+查看当前域中的用户 net user /domain 
+增加一个本地用户 net user username password /add 
+将新增的用户加到本地管理员组 net localgroup &quot;Administrators&quot; username /add   
+查看域中的密码策略 net accounts /domain 
+查看本地组 net localgroup &quot;Group&quot; 
+查看域中的组信息 net group /domain 
+查看域中指定组的成员 net group &quot;Domain group&quot; /domain 
+查看当前机器所在的域名 net config workstation 
+查看当前服务器所在的域名 net config server
+显示系统信息 systeminfo 
+查看远程主机的系统信息 systeminfo /S ip /U domain\user /P Pwd 
+显示进程和服务信息 tasklist /svc 
+显示所有进程以及DLL信息 tasklist /m 
+显示进程和所有者 tasklist /v 
+查看远程主机的进程列表 tasklist /S ip /v 
+显示具体的服务信息（包括二进制路径和运行使用） sc qc Spooler
+</code></pre>
+<p>**在搜索框中搜索 “事件查看器”，双击打开。（***<em>事件查看器的位置在*</em>**C:\WINDOWS\system32，名字为eventvwr.msc）</p>
+<p>敏感事件id:<br>
+4624 登录成功<br>
+4625 登录失败<br>
+4634 注销成功</p>
+<p>4648 - 试图使用明确的凭证登录（可以用以查看远程登陆的相关信息，比如远程登陆的IP地址等）</p>
+<p>4647 用户启动的注销<br>
+4672 使用超级用户/管理员用户进行登录<br>
+4720 创建用户<br>
+4697 7045 PsExec</p>
+<p><strong>系统信息工具</strong></p>
+<p>在命令行中输入【msinfo32】命令，打开【系统信息】窗口</p>
+<h3 id="windous入侵排查">windous入侵排查</h3>
+<p>检查系统账号安全</p>
+<p>查看服务器是否有弱口令，远程管理端口是否对公网开放（使用 netstat -ano 命令、或者问服务器管理员）</p>
+<p>命令查看服务器是否存在可疑账号、新增账号，如有管理员群组的（Administrators）里的新增账户，如有，请立即禁用或删除掉</p>
+<p>D 盾或者注册表中查看服务器是否存在隐藏账号、克隆账号</p>
+<p>结合日志，查看管理员登录时间、用户名是否存在异常</p>
+<p>检查方法：Win+R 打开运行，输入 “eventvwr.msc”，回车运行，打开 “事件查看器”，导出 Windows 日志–安全，利用 Log Parser 进行分析</p>
+<h4 id="查看服务器是否存在可疑账号-新增账号">查看服务器是否存在可疑账号、新增账号</h4>
+<p>检查方法:打开 cmd 窗口，输入 lusrmgr.msc 命令，查看是否有新增/可疑的账号如有管理员群组的(<br>
+Administrators)里的新增账户，如有，请立即禁用或删除掉。</p>
+<h4 id="查看服务器是否存在隐藏账号-克隆账号">查看服务器是否存在隐藏账号、克隆账号。</h4>
+<p>检查方法<br>
+a、win+R 输入“regedit”打开注册表，查看管理员对应键值</p>
+<p>b.使用 D 盾 web 查杀工具，集成了对克隆账号检测的功能。</p>
+<h4 id="检查服务器是否有异常的启动项">检查服务器是否有异常的启动项</h4>
+<p>检查方法<br>
+a.登录服务器，单击【开始】&gt;【所有程序】&gt;【启动】，默认情况下此目录在是一个空目录，确认是否有非业务程序在该目录下，<br>
+b.单击开始菜单&gt;【运行】，输入 msconfig，查看是否存在命名异常的启动项目是则取消勾选命名异常的启动项目，并到命令中显示的路径删除文件。<br>
+c.单击【开始】&gt;【运行】，输入 regedit，打开注册表，查看开机启动项是否正C.常，特别注意如下三个注册表项:<br>
+HKEY CURRENT USER\softwarelmicorsoftlwindows\currentversion\runHKEY LOCAL MACHINE\SoftwarelMicrosoft[Windows\CurrentVersionRunHKEY LOCAL MACHINE\Software\MicrosoftlWindows\CurrentVersionRunonce检查右侧是否有启动异常的项目，如有请删除，并建议安装杀毒软件进行病毒查杀清除残留病毒或木马，<br>
+d.利用安全软件查看启动项、开机时间管理等，<br>
+e.组策略，运行 gpedit.msc。</p>
+<h4 id="结合日志查看管理员登录时间-用户名是否存在异常">结合日志，查看管理员登录时间、用户名是否存在异常。</h4>
+<p>检查方法:<br>
+回车运行，打开“事件查看器”Win+R 打开运行，输入“eventvwr.msc”</p>
+<h4 id="检查异常端口-进程">检查异常端口、进程</h4>
+<p>(1)检查端口连接情况，是否有远程连接、可疑连接。<br>
+检查方法:<br>
+a、netstat -ano 查看目前的网络连接，定位可疑的 ESTABLISHED<br>
+b、根据 netstat 定位出的 pid，再通过 tasklist 命令进行进程定位 tasklistfindstr “PlD”</p>
+<p>进程</p>
+<p>a.开始--运行--输入 msinfo32，依次点击“软件环境一正在运行任务”就可以查看到进程的详细信息，比如进程路径、进程 ID、文件创建日期、启动时间等。</p>
+<p>b、打开 D 盾 web 查杀工具，进程査看，关注没有签名信息的进程。<br>
+通过微软官方提供的 Process Explorer 等工具进行排查</p>
+<p>C查看可疑的进程及其子进程。可以通过观察以下内容:<br>
+没有签名验证信息的进程<br>
+没有描述信息的进程<br>
+进程的属主进程的路径是否合法<br>
+CPU 或内存资源占用长时间过高的进程</p>
+<h4 id="小技巧">小技巧:</h4>
+<p>a、查看端囗对应的 PlD:netstat -ano findstr “port”<br>
+b、查看进程对应的 PID:任务管理器--査看--选择列--PID 或者 tasklistfindstr “PlD&quot;<br>
+查看进程对应的程序位置<br>
+任务管理器--选择对应进程--右键打开文件位置运行输入 wmic，cmd 界面输入 processd、tasklist /svc 进程--PID--服务<br>
+查看 Windows 服务所对应的端口:e、%system%/system32/drivers/etc/services(-般%system%就是 C:\Windows)</p>
+<h3 id="linux应急响应"><strong>linux应急响应</strong></h3>
+<ul>
+<li>文件排查:tmp 目录文件(临时文件)Is-alt /tmp</li>
+<li>启动项排查:查看开启启动项内容 Is-alt /etc/init.d/</li>
+<li>查看命令执行记录:直接 history 或 者 cat ~/.bash history</li>
+<li>用户信息排査 /etc/passwd</li>
+<li>计划任务排查: crontab -|查看当 前的计划有那些，是否有后门木马程序 启动相关信息</li>
+<li>进程排査: netstat -antlp，根据 n etstat 定位出 pid，使用 ps 命令，分析 进程 top7.</li>
+<li>系统登录日志排查: ssh 日志:/var/log/lastlog 查看最近登 录的记录 系统中所有用户最近一次登录信息:las tlog8.  安全日志主要分析点：是否有ip爆破ssh成功</li>
+<li>中间件日志查询 Apache:/var/log/httpd/ Nqix:/var/log/nginx/</li>
+<li>后门排査 使用河马 webshell /find(命令)可以用工具:GScan</li>
+</ul>
+<pre><code>cat /etc/passwd
+# 查看用户信息文件
+主要分析点：是否存在攻击者创建的恶意用户
+
+cat /etc/shadow
+# 查看影子文件
+
+awk -F: '$3==0{print $1}' /etc/passwd
+cat /etc/passwd | grep x:0
+# 查看系统是否还存在其他的特权账户，uid为0，默认系统只存在root一个特权账户
+
+who
+#查看当前登录用户，以及其登录ip。pts代表远程登录，tty代表本地登陆。
+
+uptime
+#查看现在的时间、系统开机时长、目前多少用户登录，系统在过去的1分钟、5分钟  和15分钟内的平均负载。
+
+stat /etc/passwd
+#查看密码文件上一次修改的时间，如果最近被修改过，那就可能存在问题。
+
+cat /etc/passwd | grep -v nologin
+#查看除了不可登录以外的用户都有哪些，有没有新增的
+
+cat /etc/passwd | grep /bin/bash
+#查看能用bash shell登录的用户。
+
+history
+#查看历史命令
+
+cat .bash_history &gt;&gt;history.txt
+#保存历史命令
+
+netstat -pantu
+#查看端口开放和连接情况
+
+ps -aux
+#查看进程
+
+ ps -aux | grep pid
+#查看关联进程
+
+ps aux --sort=pcpu | head -10
+#查看cpu占用率前十的进程
+
+
+systemctl list-unit-files | grep enabled
+#查看开机启动项
+
+Crontab -l
+#查看定时任务
+
+top
+#进程动态监控
+
+ps -ef
+#静态监控
+
+grep &quot;Failed password for root&quot; /var/log/secure | awk '{print $11}' | sort | uniq -c | sort -nr | more
+#统计爆破主机root账号的失败次数及ip：
+
+grep &quot;Accepted &quot; /var/log/secure | awk '{print $1,$2,$3,$9,$11}'
+查看成功登录的日期、用户名、IP：
+
+stat /bin/netstat
+  查看命名修改时间，防止被替换
+</code></pre>
+<h3 id="linux加固">Linux加固：</h3>
+<ol>
+<li>修改ssh的配置文件，禁止root直接登录</li>
+<li>修改密码配置策略文件，确保密码的最小长度为8位</li>
+<li>确保错误登录3次，锁定此账户5分钟</li>
+<li>禁止su非法提权，只允许root和wheel组用户su到root</li>
+<li>不响应ICMP请求</li>
+<li>设置登录超时时间为10分钟</li>
+<li>结束非法登录用户</li>
+</ol>
+<h3 id="windows加固">Windows加固：</h3>
+<ol>
+<li>修改3389端口</li>
+<li>设置安全策略，不允许SAM账户的匿名枚举，不允许SAM账户和共享的匿名枚举。</li>
+<li>在组策略中设置：阻止访问注册表编辑工具</li>
+<li>开启审核对象访问，成功与失败；开启审核目录服务访问，成功与失败；开启审核系统事件，成功与失败</li>
+<li>禁止445端口漏洞</li>
+<li>设置屏幕保护在恢复时使用密码保护</li>
+<li>设置windows密码策略：使密码必须满足复杂性，设置密码长度最小值为8位，设置密码最长存留期为30天</li>
+<li>开启Windows防火墙，关闭ping服务，打开3389、80等服务</li>
+<li>关闭系统默认共享文件</li>
+</ol>
+<h3 id="勒索病毒处置流程">勒索病毒处置流程?</h3>
+<ul>
+<li>首先了解现状，了解发病时间和系统架构，并且确认被感染的主机</li>
+<li>然后先进行临时处置，对被感染的主机进行网络隔离，禁止使用移动存储设备，对未感染的主机进行ACL隔离，关闭 SSH(linux的远控)、RP(windows的远控)等协议，也不能使用移动存储</li>
+<li>获取样本，windows 系统进行文件排查、进程排查、系统信息排查、系统日志排查;</li>
+<li>进行进一步的处置，对已经感染的主机进行断网隔离，等待解密进展，最后重装系统。</li>
+<li>最后是防御，定期打补丁、部署杀软、对口令策略进行加固，部署流量检测设备</li>
+</ul>
+<h3 id="挖矿应急响应">挖矿应急响应</h3>
+<p>a.判断(第一步先判断)</p>
+<p>1.查看cpu占用率**(判断CPU占用率高不高)**</p>
+<p>2.查看天眼的流量分析，是否去别的有危险的网站下载东西，然后在本地执行了挖矿的一些命令;<strong>(结合天眼设备分析，看是否去可疑网站下载过东西或在本地执行挖矿命令)</strong></p>
+<p>3.是否有外连，向远程ip的请求;<strong>(是否有外连或者远程ip请求 netstart -ano 查看所有端口)</strong></p>
+<p>b.事件分析(第二步分析)<br>
+(1)登录网站服务器，查看进程是否有异常**;(查看网站服务器是否有异常进程 系统命令tasklist)**</p>
+<p>(2)进行查看异常进程的服务项是什么.选择可疑服务项，然后停止服务，其启动类型会变为静止。(<strong>并查看它的服务项，尤其是可疑服务项(系统命令services.msc查看服务项))</strong></p>
+<p>(3)进行查看一下计划任务有没有可疑的**(查看一下有没有可疑的计划任务)**<br>
+<strong>临时解决方案(最后解决并处置)</strong></p>
+<p>(1)停止并禁用可疑服务项，有时候服务项的名称会变，但描述不会变，根据描述快速找到可疑服务项，删除服务项:</p>
+<p>(2)根据实际存在木马的路径，进行删除木马**(如果知道木马路径的话，直接删马)**<br>
+(3)重启计算机;<br>
+(4)使用杀软全盘查杀；</p>
+<h3 id="蠕虫病毒介绍">蠕虫病毒介绍</h3>
+<p>蠕虫病毒介绍:蠕虫病毒是一种自包含的程序(或是一套程序)，通常通过网络途径传播每入侵到一台新的计算机，它就在这台计算机上复制自己，并自动执行它自身的程序(典型的蠕虫病毒有:熊猫烧香病毒、冲击波/震荡波病毒、conficker病毒等)<br>
+发生场景(可不说): 管理员在出口防火墙发现内网服务器不断向境外iP发起主动连接，内网环境无法连通外网</p>
+<p>应急响应:<br>
+1、(分析判断)先在出口防火墙看一下服务器内网P，先将中病毒的主机从内网断开，然后登录该服务器，打开D盾 web查杀查看一下端口连接情况，(一般)可以发现本地在大量地向外网IP发起主动连接(见下图)</p>
+<figure data-type="image" tabindex="1"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403301641715.png" alt="image-20240330164137526" loading="lazy"></figure>
+<p>通过端口异常，去跟踪<strong>进程ID</strong>，可以找到引起<strong>异常服务主进程</strong>(在向大量远程IP的端口发送请求);一对服务器进行清查，成功清除病毒。<br>
+一般就是可以断定感染了病毒。之后用用卡巴斯基<strong>病毒查杀工具</strong>，对全盘文件进行查杀，由此发现一些异常文件。使用一些多<strong>引擎在线病毒网站扫描异常文件</strong>，确认服务器感染了<strong>哪种蠕虫病毒。之后下载对应的蠕虫专杀工具</strong></p>
+<h4 id="处理过程简略版">处理过程(简略版)</h4>
+<p>发现异常:出口防火墙、本地端口连接情况，主动向外网发起大量连接<br>
+病毒查杀卡巴斯基全盘扫描，发现异常文件<br>
+确认病毒使用多引擎在线病毒对该文件扫描，确认服务器感染conficker蠕虫病毒。2<br>
+病毒处理里:使用conficker蠕虫专杀工具对服务器进行清查，成功清除病毒。<br>
+预防:<br>
+1、安装杀毒软件，定期全盘扫描<br>
+2、不使用来历不明的软件，不随意接入未经查杀的U盘<br>
+3、定期对windows系统漏洞进行修复，不给病毒可乘之机<br>
+做好重要文件的备份，备份，备份</p>
+<h3 id="内网渗透事件">内网渗透事件</h3>
+<p>多台服务器出现异常，特备是有竟对内网开放的系统</p>
+<p>异常特征<br>
+ 多台服务器异常，特别仅对内网开放的系统<br>
+ 异常情况较为一致，如样本MD5、C&amp;C地址一致或非法用户名一致<br>
+ 异常访问来源来自内网IP<br>
+ 分析思路<br>
+ 访谈管理员，服务器之间是否存在密码重用的情况，是否存在弱口令<br>
+ 了解业务，梳理服务器开放的服务，优先处理对互联网开放的服务器<br>
+ 检查登录日志，查看登录来源IP地址，判定其合法性；如非管理员常用Ip地址登录、非工作时段的登录ip地址<br>
+ 梳理登录日志以及时间线，目标找到第一台受入侵的服务器<br>
+ 检查存在容易遭受攻击的服务，查看其相应日志是否存在恶意行为，记录源IP</p>
+<h3 id="反弹-shell-的写入方式">反弹 shell 的写入方式</h3>
+<p>比如可以利用 redis 数据库的未授权访问 可以直接写入反弹 shell拿到系统 权限 或者我们可以写入一个 ssh 公钥，直接登录了</p>
+<h3 id="给你一段二进制木马如何溯源"><strong>给你一段二进制木马如何溯源</strong></h3>
+<p>通过逆向技术，反汇编二进制文件，得到汇编代码；然后阅读汇编代码，一点点去理解程序的意图和执行逻辑。</p>
+<p>https://www.freebuf.com/articles/others-articles/336602.html</p>
+<h3 id="溯源反制的思路"><strong>溯源反制的思路？</strong></h3>
+<p>1）先判断IP的类型，看IP是代理IP，IDC机房/云主机，肉鸡，CDN IP。查看IP的类型可以通过威胁情报网站或者ipip.net这种类型的网站进行判断。</p>
+<p>2）代理IP/CDN：如果攻击IP是代理IP或者CDN IP地址，那么一般是没有办法进行有效溯源的，可以先放弃。</p>
+<p>3）肉鸡IP：这种IP一般是由于存在漏洞被攻击者拿到权限，进而用作跳板进行攻击，这种只能去攻击这台主机拿到权限以后，上去查找连接记录，进而获取真实IP，在进行溯源。这种方式比较难。</p>
+<p>4）IDC机房或者云主机：这种有可能是攻击者自己的服务器，可以查看该IP的历史域名解析记录，根据域名信息去做whois查询，看是否能够获取到注册人信息，如姓名，邮箱，手机号等。如果可以拿到这些信息，可以去查社工库，或者各种论坛去完善攻击者画像。</p>
+<p>5）真实IP：如果是真实IP，那么可以通过网站对攻击者的位置进行大概定位，在结合其它信息进行判断。</p>
+<p><strong>A</strong></p>
+<p>1.攻击源捕获</p>
+<ul>
+<li>安全设备报警，如扫描IP、威胁阻断、病毒木马、入侵事件等</li>
+<li>日志与流量分析，异常的通讯流量、攻击源与攻击目标等</li>
+<li>服务器资源异常，异常的文件、账号、进程、端口，启动项、计划任务和服务等</li>
+<li>邮件钓鱼，获取恶意文件样本、钓鱼网站 URL 等</li>
+<li>蜜罐系统，获取攻击者 ID、电脑信息、浏览器指纹、行为、意图的相关信息</li>
+</ul>
+<p>2.溯源反制</p>
+<ul>
+<li>IP 定位技术<br>
+根据IP定位物理地址–代理 IP<br>
+溯源案例：通过 IP 端口扫描，反向渗透服务器进行分析，最终定位到攻击者相关信息</li>
+<li>ID 追踪术<br>
+ID 追踪术，搜索引擎、社交平台、技术论坛、社工库匹配<br>
+溯源案例：利用 ID 从技术论坛追溯邮箱，继续通过邮箱反追踪真实姓名，通过姓名找到相关简历信息</li>
+<li>网站 url<br>
+域名 Whois 查询–注册人姓名、地址、电话和邮箱 --域名隐私保护<br>
+溯源案例：通过攻击 IP 历史解析记录/域名，对域名注册信息进行溯源分析</li>
+<li>恶意样本分析<br>
+提取样本特征、用户名、ID、邮箱、C2 服务器等信息–同源分析<br>
+溯源案例：样本分析过程中，发现攻击者的个人 ID 和 QQ，成功定位到攻击者</li>
+<li>社交账号<br>
+基于 JSONP 跨域，获取攻击者的主机信息、浏览器信息、真实 IP 及社交信息等<br>
+利用条件：可以找到相关社交网站的 jsonp 接口泄露敏感信息，相关网站登录未注销</li>
+</ul>
+<p>3.攻击者画像</p>
+<ul>
+<li>攻击路径</li>
+</ul>
+<p>攻击目的：拿到权限、窃取数据、获取利益、DDOS 等<br>
+网络代理：代理 IP、跳板机、C2 服务器等<br>
+攻击手法：鱼叉式邮件钓鱼、Web渗透、水坑攻击、近源渗透、社会工程等</p>
+<ul>
+<li>攻击者身份画像</li>
+</ul>
+<p>虚拟身份：ID、昵称、网名<br>
+真实身份：姓名、物理位置<br>
+联系方式：手机号、qq/微信、邮箱<br>
+组织情况：单位名称、职位信息</p>
+<h3 id="蜜罐是怎么获取攻击者社交账号信息的怎么防"><strong>蜜罐是怎么获取攻击者社交账号信息的？怎么防</strong></h3>
+<p>浏览器信息读取</p>
+<p>利用jsonp，跨域访问社交平台接口，提取包含的个人信息</p>
+<p>使用浏览器隐私模式，或虚拟机内实施攻击操作</p>
+<h2 id="渗透问题">渗透问题</h2>
+<h3 id="漏洞怎么挖的">漏洞怎么挖的？</h3>
+<p>(1)一般就是通过谷歌骇客语法，比如搜可能存在sql注入的网站:inurl:php?id=1</p>
+<p>(2)还有就是用鹰图或者fofa，搜一下比如想要捜后台类的网站body=”后台”，或者捜一些可能存在默认密码的网站body=”默认密码为admin”等这个自由发挥，上面的仅供参考</p>
+<h3 id="渗透测试时需要注意什么问题">渗透测试时需要注意什么问题?</h3>
+<p>渗透测试时，<strong>不要影响对方网站业务系统运行的连续性</strong>，不要<strong>因为渗透测试把对方网站打崩。</strong><br>
+还有就是一般<strong>不会对网站进行提权</strong>的操作，因为提权很有可能导致对方<strong>服务器死机蓝屏</strong>，影响对方业务系统的连续运行。还有就是不会进行挂马的操作，比如测试文件上传漏洞的时候，如果是<strong>php网站就只会上传phpinfo文件看是否能够解析执</strong>行。<br>
+一些关键的系统账号再去爆破前先去手动测测看看这些账号有没有因为密码输入错误，导致锁定次数的.</p>
+<h3 id="你挖过什么有意思的漏洞">你挖过什么有意思的漏洞?</h3>
+<p>Charles。登陆后点击个人信息，抓包，放到repeter模块，修改strUserID参数可以越权查看别人信息放intruder模块可以跑数据，这里有几万+信息泄露</p>
+<h3 id="项目渗透测试的流程">项目渗透测试的流程?</h3>
+<p>2首先我会先和项目负责人确定下这个渗透测试的项目需求以及一些注意事项,比如客,户有没有要求这个渗透测试的时间段是在晚上还是白天测试，还有网站测试的范围，<br>
+能不能提权，能不能挂马什么的..<br>
+3.然后对网站进行渗透测试<br>
+最后根据挖掘到的漏洞输出渗透测试报告</p>
+<h3 id="给你一个登录框你会如何进行渗透测试">给你一个登录框，你会如何进行渗透测试?</h3>
+<p>我会尝试进行爆破，但是爆破前我会输入一个账号看<strong>看页面内有没有什么回显</strong>，然后根据<strong>页面内的回显进行爆破</strong>，页面内的回显的话可能有这么几种情况</p>
+<p>第一种情况输入用户名和密码点击登录以后，页面回显密码错误，说明该用户可能存在，那么我就会使用bupsuite进行抓包，进行爆破</p>
+<p>第二种情况 输入用户名和密码点击登录以后,页面显示用户名错误,说明输入的该用户不存在,那么我会使用burpsuite进行抓包,然后将用户设为变量,导入常见的用户名的密码本,使用</p>
+<p>第三种情况 输入用户名和密码点击登录以后,顶面显示用户名或者密码错误没法根据页面回显来判新此用户名是否存在，然后使用burpsuite进行抓包，将用户名和密码进行设置，使用双变量爆破分别导入用户名密码本和密码的密码本，<br>
+爆破不行的话，我会再尝试试试别的一些漏洞比如看看是否可能存在sql注入<br>
+看看传输的数据是否能够<strong>拼接命令导致命令执行</strong><br>
+看看是不是有忘记密码之类的操作，看是不是存在逻辑漏洞<br>
+看看语言和框架看是不是存在已知的漏洞<br>
+使用漏扫工具(xray，awvs)扫一下看看，是不是能扫到漏洞，扫到的话在进行手工验证<br>
+看看传输的数据是否能够拼接命令导致命令执行</p>
+<h3 id="给你一个网站你会如何进行渗透测试"><strong>给你一个网站，你会如何进行渗透测试?</strong></h3>
+<p>首先我会先进行<strong>信息收集</strong>，看下网站用的<strong>什么语言写的</strong>，是php还是$sp还是html;看下<strong>网站用的什么中间件</strong>,是i还是apache哈的;会<strong>扫描下网站开放的端口</strong>,有没有敏感端口泄露:还有用fofa或者鹰图看下这个网站曾经开放的历史端口，因为nmap有些端口可能扫不出来,使用目录扫描工具，比如御剑，dirsearch等对网站进行<strong>扫描看看能不能扫出敏感文件或者后台</strong>:收集<strong>网站的子域名或者c段的ip</strong>。,然后再根据收集到的<strong>信息进行分析和归纳</strong>，尝试利用，比如<strong>收集到这个网站开放了3306端口那么，我可能尝试爆破下这个端口的口令</strong>或者试下弱口令;比如收集到这个网站用动态脚本语言开发的，那么我可能测测<strong>是否可能存在sql注入漏洞</strong>;或者直接用awvs漏洞扫描工具扫描下，然后对扫描的结果进行验证。如果常规漏洞测不出来的话，我可能再测测网站的功能项,正常的逻辑啥的,说不定有逻辑漏洞。最后输出渗透测试报告(渗透测试报告内一般会写漏洞的利用点，漏洞的修复建议，渗透测试过程中用到的工具)</p>
+<h3 id="项目的渗透测试和挖src有什么区别">项目的渗透测试和挖src有什么区别?</h3>
+<p>就是报告的复杂程度，项目的渗透测试报告比较复杂，src的渗透测试报告只需要写明这个漏洞怎么挖掘出来的?</p>
+<h3 id="一般你提交的漏洞审核不通过的原因是什么请举例">一般你提交的漏洞审核不通过的原因是什么?请举例</h3>
+<p>联系不上厂商;漏洞真实存在但是危害小<br>
+比如反射型xss所有的漏洞平台都不会收录这种类型的平台,还有目录遍历,如果目录遍历没有一些敏感文件比如网站的配置文件，数据库信息等，也可能不收录,还有phpinfo这类文件也不会收取</p>
+<h3 id="挖漏洞用到的工具各自用在什么场景下">挖漏洞用到的工具，各自用在什么场景下</h3>
+<p>Burpsuite:抓包改包，爆破<br>
+sqlmap:跑sql注入<br>
+nmap:扫描端口<br>
+awvs,goby:扫描漏洞<br>
+御剑,dirsearch:扫描目录和敏感文件<br>
+(说自己熟悉的工具)</p>
+<h3 id="poc和exp是什么">poc和exp是什么:</h3>
+<p>Poc(prof of concept)是指的漏洞验证代码，通常用于验证漏洞是否存在以及漏洞的影响作用，通常是一段简单的代码，可以利用握洞来执行一些简单的操作，例如获取系练信息、执行命今等。poc的主要作用是验证洞洞是否存在，以便于后续的漏洞利用。<br>
+EXP(Expoit)是指漏洞利用代码，通常用于利用漏洞来执行一些恶意操作，例如获取敏感信息、控制系统等。EXP通常是一段复杂的代码，需要深入了解深洞的原理和目标系统的环境才能编写。EXP的主要作用是利用漏洞来实现攻击目的，例如窃取敏感信息、控制目标系统等。</p>
+<pre><code class="language-女吧">\volatility.exe f mem2.vmem --profile=WIn7SPIX64. iehistory 
+</code></pre>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://zj4sun.github.io/post/dc-2-ba-ji-wan-quan-shen-tou/">
+                <h3 class="post-title">
+                   DC-2靶机完全渗透
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://zj4sun.github.io//images/avatar.png?v=1735599266098" class="no-responsive avatar">
+    <div class="text-muted">行胜于言</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-nian-zhong-zong-jie/">2024年年度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/wei-xie-qing-bao/">威胁情报</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">2024年第四季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/ruo-kou-ling-zong-jie/">弱口令总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">2024年第三季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/python-pa-chong-xue-xi-bi-ji/">python爬虫学习笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti/">github+gridea配置个人博客无法加载main.css问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">2024年第二季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-apcahe-ri-zhi-fen-xi/">玄机靶场-apcahe日志分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">玄机靶场-Linux日志分析</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://zj4sun.github.io/tag/EjyP2cHMk/" class="badge secondary">
+          live生活
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/Mt6wUAkn1/" class="badge secondary">
+          quarter总结
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge secondary">
+          information研究
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/qXZ0OLIUJ/" class="badge warning">
+          python脚册
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge secondary">
+          setting环境设置
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge ">
+          Emergency响应
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge secondary">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge secondary">
+          job实习项目
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge secondary">
+          vulnhub打靶
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zj4sun.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

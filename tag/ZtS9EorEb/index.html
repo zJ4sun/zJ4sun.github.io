@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>web安全之路 | zJ4sun</title>
+<meta name="description" content="行胜于言">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://zj4sun.github.io//favicon.ico?v=1735599266098">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zj4sun.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://zj4sun.github.io/">zJ4sun</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <h2 class="current-tag">标签: web安全之路</h2>
+          
+  <article class="article">
+    <h2 class="article-title">
+      <a href="https://zj4sun.github.io/post/dnslog-wai-dai/">dnslog外带</a>
+    </h2>
+    <p class="article-meta">
+      2024-05-08
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge success">
+          web安全之路
+        </a>
+      
+    </p>
+    <p class="text-lead">
+      
+    </p>
+    <div class="row">
+      <a href="https://zj4sun.github.io/post/dnslog-wai-dai/" class="readmore-link">
+        <button>
+          Read More
+        </button>
+      </a>
+    </div>
+  </article>
+
+  <article class="article">
+    <h2 class="article-title">
+      <a href="https://zj4sun.github.io/post/dc-2-ba-ji-wan-quan-shen-tou/"> DC-2靶机完全渗透</a>
+    </h2>
+    <p class="article-meta">
+      2024-04-28
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge secondary">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge warning">
+          vulnhub打靶
+        </a>
+      
+    </p>
+    <p class="text-lead">
+      
+    </p>
+    <div class="row">
+      <a href="https://zj4sun.github.io/post/dc-2-ba-ji-wan-quan-shen-tou/" class="readmore-link">
+        <button>
+          Read More
+        </button>
+      </a>
+    </div>
+  </article>
+
+  <article class="article">
+    <h2 class="article-title">
+      <a href="https://zj4sun.github.io/post/fu-wu-qi-duan-lou-dong/">bp靶场——服务器端漏洞</a>
+    </h2>
+    <p class="article-meta">
+      2024-03-25
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge warning">
+          web安全之路
+        </a>
+      
+    </p>
+    <p class="text-lead">
+      <p>最近听说burpsuite有一个靶场，以前一直不知道打着试试，按照他提供的路线一步一步的来，因为他这里有比较详细的帮助的按钮，所以很适合新手练习</p>
+<p><a href="https://portswigger.net/web-security/learning-paths">项目地址</a></p>
+<h3 id="路径遍历">路径遍历</h3>
+<p><a href="https://portswigger.net/web-security/learning-paths/server-side-vulnerabilities-apprentice">网址</a>  <strong>路径遍历</strong>路径遍历（也称为目录遍历）漏洞使攻击者能够与服务器上的任意文件进行交互，从而使他们能够访问敏感数据。如果他们还可以写入这些文件，他们就有可能修改应用程序数据或行为，最终完全控制服务器。</p>
+<p>进入后</p>
+<ol>
+<li>
+<p>使用 Burp Suite 拦截并修改获取产品图像的请求。</p>
+</li>
+<li>
+<figure data-type="image" tabindex="1"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192023632.png" alt="image-20240319202351554" loading="lazy"></figure>
+</li>
+<li>
+<p>修改<code>filename</code>参数，为其指定值：</p>
+<pre><code>../../../etc/passwd
+</code></pre>
+</li>
+<li>
+<p>页面会提示通关</p>
+</li>
+</ol>
+<h3 id="访问控制">访问控制</h3>
+<h4 id="垂直提权">垂直提权</h4>
+<p>如果用户可以获得对他们无权访问的功能的访问权限，那么这就是垂直权限提升。例如，如果非管理用户可以访问管理页面并在其中删除用户帐户，那么这就是垂直权限提升。最基本的是，当应用程序不对敏感功能实施任何保护时，就会出现垂直权限升级。例如，管理功能可以从管理员的欢迎页面链接，但不能从用户的欢迎页面链接。但是，用户可以通过浏览相关的管理 URL 来访问管理功能。</p>
+<p>例如，网站可能在以下 URL 托管敏感功能：</p>
+<pre><code>https://insecure-website.com/admin
+</code></pre>
+<p>任何用户都可以访问它，而不仅仅是在其用户界面中具有该功能链接的管理用户。在某些情况下，管理 URL 可能会在其他位置公开，例如文件<code>robots.txt</code>：</p>
+<pre><code>https://insecure-website.com/robots.txt
+</code></pre>
+<p>即使 URL 没有在任何地方公开，攻击者也可能能够使用单词列表来暴力破解敏感功能的位置。</p>
+<ol>
+<li><code>robots.txt</code>通过附加实验室 URL 转到实验室并查看<code>/robots.txt</code>。请注意，该<code>Disallow</code>行公开了管理面板的路径。</li>
+</ol>
+<figure data-type="image" tabindex="2"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192031243.png" alt="image-20240319203120208" loading="lazy"></figure>
+<ol>
+<li>在 URL 栏中，替换<code>/robots.txt</code>为<code>/administrator-panel</code>以加载管理面板。</li>
+<li>删除<code>carlos</code>。</li>
+</ol>
+<figure data-type="image" tabindex="3"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192032419.png" alt="image-20240319203212358" loading="lazy"></figure>
+<p>在某些情况下，通过提供不太可预测的 URL 来隐藏敏感功能。这是所谓的“默默无闻的安全”的一个例子。但是，隐藏敏感功能并不能提供有效的访问控制，因为用户可能会通过多种方式发现混淆的 URL。</p>
+<p>想象一个在以下 URL 托管管理功能的应用程序：</p>
+<pre><code>https://insecure-website.com/administrator-panel-yb556
+</code></pre>
+<p>攻击者可能无法直接猜测到这一点。但是，应用程序仍可能会将 URL 泄露给用户。URL 可能会在 JavaScript 中公开，根据用户的角色构建用户界面：</p>
+<script> 	var isAdmin = false; 	if (isAdmin) { 		... 		var adminPanelTag = document.createElement('a'); 		adminPanelTag.setAttribute('https://insecure-website.com/administrator-panel-yb556'); 		adminPanelTag.innerText = 'Admin panel'; 		... 	} </script>
+<p>如果用户是管理员用户，此脚本将添加一个指向用户 UI 的链接。但是，包含 URL 的脚本对所有用户都是可见的，无论其角色如何。</p>
+<p>根据他的提示，我们发现这个很可能地址藏在前端中，打开后按f12检查，发现一个地址</p>
+<figure data-type="image" tabindex="4"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192036650.png" alt="image-20240319203633613" loading="lazy"></figure>
+<p>成功进入到仪表界面</p>
+<figure data-type="image" tabindex="5"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192037388.png" alt="image-20240319203717323" loading="lazy"></figure>
+<h3 id="基于参数的访问控制方法">基于参数的访问控制方法</h3>
+<p>某些应用程序在登录时确定用户的访问权限或角色，然后将此信息存储在用户可控的位置。这可能是：</p>
+<ul>
+<li>一个隐藏字段。</li>
+<li>cookie</li>
+<li>预设的查询字符串参数。</li>
+</ul>
+<p>应用程序根据提交的值做出访问控制决策。例如：</p>
+<pre><code>https://insecure-website.com/login/home.jsp?admin=true 
+https://insecure-website.com/login/home.jsp?role=1
+</code></pre>
+<p>这种方法是不安全的，因为用户可以修改值并访问他们未授权的功能，例如管理功能。</p>
+<p>要求：</p>
+<figure data-type="image" tabindex="6"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192039946.png" alt="image-20240319203903911" loading="lazy"></figure>
+<p>直接尝试用/admin不行</p>
+<figure data-type="image" tabindex="7"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192040021.png" alt="image-20240319203959974" loading="lazy"></figure>
+<p>发现登陆口更具提示登录</p>
+<figure data-type="image" tabindex="8"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192041257.png" alt="image-20240319204122200" loading="lazy"></figure>
+<p>看到要求是仿造cookie，使用burp suite抓包</p>
+<figure data-type="image" tabindex="9"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192044821.png" alt="image-20240319204446788" loading="lazy"></figure>
+<p>发现直接定义了admin类型，改为true发送回去</p>
+<figure data-type="image" tabindex="10"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192046666.png" alt="image-20240319204637610" loading="lazy"></figure>
+<p>发现出现了admin panel，后续一直改admin的类型就可以了，按照步骤删除carlos即可</p>
+<h3 id="水平提权">水平提权</h3>
+<p>如果用户能够访问属于另一个用户的资源，而不是他们自己的该类型资源，则会发生水平权限提升。例如，如果一名员工可以访问其他员工以及自己的记录，那么这就是水平权限提升。</p>
+<p>水平权限升级攻击可以使用与垂直权限升级类似的利用方法。例如，用户可以使用以下 URL 访问自己的帐户页面：</p>
+<pre><code>https://insecure-website.com/myaccount?id=123
+</code></pre>
+<p>如果攻击者将<code>id</code>参数值修改为其他用户的参数值，他们可能会获得对其他用户的帐户页面以及相关数据和功能的访问权限。</p>
+<h4 id="笔记">笔记</h4>
+<p>这是不安全的直接对象引用 (IDOR) 漏洞的示例。当用户控制器参数值用于直接访问资源或功能时，就会出现此类漏洞。</p>
+<p>在某些应用中，可利用的参数没有可预测的值。例如，应用程序可以使用全局唯一标识符 (GUID) 来识别用户，而不是递增的数字。这可以防止攻击者猜测或预测另一个用户的标识符。然而，属于其他用户的 GUID 可能会在应用程序中引用用户的其他地方公开，例如用户消息或评论。</p>
+<p>要求：</p>
+<figure data-type="image" tabindex="11"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192051624.png" alt="image-20240319205117587" loading="lazy"></figure>
+<p>根据提示我们先登录，再看看报文是什么样的。发现没有什么特殊的地方，</p>
+<figure data-type="image" tabindex="12"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192125980.png" alt="image-20240319212505925" loading="lazy"></figure>
+<p>去看了一下，官方的解决办法</p>
+<ol>
+<li>查找 的博客文章<code>carlos</code>。</li>
+<li>单击<code>carlos</code>并观察 URL 包含他的用户 ID。记下此 ID。</li>
+<li>使用提供的凭据登录并访问您的帐户页面。</li>
+<li>将“id”参数更改为保存的用户 ID。</li>
+<li>检索并提交 API 密钥。</li>
+</ol>
+<figure data-type="image" tabindex="13"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192122568.png" alt="image-20240319212240530" loading="lazy"></figure>
+<p>点击carlos的账户出现了</p>
+<p>id：7c400002-b17c-4713-a6de-d89173c69f30</p>
+<p>打开个人账户抓包拦截后，改id提交发现已经移动过去了。</p>
+<figure data-type="image" tabindex="14"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192126498.png" alt="image-20240319212649430" loading="lazy"></figure>
+<h2 id="水平到垂直的权限提升"><strong>水平到垂直的权限提升</strong></h2>
+<p>通常，通过损害更有特权的用户，水平权限升级攻击可以转变为垂直权限升级。例如，水平升级可能允许攻击者重置或捕获属于另一个用户的密码。如果攻击者以管理用户为目标并危害其帐户，那么他们可以获得管理访问权限，从而执行垂直权限升级。</p>
+<p>攻击者可能能够使用已经描述的水平权限升级参数篡改技术来访问另一个用户的帐户页面：</p>
+<pre><code>https://insecure-website.com/myaccount?id=456
+</code></pre>
+<p>如果目标用户是应用程序管理员，那么攻击者将获得对管理帐户页面的访问权限。此页面可能会泄露管理员的密码或提供更改密码的方法，或者可能提供对特权功能的直接访问。</p>
+<p>要求</p>
+<figure data-type="image" tabindex="15"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192129063.png" alt="image-20240319212953034" loading="lazy"></figure>
+<p>登录后抓包</p>
+<figure data-type="image" tabindex="16"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192139882.png" alt="image-20240319213916840" loading="lazy"></figure>
+<p>发现下面有一个id=，想到要求将其改为administrator，发送。返送2xnhfzlzrdtfqlpg7m62</p>
+<figure data-type="image" tabindex="17"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403192145657.png" alt="image-20240319214504590" loading="lazy"></figure>
+<p>复制登陆即可</p>
+<h2 id="身份验证漏洞">身份验证漏洞</h2>
+<p>从概念上讲，身份验证漏洞很容易理解。然而，由于身份验证和安全性之间的明确关系，它们通常至关重要。</p>
+<p>身份验证漏洞可能使攻击者能够访问敏感数据和功能。它们还暴露了额外的攻击面以供进一步利用。因此，了解如何识别和利用身份验证漏洞以及如何绕过常见的保护措施非常重要。</p>
+<p>在本节中，我们解释：</p>
+<ul>
+<li>网站最常用的身份验证机制。</li>
+<li>这些机制中存在潜在的漏洞。</li>
+<li>不同身份验证机制中固有的漏洞。</li>
+<li>由于实施不当而引入的典型漏洞。</li>
+<li>如何使您自己的身份验证机制尽可能强大。</li>
+</ul>
+<h3 id="身份验证和授权有什么区别">身份验证和授权有什么区别？</h3>
+<p>身份验证是验证用户是否是其所声称的身份的过程。授权涉及验证是否允许用户执行某些操作。例如，身份验证确定尝试使用该用户名访问网站的人是否<code>Carlos123</code>确实是创建该帐户的同一人。一旦<code>Carlos123</code>通过身份验证，他们的权限就决定了他们被授权执行的操作。例如，他们可能被授权访问其他用户的个人信息，或执行删除其他用户帐户等操作。</p>
+<h3 id="暴力攻击">暴力攻击</h3>
+<p>暴力攻击是指攻击者使用试错系统来猜测有效的用户凭据。这些攻击通常是使用用户名和密码的单词列表自动进行的。自动化此过程，尤其是使用专用工具，可能使攻击者能够高速进行大量登录尝试。</p>
+<p>暴力破解并不总是只是对用户名和密码进行完全随机的猜测。通过使用基本逻辑或公开可用的知识，攻击者可以微调暴力攻击，以做出更有根据的猜测。这大大提高了此类攻击的效率。依赖基于密码的登录作为唯一的用户身份验证方法的网站如果没有实施足够的强力保护，可能会非常容易受到攻击。</p>
+<h3 id="暴力破解用户名">暴力破解用户名</h3>
+<p>如果用户名符合可识别的模式（例如电子邮件地址），则特别容易被猜到。例如，常见的格式是企业登录信息<code>firstname.lastname@somecompany.com</code>。然而，即使没有明显的模式，有时甚至会使用可预测的用户名创建高权限帐户，例如<code>admin</code>或<code>administrator</code>。</p>
+<p>在审核过程中，检查网站是否公开披露潜在的用户名。例如，您是否可以在不登录的情况下访问用户个人资料？即使配置文件的实际内容被隐藏，配置文件中使用的名称有时也与登录用户名相同。您还应该检查 HTTP 响应以查看是否泄露了任何电子邮件地址。有时，响应会包含高权限用户（例如管理员或 IT 支持人员）的电子邮件地址。</p>
+<h3 id="暴力破解密码">暴力破解密码</h3>
+<p>密码也可以类似地被暴力破解，其难度根据密码的强度而变化。许多网站采用某种形式的密码策略，迫使用户创建高熵密码，至少在理论上，仅使用暴力破解更难破解这些密码。这通常涉及通过以下方式强制使用密码：</p>
+<ul>
+<li>最少字符数</li>
+<li>小写和大写字母的混合</li>
+<li>至少一个特殊字符</li>
+</ul>
+<p>然而，虽然高熵密码很难仅靠计算机来破解，但我们可以利用人类行为的基本知识来利用用户无意中引入该系统的漏洞。用户通常不会使用随机的字符组合来创建强密码，而是使用他们能记住的密码并尝试将其破解以适应密码策略。例如，如果<code>mypassword</code>不允许，用户可以尝试类似<code>Mypassword1!</code>或 的操作<code>Myp4$$w0rd</code>。</p>
+<p>如果策略要求用户定期更改密码，则用户通常只对其首选密码进行较小的、可预测的更改。例如，<code>Mypassword1!</code>成为<code>Mypassword1?</code>或<code>Mypassword2!.</code></p>
+<p>了解可能的凭据和可预测的模式意味着暴力攻击通常比简单地迭代每种可能的字符组合更加复杂，因此也更加有效。</p>
+<h3 id="用户名枚举">用户名枚举</h3>
+<p>用户名枚举是指攻击者能够观察网站行为的变化，以确定给定的用户名是否有效。</p>
+<p>用户名枚举通常发生在登录页面上（例如，当您输入有效的用户名但密码不正确时），或者在注册表单上（当您输入已使用的用户名时）。这大大减少了暴力登录所需的时间和精力，因为攻击者能够快速生成有效用户名的候选列表。</p>
+<p>在尝试暴力破解登录页面时，您应该特别注意以下方面的任何差异：</p>
+<ul>
+<li><strong>状态码</strong>：在暴力攻击期间，返回的 HTTP 状态码对于绝大多数猜测来说可能都是相同的，因为大多数猜测都是错误的。如果猜测返回不同的状态代码，则强烈表明用户名是正确的。无论结果如何，网站始终返回相同的状态代码是最佳实践，但并不总是遵循这种做法。</li>
+<li><strong>错误消息</strong>：有时返回的错误消息会有所不同，具体取决于用户名和密码是否不正确或仅密码不正确。网站的最佳做法是在这两种情况下使用相同的通用消息，但有时会出现小的打字错误。只要一个字符不合适，就会使两条消息截然不同，即使该字符在呈现的页面上不可见。</li>
+<li><strong>响应时间</strong>：如果大多数请求都以相似的响应时间处理，则任何偏离此时间的情况都表明幕后发生了不同的事情。这再次表明猜测的用户名可能是正确的。例如，如果用户名有效，网站可能只会检查密码是否正确。此额外步骤可能会导致响应时间略有增加。这可能很微妙，但攻击者可以通过输入过长的密码来使这种延迟变得更加明显，而网站需要更长的时间来处理。</li>
+</ul>
+<p>要求：<img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200903683.png" alt="image-20240320090327635" loading="lazy"></p>
+<p>发现一个平平无奇的登录界面，先试试最简单的administrator</p>
+<figure data-type="image" tabindex="18"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200905325.png" alt="image-20240320090503244" loading="lazy"></figure>
+<figure data-type="image" tabindex="19"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200906636.png" alt="image-20240320090607595" loading="lazy"></figure>
+<p>突然发现它提供了单词列表，点击候选人用户名就可以 看到，那么直接拦截登录报，发送到intruder里面，尝试注入</p>
+<figure data-type="image" tabindex="20"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200919775.png" alt="image-20240320091918734" loading="lazy"></figure>
+<p>选择cluster bomb—添加变量符号—payloads，</p>
+<figure data-type="image" tabindex="21"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200919266.png" alt="image-20240320091944200" loading="lazy"></figure>
+<p>这里的变量2就是第几个变量的位置，点击就可以切换到变量1，配置好字典后，点击start attack</p>
+<figure data-type="image" tabindex="22"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200921322.png" alt="image-20240320092143263" loading="lazy"></figure>
+<p>接下来通过报文长度和响应状态码来进行筛选判断</p>
+<figure data-type="image" tabindex="23"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200924050.png" alt="image-20240320092438005" loading="lazy"></figure>
+<p>登录成功</p>
+<figure data-type="image" tabindex="24"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200926090.png" alt="image-20240320092608020" loading="lazy"></figure>
+<h3 id="绕过双因素身份验证">绕过双因素身份验证</h3>
+<p>有时，双因素身份验证的实施存在缺陷，以至于可以完全绕过它。</p>
+<p>如果首先提示用户输入密码，然后提示用户在单独的页面上输入验证码，则用户在输入验证码之前实际上处于“登录”状态。在这种情况下，值得测试一下在完成第一个身份验证步骤后是否可以直接跳到“仅登录”页面。有时，您会发现网站在加载页面之前实际上并没有检查您是否完成了第二步。</p>
+<p>要求：</p>
+<figure data-type="image" tabindex="25"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200928178.png" alt="image-20240320092818141" loading="lazy"></figure>
+<p>先测试一下发现登录报文明文传输账号和密码，然后登录后需要4位验证码，考虑尝试使用拦截登录包更改为要求中的账户名和密码</p>
+<figure data-type="image" tabindex="26"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200933725.png" alt="image-20240320093331658" loading="lazy"></figure>
+<p>发现一段加密后key，尝试了一些主流的算法解密，不行。说明不是这个。查看官方的解释。</p>
+<ol>
+<li>登录您自己的帐户。您的 2FA 验证码将通过电子邮件发送给您。单击<strong>电子邮件客户端</strong>按钮访问您的电子邮件。</li>
+<li>转到您的帐户页面并记下 URL。</li>
+<li>退出您的帐户。</li>
+<li>使用受害者的凭据登录。</li>
+<li>当提示输入验证码时，手动更改 URL 以导航到<code>/my-account</code>。当页面加载时，实验室就解决了。</li>
+</ol>
+<p>原来这里还有一个邮件客户端</p>
+<figure data-type="image" tabindex="27"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200940252.png" alt="" loading="lazy"></figure>
+<p>发现邮件登陆后。<img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200943055.png" alt="image-20240320094327939" style="zoom:150%;" /></p>
+<figure data-type="image" tabindex="28"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200942964.png" alt="image-20240320094244860" loading="lazy"></figure>
+<p>发现上面url直接是格式，按照要求更换账号登录，在切换url，完成</p>
+<figure data-type="image" tabindex="29"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403200948132.png" alt="image-20240320094852043" loading="lazy"></figure>
+<h2 id="服务器端伪造请求">服务器端伪造请求</h2>
+<h3 id="什么是-ssrf">什么是 SSRF？</h3>
+<p>服务器端请求伪造是一种 Web 安全漏洞，允许攻击者导致服务器端应用程序向非预期位置发出请求。</p>
+<p>在典型的 SSRF 攻击中，攻击者可能会导致服务器连接到组织基础设施内的仅供内部使用的服务。在其他情况下，他们可能能够强制服务器连接到任意外部系统。这可能会泄露敏感数据，例如授权凭据。</p>
+<h3 id="针对服务器的-ssrf-攻击">针对服务器的 SSRF 攻击</h3>
+<p>在针对服务器的 SSRF 攻击中，攻击者会导致应用程序通过环回网络接口向托管该应用程序的服务器发出 HTTP 请求。这通常涉及提供带有主机名的 URL，例如<code>127.0.0.1</code>（指向环回适配器的保留 IP 地址）或<code>localhost</code>（同一适配器的常用名称）。</p>
+<p>例如，想象一个购物应用程序，它允许用户查看特定商店中是否有商品的库存。为了提供股票信息，应用程序必须查询各种后端 REST API。它通过前端 HTTP 请求将 URL 传递到相关后端 API 端点来实现此目的。当用户查看商品的库存状态时，他们的浏览器会发出以下请求：</p>
+<pre><code>POST /product/stock HTTP/1.0 Content-Type: application/x-www-form-urlencoded Content-Length: 118 stockApi=http://stock.weliketoshop.net:8080/product/stock/check%3FproductId%3D6%26storeId%3D1
+</code></pre>
+<p>这会导致服务器向指定的 URL 发出请求，检索库存状态，并将其返回给用户。</p>
+<p>在此示例中，攻击者可以修改请求以指定服务器本地的 URL：</p>
+<pre><code>POST /product/stock HTTP/1.0 Content-Type: application/x-www-form-urlencoded Content-Length: 118 stockApi=http://localhost/admin
+</code></pre>
+<p>服务器获取<code>/admin</code>URL 的内容并将其返回给用户。</p>
+<p>攻击者可以访问该<code>/admin</code>URL，但管理功能通常只有经过身份验证的用户才能访问。这意味着攻击者不会看到任何感兴趣的内容。但是，如果对 URL 的请求<code>/admin</code>来自本地计算机，则会绕过正常的访问控制。应用程序授予对管理功能的完全访问权限，因为请求似乎源自受信任的位置。</p>
+<p>为什么应用程序会以这种方式运行，并隐式信任来自本地计算机的请求？出现这种情况的原因有多种：</p>
+<ul>
+<li>访问控制检查可以在位于应用程序服务器前面的不同组件中实现。当重新连接到服务器时，检查将被绕过。</li>
+<li>出于灾难恢复的目的，应用程序可能允许来自本地计算机的任何用户无需登录即可进行管理访问。这为管理员提供了一种在丢失凭据时恢复系统的方法。这假设只有完全信任的用户会直接来自服务器。</li>
+<li>管理界面可能侦听与主应用程序不同的端口号，并且用户可能无法直接访问。</li>
+</ul>
+<p>这种信任关系（其中源自本地计算机的请求的处理方式与普通请求不同）通常使 SSRF 成为严重漏洞。</p>
+<p>要求：</p>
+<figure data-type="image" tabindex="30"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403201353531.png" alt="image-20240320135328440" loading="lazy"></figure>
+<p>根据题目推测，我们需要重点观察使用库存检查的时候的报文变化。</p>
+<figure data-type="image" tabindex="31"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403201947222.png" alt="image-20240320194715149" loading="lazy"></figure>
+<p>更具要求，我们尝试直接用<code>stockApi=http://localhost/admin</code>,发现直接400</p>
+<figure data-type="image" tabindex="32"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403201950355.png" alt="image-20240320195028314" loading="lazy"></figure>
+<p>看了半天，发现原来是自己打错了，前面还在用原本的网址</p>
+<figure data-type="image" tabindex="33"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403201953996.png" alt="image-20240320195311918" loading="lazy"></figure>
+<p>找到了地址，复制发送即可</p>
+<h3 id="针对另一个后端系统的基本-ssrf">针对另一个后端系统的基本 SSRF</h3>
+<p>要求：<img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403201955238.png" alt="image-20240320195521202" loading="lazy"></p>
+<p>先看看报文</p>
+<figure data-type="image" tabindex="34"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403201913931.png" alt="image-20240320191316856" loading="lazy"></figure>
+<p>我们看到要求，是需要扫描那个网段找到具体是多少。利用intruder功能</p>
+<figure data-type="image" tabindex="35"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403201942754.png" alt="image-20240320194239706" loading="lazy"></figure>
+<p>发现36很可疑，右键发到repeater中看看</p>
+<figure data-type="image" tabindex="36"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403201943220.png" alt="image-20240320194353145" loading="lazy"></figure>
+<p>找到了连接后，复制发送，ok过了</p>
+<h2 id="文件上传漏洞">文件上传漏洞</h2>
+<h3 id="什么是文件上传漏洞">什么是文件上传漏洞？</h3>
+<p>文件上传漏洞是指 Web 服务器允许用户在未充分验证文件名称、类型、内容或大小等信息的情况下将文件上传到其文件系统。如果未能正确执行这些限制，可能意味着即使是基本的图像上传功能也可以用来上传任意且具有潜在危险的文件。这甚至可能包括启用远程代码执行的服务器端脚本文件。</p>
+<p>在某些情况下，上传文件的行为本身就足以造成损害。其他攻击可能涉及对文件的后续 HTTP 请求，通常是为了触发服务器执行该文件。</p>
+<h3 id="文件上传漏洞是如何产生的">文件上传漏洞是如何产生的？</h3>
+<p>考虑到相当明显的危险，野外网站很少对允许用户上传的文件没有任何限制。更常见的是，开发人员实施了他们认为稳健的验证，但这些验证要么存在固有缺陷，要么很容易被绕过。</p>
+<p>例如，他们可能尝试将危险文件类型列入黑名单，但在检查文件扩展名时未能考虑到解析差异。与任何黑名单一样，也很容易意外地忽略可能仍然危险的更模糊的文件类型。</p>
+<h3 id="利用不受限制的文件上传来部署-web-shell">利用不受限制的文件上传来部署 Web shell</h3>
+<p>从安全角度来看，最糟糕的情况是网站允许您上传服务器端脚本（例如 PHP、Java 或 Python 文件），并且还配置为将它们作为代码执行。这使得在服务器上创建您自己的 Web shell 变得非常简单。</p>
+<h4 id="web-shell">web shell</h4>
+<p>Web shell 是一种恶意脚本，攻击者只需将 HTTP 请求发送到正确端点即可在远程 Web 服务器上执行任意命令。</p>
+<p>如果您能够成功上传 Web shell，则您实际上可以完全控制服务器。这意味着您可以读取和写入任意文件、窃取敏感数据，甚至使用服务器对内部基础设施和网络外部的其他服务器进行攻击。例如，以下 PHP 单行代码可用于从服务器的文件系统读取任意文件：</p>
+<pre><code>&lt;?php echo file_get_contents('/path/to/target/file'); ?&gt;
+</code></pre>
+<p>上传后，发送对此恶意文件的请求将在响应中返回目标文件的内容。</p>
+<p>更通用的 Web shell 可能如下所示：</p>
+<pre><code>&lt;?php echo system($_GET['command']); ?&gt;
+</code></pre>
+<p>该脚本使您能够通过查询参数传递任意系统命令，如下所示：</p>
+<pre><code>GET /example/exploit.php?command=id HTTP/1.1
+</code></pre>
+<p>要求：</p>
+<figure data-type="image" tabindex="37"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403201957308.png" alt="image-20240320195748262" loading="lazy"></figure>
+<p>很简单的描述</p>
+<p>本打算直接用一句话木马，搭配蚁剑来远程shell，但是本地写一个带木马的php是被秒杀的，所以还是用的他这个。文件上传漏洞就是要找到文件的位置，我们先上传一个正常的文件，看看上传的路径都在那儿。</p>
+<figure data-type="image" tabindex="38"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403202018685.png" alt="image-20240320201847565" loading="lazy"></figure>
+<figure data-type="image" tabindex="39"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403202034624.png" alt="image-20240320203444530" loading="lazy"></figure>
+<p>这里我们需要留一个请求，来帮助我们待会执行命令</p>
+<p>上传它提示的木马后，发送get执行</p>
+<figure data-type="image" tabindex="40"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403202040408.png" alt="" loading="lazy"></figure>
+<p>其实也可以右键直接执行</p>
+<figure data-type="image" tabindex="41"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403202039269.png" alt="image-20240320203958226" loading="lazy"></figure>
+<figure data-type="image" tabindex="42"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403202042837.png" alt="image-20240320204205790" loading="lazy"></figure>
+<h3 id="利用文件上传验证缺陷">利用文件上传验证缺陷</h3>
+<p>在外边环境中，您不太可能找到像我们在之前的实验室中看到的那样没有针对文件上传攻击的保护的网站。但仅仅因为防御到位，并不意味着它们是强大的。有时您仍然可以利用这些机制中的缺陷来获取用于远程代码执行的 Web shell。</p>
+<h3 id="文件类型验证有缺陷">文件类型验证有缺陷</h3>
+<p><code>POST</code>提交 HTML 表单时，浏览器通常会在内容类型为 的请求 中发送提供的数据<code>application/x-www-form-url-encoded</code>。这非常适合发送简单的文本，例如您的姓名或地址。但是，它不适合发送大量二进制数据，例如整个图像文件或 PDF 文档。在这种情况下，内容类型<code>multipart/form-data</code>是首选。</p>
+<h3 id="有缺陷的文件类型验证">有缺陷的文件类型验证</h3>
+<p>考虑一个包含用于上传图像、提供图像描述和输入用户名的字段的表单。提交此类表单可能会产生如下所示的请求：</p>
+<pre><code class="language-http">POST /images HTTP/1.1
+    Host: normal-website.com
+    Content-Length: 12345
+    Content-Type: multipart/form-data; boundary=---------------------------012345678901234567890123456
+
+    ---------------------------012345678901234567890123456
+    Content-Disposition: form-data; name=&quot;image&quot;; filename=&quot;example.jpg&quot;
+    Content-Type: image/jpeg
+
+    [...binary content of example.jpg...]
+
+    ---------------------------012345678901234567890123456
+    Content-Disposition: form-data; name=&quot;description&quot;
+
+    This is an interesting description of my image.
+
+    ---------------------------012345678901234567890123456
+    Content-Disposition: form-data; name=&quot;username&quot;
+
+    wiener
+    ---------------------------012345678901234567890123456--
+</code></pre>
+<p>正如您所看到的，对于每个表单的输入，消息正文被分成单独的部分。每个部分都包含一个<code>Content-Disposition</code>标头，它提供了有关与其相关的输入字段的一些基本信息。这些单独的部分还可能包含自己的<code>Content-Type</code>标头，该标头告诉服务器使用此输入提交的数据的 MIME 类型。</p>
+<p>网站可能尝试验证文件上传的一种方法是检查此特定于输入的<code>Content-Type</code>标头是否与预期的 MIME 类型匹配。例如，如果服务器只需要图像文件，它可能只允许<code>image/jpeg</code>和等类型<code>image/png</code>。当服务器隐式信任此标头的值时，可能会出现问题。如果没有执行进一步的验证来检查文件的内容是否确实与假定的 MIME 类型匹配，则可以使用 Burp Repeater 等工具轻松绕过此防御。</p>
+<p>要求：</p>
+<figure data-type="image" tabindex="43"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403202052503.png" alt="image-20240320205254448" loading="lazy"></figure>
+<p>更具要求应该是有限制条件不允许上传php的文件了</p>
+<figure data-type="image" tabindex="44"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403202053476.png" alt="image-20240320205344445" loading="lazy"></figure>
+<p>果然设置了白名单，这里可以选择修改类型绕过，也可以用图片马。当然如果是前端验证就可以直接绕过了，还可以在浏览器里面禁用javascrip这里就直接选择绕过先试试吧。</p>
+<figure data-type="image" tabindex="45"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403202056522.png" alt="image-20240320205657494" loading="lazy"></figure>
+<p>修改shell为png，在拦截改为php。上传成功</p>
+<figure data-type="image" tabindex="46"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403202100362.png" alt="image-20240320210004326" loading="lazy"></figure>
+<figure data-type="image" tabindex="47"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403202101670.png" alt="image-20240320210150617" loading="lazy"></figure>
+<p>收工</p>
+<h2 id="操作系统命令注入">操作系统命令注入</h2>
+<p>https://portswigger.net/web-security/learning-paths/server-side-vulnerabilities-apprentice/os-command-injection-apprentice/os-command-injection/what-is-os-command-injection</p>
+<h3 id="什么是操作系统命令注入">什么是操作系统命令注入？</h3>
+<p>操作系统命令注入也称为 shell 注入。它允许攻击者在运行应用程序的服务器上执行操作系统 (OS) 命令，并且通常会完全破坏应用程序及其数据。通常，攻击者可以利用操作系统命令注入漏洞来危害托管基础设施的其他部分，并利用信任关系将攻击转向组织内的其他系统。</p>
+<h3 id="常见的指令">常见的指令</h3>
+<pre><code>识别操作系统命令注入漏洞后，执行一些初始命令以获取有关系统的信息非常有用。以下是一些在 Linux 和 Windows 平台上有用的命令的摘要：
+命令的目的	Linux	windows
+当前用户名	whoami	whoami
+操作系统	uname -a	ver
+网络配置	ifconfig	ipconfig /all
+网络连接	netstat -an	netstat -an
+正在运行的进程	ps -ef	tasklist
+</code></pre>
+<p>要求：</p>
+<figure data-type="image" tabindex="48"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403211111401.png" alt="image-20240321111148323" loading="lazy"></figure>
+<figure data-type="image" tabindex="49"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403211114293.png" alt="image-20240321111408252" loading="lazy"></figure>
+<p>现在repeater里面试口令</p>
+<figure data-type="image" tabindex="50"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403211357856.png" alt="image-20240321135713637" loading="lazy"></figure>
+<p>ok过了</p>
+<h2 id="sql-注入-sqli">SQL 注入 (SQLi)</h2>
+<p>SQL 注入 (SQLi) 是一种 Web 安全漏洞，允许攻击者干扰应用程序对其数据库进行的查询。这可能允许攻击者查看他们通常无法检索的数据。这可能包括属于其他用户的数据或应用程序可以访问的任何其他数据。在许多情况下，攻击者可以修改或删除此数据，从而导致应用程序的内容或行为发生持久更改。在某些情况下，攻击者可以升级 SQL 注入攻击以危害底层服务器或其他后端基础设施。它还可以使他们执行拒绝服务攻击。</p>
+<h3 id="如何检测sql漏洞">如何检测sql漏洞</h3>
+<p>您可以针对应用程序中的每个入口点使用一组系统测试来手动检测 SQL 注入。为此，您通常需要提交：</p>
+<ul>
+<li>单引号字符<code>'</code>并查找错误或其他异常。</li>
+<li>一些特定于 SQL 的语法，用于计算入口点的基本（原始）值和不同的值，并查找应用程序响应中的系统差异。</li>
+<li>布尔条件，例如<code>OR 1=1</code>和<code>OR 1=2</code>，并查找应用程序响应中的差异。</li>
+<li>有效负载旨在在 SQL 查询中执行时触发时间延迟，并查找响应时间的差异。</li>
+<li>OAST 有效负载旨在在 SQL 查询中执行时触发带外网络交互，并监视任何生成的交互。</li>
+</ul>
+<p>或者，您可以使用 Burp Scanner 快速可靠地找到大多数 SQL 注入漏洞。</p>
+<h3 id="检索隐藏数据">检索隐藏数据</h3>
+<p>想象一个显示不同类别产品的购物应用程序。当用户单击**“礼品”**类别时，他们的浏览器会请求以下 URL：</p>
+<pre><code>https://insecure-website.com/products?category=Gifts
+</code></pre>
+<p>这会导致应用程序执行 SQL 查询以从数据库中检索相关产品的详细信息：</p>
+<pre><code>SELECT * FROM products WHERE category = 'Gifts' AND released = 1
+</code></pre>
+<p>此 SQL 查询要求数据库返回：</p>
+<ul>
+<li>所有详细信息 ( <code>*</code>)</li>
+<li>从<code>products</code>表中</li>
+<li>哪里<code>category</code>是<code>Gifts</code></li>
+<li>并且<code>released</code>是<code>1</code>。</li>
+</ul>
+<p>该限制<code>released = 1</code>用于隐藏未发布的产品。我们可以假设对于未发布的产品，<code>released = 0</code>.</p>
+<p>该应用程序没有针对 SQL 注入攻击实施任何防御措施。这意味着攻击者可以构造以下攻击，例如：</p>
+<pre><code>https://insecure-website.com/products?category=Gifts'--
+</code></pre>
+<p>SQL 查询结果如下：</p>
+<pre><code>SELECT * FROM products WHERE category = 'Gifts'--' AND released = 1
+</code></pre>
+<p>至关重要的是，请注意这<code>--</code>是 SQL 中的注释指示符。这意味着查询的其余部分将被解释为注释，从而有效地将其删除。在此示例中，这意味着查询不再包含<code>AND released = 1</code>.结果，所有产品都会显示出来，包括尚未发布的产品。</p>
+<p>您可以使用类似的攻击来使应用程序显示任何类别中的所有产品，包括他们不知道的类别：</p>
+<pre><code>https://insecure-website.com/products?category=Gifts'+OR+1=1--
+</code></pre>
+<p>SQL 查询结果如下：</p>
+<pre><code>SELECT * FROM products WHERE category = 'Gifts' OR 1=1--' AND released = 1
+</code></pre>
+<p><code>category</code>修改后的查询返回is<code>Gifts</code>或<code>1</code>等于 的 所有项目<code>1</code>。一如既往<code>1=1</code>，查询返回所有项目。</p>
+<h4 id="警告">警告</h4>
+<p>将条件注入<code>OR 1=1</code>SQL 查询时要小心。即使它在您注入的上下文中看起来无害，但应用程序在多个不同查询中使用来自单个请求的数据是很常见的。例如， 如果您的条件达到<code>UPDATE</code>or语句，则可能会导致数据意外丢失。<code>DELETE</code></p>
+<p>要求：</p>
+<figure data-type="image" tabindex="51"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403211418081.png" alt="" loading="lazy"></figure>
+<p>我们要他的要求和提示做的时将AND released = 1给注释掉，直接在url里面操作就可实现</p>
+<figure data-type="image" tabindex="52"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403211417166.png" alt="image-20240321141753485" loading="lazy"></figure>
+<p>要求：：<img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403211500602.png" alt="image-20240321150025530" loading="lazy"></p>
+<p>找了一圈，发现唯一存在注入的，可能只有登录的时候存在数据库相关。</p>
+<figure data-type="image" tabindex="53"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403211452131.png" alt="image-20240321145242954" loading="lazy"></figure>
+<p>只能一个一个的试，这里考虑的是把密码验证给绕过。</p>
+<figure data-type="image" tabindex="54"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202403211505368.png" alt="image-20240321150548220" loading="lazy"></figure>
+<p>最后尝试在administrator后面加上'--成功绕过</p>
+
+    </p>
+    <div class="row">
+      <a href="https://zj4sun.github.io/post/fu-wu-qi-duan-lou-dong/" class="readmore-link">
+        <button>
+          Read More
+        </button>
+      </a>
+    </div>
+  </article>
+
+  <article class="article">
+    <h2 class="article-title">
+      <a href="https://zj4sun.github.io/post/bp-ba-chang-sql-zhu-ru-zhuan-ti/">bp靶场——sql注入专题</a>
+    </h2>
+    <p class="article-meta">
+      2024-02-16
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge success">
+          web安全之路
+        </a>
+      
+    </p>
+    <p class="text-lead">
+      
+    </p>
+    <div class="row">
+      <a href="https://zj4sun.github.io/post/bp-ba-chang-sql-zhu-ru-zhuan-ti/" class="readmore-link">
+        <button>
+          Read More
+        </button>
+      </a>
+    </div>
+  </article>
+
+
+        </div>
+        <div class="row flex-edges">
+  
+  
+</div>
+
+      </div>
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://zj4sun.github.io//images/avatar.png?v=1735599266098" class="no-responsive avatar">
+    <div class="text-muted">行胜于言</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-nian-zhong-zong-jie/">2024年年度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/wei-xie-qing-bao/">威胁情报</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">2024年第四季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/ruo-kou-ling-zong-jie/">弱口令总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">2024年第三季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/python-pa-chong-xue-xi-bi-ji/">python爬虫学习笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti/">github+gridea配置个人博客无法加载main.css问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">2024年第二季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-apcahe-ri-zhi-fen-xi/">玄机靶场-apcahe日志分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">玄机靶场-Linux日志分析</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://zj4sun.github.io/tag/EjyP2cHMk/" class="badge warning">
+          live生活
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/Mt6wUAkn1/" class="badge ">
+          quarter总结
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge success">
+          information研究
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/qXZ0OLIUJ/" class="badge warning">
+          python脚册
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge success">
+          setting环境设置
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge warning">
+          Emergency响应
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge success">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge warning">
+          job实习项目
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge secondary">
+          vulnhub打靶
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zj4sun.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>

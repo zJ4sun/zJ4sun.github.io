@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>玄机靶机-webshell查杀 | zJ4sun</title>
+<meta name="description" content="行胜于言">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://zj4sun.github.io//favicon.ico?v=1735599266098">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://zj4sun.github.io//styles/main.css">
+
+
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://zj4sun.github.io/">zJ4sun</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>玄机靶机-webshell查杀</h1>
+            <p class="article-meta">
+              2024-05-07
+              
+                <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge ">
+                  Emergency响应
+                </a>
+              
+            </p>
+            
+            <div class="post-content" v-pre>
+              <h2 id="前言">前言</h2>
+<p>等了好久终于抽到了玄机的靶场邀请码，今天来体验一下，记录下自己的学习过程。</p>
+<p>项目地址：https://xj.edisec.net/challenges/25</p>
+<pre><code>靶机账号密码 root xjwebshell
+1.黑客webshell里面的flag flag{xxxxx-xxxx-xxxx-xxxx-xxxx}
+2.黑客使用的什么工具的shell github地址的md5 flag{md5}
+3.黑客隐藏shell的完整路径的md5 flag{md5} 注 : /xxx/xxx/xxx/xxx/xxx.xxx
+4.黑客免杀马完整路径 md5 flag{md5}
+</code></pre>
+<h2 id="解题过程">解题过程</h2>
+<p>先用xshell远程连接 一下，输入ip直接连接</p>
+<figure data-type="image" tabindex="1"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405061035601.png" alt="image-20240506103526514" loading="lazy"></figure>
+<h3 id="查找webshell">查找webshell</h3>
+<p>这里是学习一个大佬选择手动查询，我们也可以使用河马等webshell工具，注意目标主机是linux服务器</p>
+<figure data-type="image" tabindex="2"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405061041813.png" alt="image-20240506104131784" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405061042498.png" alt="image-20240506104259458" loading="lazy"></figure>
+<p>这里发现了flag{<strong>{027ccd04-5065-48b6-a32d-77c704a5e26d</strong>}。这里我们可以得出他是哥斯拉。因为哥斯拉的php特征哥斯拉php马特征</p>
+<ul>
+<li>session_start() 创建或者重启一个会话</li>
+<li>@set_time_limit(0) 设置程序最长运行时间 永远</li>
+<li>@error_reporting(0) 关闭错误报告</li>
+<li>$key=xxxxxxxxx 加解密的盐值</li>
+</ul>
+<p>所以第二个flag就是Godzilla的github地址的md5值（用md5加密一下就好了）</p>
+<p>https://github.com/BeichenDream/Godzilla</p>
+<p><strong>Flag2: flag{39392DE3218C333F794BEFEF07AC9257}</strong></p>
+<p>接着来看找到的第二个shell ./include/Db/.Mysqli.php</p>
+<p>当我们进入目标文件夹时，用ls显示文件看到的只是正常的数据库配置文件</p>
+<p>该webshell通过以 ‘.’ 开头对shell命名，得到的文件就是隐藏文件，这时得使用</p>
+<pre><code>ls -a
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405061118986.png" alt="image-20240506111837900" loading="lazy"></figure>
+<p>典型的哥斯拉马子特征</p>
+<p>所以第三个flag 为该shell的地址：/var/www/html/include/Db/.Mysqli.php</p>
+<p><strong>Flag3: flag{AEBAC0E58CD6C5FAD1695EE4D1AC1919}</strong></p>
+<p>php免杀马通常字符串异或加密、base家族加密、rot13加密 字符串拼接等方式实现</p>
+<p>这里尝试最常见的base64编码，同样也是通过find去匹配关键字查询</p>
+<pre><code>find ./ -name &quot;*.php&quot; | xargs grep &quot;base64_decode&quot;
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://jasun-1321731794.cos.ap-chengdu.myqcloud.com/pic/202405061119558.png" alt="image-20240506111919502" loading="lazy"></figure>
+<p>所以第三个flag 为该shell的地址：/var/www/html/wap/top.php</p>
+<p><strong>Flag4: flag{EEFF2EABFD9B7A6D26FC1A53D3F7D1DE}</strong></p>
+<h2 id="总结">总结</h2>
+<p>哥斯拉php马的特征：</p>
+<ol>
+<li>webshell配置，常见于文件头session_start(); @set_time_limit(0); @error_reporting(0);</li>
+<li>默认的加解密盐值：3c6e0b8a9c15224a</li>
+<li>有一个向SESSION中存储攻击荷载的过程，就是会有一个<code>$_SESSION[$XXX]=P</code>的过程</li>
+</ol>
+<p>这是第一次使用玄机这个平台打靶机，有很多不懂的地方，网上相关的资料不是很多，但是有一位师傅写的特别详细，相关知识点也有解释，文章后半段用了师傅相关的图片特此说明。通过本次联系，发现自己还有很多应急响应相关的知识点空缺，决定好好的学习一下webshll工具特征。</p>
+<p><a href="https://godyu.com/12918.html">大佬文章地址</a></p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://zj4sun.github.io/post/hw-mian-jing-zhi-shi-dian-zheng-li/">
+                <h3 class="post-title">
+                  hw面经知识点整理
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://zj4sun.github.io//images/avatar.png?v=1735599266098" class="no-responsive avatar">
+    <div class="text-muted">行胜于言</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-nian-zhong-zong-jie/">2024年年度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/wei-xie-qing-bao/">威胁情报</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-si-ji-du-zong-jie/">2024年第四季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/ruo-kou-ling-zong-jie/">弱口令总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-san-ji-du-zong-jie/">2024年第三季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/python-pa-chong-xue-xi-bi-ji/">python爬虫学习笔记</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/githubgridea-pei-zhi-ge-ren-bo-ke-wu-fa-jia-zai-maincss-wen-ti/">github+gridea配置个人博客无法加载main.css问题</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/2024-nian-di-er-ji-du-zong-jie/">2024年第二季度总结</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-apcahe-ri-zhi-fen-xi/">玄机靶场-apcahe日志分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://zj4sun.github.io/post/xuan-ji-ba-chang-linux-ri-zhi-fen-xi/">玄机靶场-Linux日志分析</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://zj4sun.github.io/tag/EjyP2cHMk/" class="badge secondary">
+          live生活
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/Mt6wUAkn1/" class="badge success">
+          quarter总结
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/zrEiWq5mHs/" class="badge ">
+          information研究
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/qXZ0OLIUJ/" class="badge secondary">
+          python脚册
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/EJT8wG8lz/" class="badge ">
+          setting环境设置
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ApJiA0cW4/" class="badge secondary">
+          Emergency响应
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/ZtS9EorEb/" class="badge success">
+          web安全之路
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/4KkPHXGCg/" class="badge secondary">
+          job实习项目
+        </a>
+      
+        <a href="https://zj4sun.github.io/tag/1Wpns8h4a/" class="badge success">
+          vulnhub打靶
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://zj4sun.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>
